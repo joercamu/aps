@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  index: 1
+  machine_id: 
+  um: MyString
+  per_hour: 1
+  waste: 1.5
+
+two:
+  index: 1
+  machine_id: 
+  um: MyString
+  per_hour: 1
+  waste: 1.5

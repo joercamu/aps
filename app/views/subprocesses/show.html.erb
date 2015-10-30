@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @subprocess.order %>
+</p>
+
+<p>
+  <strong>Procedure:</strong>
+  <%= @subprocess.procedure %>
+</p>
+
+<p>
+  <strong>Standard:</strong>
+  <%= @subprocess.standard %>
+</p>
+
+<p>
+  <strong>Minutes:</strong>
+  <%= @subprocess.minutes %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @subprocess.start_date %>
+</p>
+
+<p>
+  <strong>Endtime:</strong>
+  <%= @subprocess.end_date %>
+</p>
+
+<p>
+  <strong>Meters:</strong>
+  <%= @subprocess.meters %>
+</p>
+
+<p>
+  <strong>Sequence:</strong>
+  <%= @subprocess.sequence %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @subprocess.state %>
+</p>
+
+<%= link_to 'Edit', edit_subprocess_path(@subprocess) %> |
+<%= link_to 'Back', subprocesses_path %>

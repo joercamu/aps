@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Subprocesses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Procedure</th>
+      <th>Standard</th>
+      <th>Minutes</th>
+      <th>Start date</th>
+      <th>Endtime</th>
+      <th>Meters</th>
+      <th>Sequence</th>
+      <th>State</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subprocesses.each do |subprocess| %>
+      <tr>
+        <td><%= subprocess.order %></td>
+        <td><%= subprocess.procedure %></td>
+        <td><%= subprocess.standard %></td>
+        <td><%= subprocess.minutes %></td>
+        <td><%= subprocess.start_date %></td>
+        <td><%= subprocess.end_date %></td>
+        <td><%= subprocess.meters %></td>
+        <td><%= subprocess.sequence %></td>
+        <td><%= subprocess.state %></td>
+        <td><%= link_to 'Show', subprocess %></td>
+        <td><%= link_to 'Edit', edit_subprocess_path(subprocess) %></td>
+        <td><%= link_to 'Destroy', subprocess, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Subprocess', new_subprocess_path %>

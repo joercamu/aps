@@ -1,0 +1,3 @@
+rails g scaffold routes number:integer waste:float
+
+rails g scaffold order state:string  weight:float  repeat:integer  route:references  scheduled_meters:integer  date_offer:date  outsourced_id:integer  outsourced_name:string  outsourced_tolerance_down:integer outsourced_tolerance_up:integer order_date_request:date order_number:integer order_quantity:float order_type:string order_um:string order_unit_value:float sheet_caliber:float sheet_client:integer sheet_composite:string sheet_cut_type:string sheet_film:string sheet_guillotine:float sheet_height:float sheet_height_planned:float sheet_id:integer sheet_meters_roll:float sheet_number:integer sheet_print:boolean sheet_product_type:string sheet_route:text sheet_spaces:integer sheet_version:integer sheet_width:float 

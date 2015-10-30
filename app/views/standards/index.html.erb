@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Standards</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Index</th>
+      <th>Machine</th>
+      <th>Um</th>
+      <th>Per hour</th>
+      <th>Waste</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @standards.each do |standard| %>
+      <tr>
+        <td><%= standard.id %></td>
+        <td><%= standard.index %></td>
+        <td><%=link_to standard.machine.name, machine_path(standard.machine) %></td>
+        <td><%= standard.um %></td>
+        <td><%= standard.per_hour %></td>
+        <td><%= standard.waste %></td>
+        <td><%= link_to 'Show', standard %></td>
+        <td><%= link_to 'Edit', edit_standard_path(standard) %></td>
+        <td><%= link_to 'Destroy', standard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Standard', new_standard_path %>

@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @machine.name %>
+</p>
+<p>
+  <strong>Press:</strong>
+  <%= @machine.press %>
+</p>
+<p>
+  <strong>Process:</strong>
+  <%@procedures.each do |procedure|%>
+  	<br><%=procedure.name%>
+  <%end%>
+</p>
+<p>
+  <strong>Standards:</strong>
+  <%=link_to "Create Standard", new_standard_machine_ref_path(@machine)%>
+  <table>
+  	<tr>
+  		<th>Index</th>
+  		<th>UM</th>
+  		<th>Per Hour</th>
+  		<th>Waste</th>
+  	</tr>
+  <%@standards.each do |standard|%>
+	  <tr>
+	  	<th><%=standard.index%></th>
+	  	<th><%=standard.um%></th>
+	  	<th><%=standard.per_hour%></th>
+	  	<th><%=standard.waste*100%> %</th>
+	  </tr>
+  <%end%>
+</table>
+</p>
+
+
+
+<%= link_to 'Edit', edit_machine_path(@machine) %> |
+<%= link_to 'Back', machines_path %>

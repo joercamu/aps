@@ -1,0 +1,34 @@
+<%= form_for(@standard) do |f| %>
+  <% if @standard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@standard.errors.count, "error") %> prohibited this standard from being saved:</h2>
+
+      <ul>
+      <% @standard.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :index %><br>
+    <%= f.number_field :index, value:@index%>
+  </div>
+  <div class="field">
+    <%= f.label :machine_id %><br>
+    <%= f.text_field :machine_id, value:@machine_id %>
+  </div>
+  <%=select("standard", "um", @measurements.collect {|p| [ p.name, p.value ] }, {include_blank: 'None'})%>
+  <div class="field">
+    <%= f.label :per_hour %><br>
+    <%= f.number_field :per_hour %>
+  </div>
+  <div class="field">
+    <%= f.label :waste %><br>
+    <%= f.text_field :waste %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

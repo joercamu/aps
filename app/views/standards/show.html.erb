@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Index:</strong>
+  <%= @standard.index %>
+</p>
+
+<p>
+  <strong>Machine:</strong>
+  <%= @standard.machine.name %>
+</p>
+
+<p>
+  <strong>Um:</strong>
+  <%= @standard.um %>
+</p>
+
+<p>
+  <strong>Per hour:</strong>
+  <%= @standard.per_hour %>
+</p>
+
+<p>
+  <strong>Waste:</strong>
+  <%= @standard.waste %>
+</p>
+
+<%= link_to 'Edit', edit_standard_path(@standard) %> |
+<%= link_to 'Back', standards_path %>

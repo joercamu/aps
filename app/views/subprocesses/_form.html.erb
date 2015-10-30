@@ -1,0 +1,53 @@
+<%= form_for(@subprocess) do |f| %>
+  <% if @subprocess.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@subprocess.errors.count, "error") %> prohibited this subprocess from being saved:</h2>
+
+      <ul>
+      <% @subprocess.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :order_id %><br>
+    <%= f.text_field :order_id %>
+  </div>
+  <div class="field">
+    <%= f.label :procedure_id %><br>
+    <%= f.text_field :procedure_id %>
+  </div>
+  <div class="field">
+    <%= f.label :standard_id %><br>
+    <%= f.text_field :standard_id %>
+  </div>
+  <div class="field">
+    <%= f.label :minutes %><br>
+    <%= f.number_field :minutes %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.datetime_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.datetime_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :meters %><br>
+    <%= f.number_field :meters %>
+  </div>
+  <div class="field">
+    <%= f.label :sequence %><br>
+    <%= f.number_field :sequence %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br>
+    <%= f.text_field :state %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

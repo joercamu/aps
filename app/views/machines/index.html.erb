@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Machines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Press</th>
+      <th>Procedures</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @machines.each do |machine| %>
+      <tr>
+        <td><%= machine.id %></td>
+        <td><%= link_to machine.name, machine%></td>
+        <td><%= machine.press %></td>
+        <td>
+          <% machine.procedures.each do |procedure|%>
+            <%= link_to procedure.name, procedure_path(procedure)%> |
+          <%end%>
+        </td>
+        <td><%= link_to 'Show', machine %></td>
+        <td><%= link_to 'Edit', edit_machine_path(machine) %></td>
+        <td><%= link_to 'Destroy', machine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Machine', new_machine_path %>

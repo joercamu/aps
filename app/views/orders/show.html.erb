@@ -1,0 +1,169 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>State:</strong>
+  <%= @order.state %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @order.weight %>
+</p>
+
+<p>
+  <strong>Repeat:</strong>
+  <%= @order.repeat %>
+</p>
+
+<p>
+  <strong>Route:</strong>
+  <%= @order.route.waste %>
+</p>
+
+<p>
+  <strong>Scheduled meters:</strong>
+  <%= @order.scheduled_meters %>
+</p>
+
+<p>
+  <strong>Date offer:</strong>
+  <%= @order.date_offer %>
+</p>
+
+<p>
+  <strong>Outsourced:</strong>
+  <%= @order.outsourced_id %>
+</p>
+
+<p>
+  <strong>Outsourced name:</strong>
+  <%= @order.outsourced_name %>
+</p>
+
+<p>
+  <strong>Outsourced tolerance down:</strong>
+  <%= @order.outsourced_tolerance_down %>
+</p>
+
+<p>
+  <strong>Outsourced tolerance up:</strong>
+  <%= @order.outsourced_tolerance_up %>
+</p>
+
+<p>
+  <strong>Order date request:</strong>
+  <%= @order.order_date_request %>
+</p>
+
+<p>
+  <strong>Order number:</strong>
+  <%= @order.order_number %>
+</p>
+
+<p>
+  <strong>Order quantity:</strong>
+  <%= @order.order_quantity %>
+</p>
+
+<p>
+  <strong>Order type:</strong>
+  <%= @order.order_type %>
+</p>
+
+<p>
+  <strong>Order um:</strong>
+  <%= @order.order_um %>
+</p>
+
+<p>
+  <strong>Order unit value:</strong>
+  <%= @order.order_unit_value %>
+</p>
+
+<p>
+  <strong>Sheet caliber:</strong>
+  <%= @order.sheet_caliber %>
+</p>
+
+<p>
+  <strong>Sheet client:</strong>
+  <%= @order.sheet_client %>
+</p>
+
+<p>
+  <strong>Sheet composite:</strong>
+  <%= @order.sheet_composite %>
+</p>
+
+<p>
+  <strong>Sheet cut type:</strong>
+  <%= @order.sheet_cut_type %>
+</p>
+
+<p>
+  <strong>Sheet film:</strong>
+  <%= @order.sheet_film %>
+</p>
+
+<p>
+  <strong>Sheet guillotine:</strong>
+  <%= @order.sheet_guillotine %>
+</p>
+
+<p>
+  <strong>Sheet height:</strong>
+  <%= @order.sheet_height %>
+</p>
+
+<p>
+  <strong>Sheet height planned:</strong>
+  <%= @order.sheet_height_planned %>
+</p>
+
+<p>
+  <strong>Sheet:</strong>
+  <%= @order.sheet_id %>
+</p>
+
+<p>
+  <strong>Sheet meters roll:</strong>
+  <%= @order.sheet_meters_roll %>
+</p>
+
+<p>
+  <strong>Sheet number:</strong>
+  <%= @order.sheet_number %>
+</p>
+
+<p>
+  <strong>Sheet print:</strong>
+  <%= @order.sheet_print %>
+</p>
+
+<p>
+  <strong>Sheet product type:</strong>
+  <%= @order.sheet_product_type %>
+</p>
+
+<p>
+  <strong>Sheet route:</strong>
+  <%= @order.sheet_route %>
+</p>
+
+<p>
+  <strong>Sheet spaces:</strong>
+  <%= @order.sheet_spaces %>
+</p>
+
+<p>
+  <strong>Sheet version:</strong>
+  <%= @order.sheet_version %>
+</p>
+
+<p>
+  <strong>Sheet width:</strong>
+  <%= @order.sheet_width %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

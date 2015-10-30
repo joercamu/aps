@@ -1,0 +1,71 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  state: MyString
+  weight: 1.5
+  repeat: 1
+  route_id: 
+  scheduled_meters: 1
+  date_offer: 2015-10-28
+  outsourced_id: 1
+  outsourced_name: MyString
+  outsourced_tolerance_down: 1
+  outsourced_tolerance_up: 1
+  order_date_request: 2015-10-28
+  order_number: 1
+  order_quantity: 1.5
+  order_type: MyString
+  order_um: MyString
+  order_unit_value: 1.5
+  sheet_caliber: 1.5
+  sheet_client: 1
+  sheet_composite: MyString
+  sheet_cut_type: MyString
+  sheet_film: MyString
+  sheet_guillotine: 1.5
+  sheet_height: 1.5
+  sheet_height_planned: 1.5
+  sheet_id: 1
+  sheet_meters_roll: 1.5
+  sheet_number: 1
+  sheet_print: false
+  sheet_product_type: MyString
+  sheet_route: MyText
+  sheet_spaces: 1
+  sheet_version: 1
+  sheet_width: 1.5
+
+two:
+  state: MyString
+  weight: 1.5
+  repeat: 1
+  route_id: 
+  scheduled_meters: 1
+  date_offer: 2015-10-28
+  outsourced_id: 1
+  outsourced_name: MyString
+  outsourced_tolerance_down: 1
+  outsourced_tolerance_up: 1
+  order_date_request: 2015-10-28
+  order_number: 1
+  order_quantity: 1.5
+  order_type: MyString
+  order_um: MyString
+  order_unit_value: 1.5
+  sheet_caliber: 1.5
+  sheet_client: 1
+  sheet_composite: MyString
+  sheet_cut_type: MyString
+  sheet_film: MyString
+  sheet_guillotine: 1.5
+  sheet_height: 1.5
+  sheet_height_planned: 1.5
+  sheet_id: 1
+  sheet_meters_roll: 1.5
+  sheet_number: 1
+  sheet_print: false
+  sheet_product_type: MyString
+  sheet_route: MyText
+  sheet_spaces: 1
+  sheet_version: 1
+  sheet_width: 1.5

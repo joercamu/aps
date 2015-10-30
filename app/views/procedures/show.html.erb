@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @procedure.name %>
+</p>
+
+<p>
+  <strong>Press:</strong>
+  <%= @procedure.press %>
+</p>
+<p>
+	<strong>Machines:</strong>
+	<ul>
+	<%@machines.each do |machine|%>
+		<li><%=link_to machine.name, machine_path(machine)%></li>
+	<%end%>
+	</ul>
+</p>
+
+<%= link_to 'Edit', edit_procedure_path(@procedure) %> |
+<%= link_to 'Back', procedures_path %>
