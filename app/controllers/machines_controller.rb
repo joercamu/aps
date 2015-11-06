@@ -11,8 +11,7 @@ class MachinesController < ApplicationController
   # GET /machines/1
   # GET /machines/1.json
   def show
-    @procedures = @machine.procedures
-    @standards = @machine.standards
+
   end
 
   # GET /machines/new

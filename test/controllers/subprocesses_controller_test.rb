@@ -18,7 +18,7 @@ class SubprocessesControllerTest < ActionController::TestCase
 
   test "should create subprocess" do
     assert_difference('Subprocess.count') do
-      post :create, subprocess: { endtime: @subprocess.endtime, meters: @subprocess.meters, minutes: @subprocess.minutes, order: @subprocess.order, procedure: @subprocess.procedure, sequence: @subprocess.sequence, standard: @subprocess.standard, start_date: @subprocess.start_date, state: @subprocess.state }
+      post :create, subprocess: { end_time: @subprocess.end_time, meter: @subprocess.meter, minutes: @subprocess.minutes, order_id: @subprocess.order_id, procedure_id: @subprocess.procedure_id, sequence: @subprocess.sequence, standard_id: @subprocess.standard_id, start_date: @subprocess.start_date, state: @subprocess.state }
     end
 
     assert_redirected_to subprocess_path(assigns(:subprocess))
@@ -35,7 +35,7 @@ class SubprocessesControllerTest < ActionController::TestCase
   end
 
   test "should update subprocess" do
-    patch :update, id: @subprocess, subprocess: { endtime: @subprocess.endtime, meters: @subprocess.meters, minutes: @subprocess.minutes, order: @subprocess.order, procedure: @subprocess.procedure, sequence: @subprocess.sequence, standard: @subprocess.standard, start_date: @subprocess.start_date, state: @subprocess.state }
+    patch :update, id: @subprocess, subprocess: { end_time: @subprocess.end_time, meter: @subprocess.meter, minutes: @subprocess.minutes, order_id: @subprocess.order_id, procedure_id: @subprocess.procedure_id, sequence: @subprocess.sequence, standard_id: @subprocess.standard_id, start_date: @subprocess.start_date, state: @subprocess.state }
     assert_redirected_to subprocess_path(assigns(:subprocess))
   end
 

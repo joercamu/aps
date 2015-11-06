@@ -10,8 +10,8 @@
 </p>
 <p>
   <strong>Process:</strong>
-  <%@procedures.each do |procedure|%>
-  	<br><%=procedure.name%>
+  <%@machine.procedures.each do |procedure|%>
+  	<br><%=link_to procedure.name, procedure%>
   <%end%>
 </p>
 <p>
@@ -24,9 +24,9 @@
   		<th>Per Hour</th>
   		<th>Waste</th>
   	</tr>
-  <%@standards.each do |standard|%>
+  <%@machine.standards.each do |standard|%>
 	  <tr>
-	  	<th><%=standard.index%></th>
+	  	<th><%=link_to standard.index, standard%></th>
 	  	<th><%=standard.um%></th>
 	  	<th><%=standard.per_hour%></th>
 	  	<th><%=standard.waste*100%> %</th>

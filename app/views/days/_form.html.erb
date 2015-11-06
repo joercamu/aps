@@ -1,0 +1,41 @@
+<%= form_for(@day) do |f| %>
+  <% if @day.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@day.errors.count, "error") %> prohibited this day from being saved:</h2>
+
+      <ul>
+      <% @day.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :machine_id %><br>
+    <%= f.text_field :machine_id %>
+  </div>
+  <div class="field">
+    <%= f.label :day %><br>
+    <%= f.date_select :day %>
+  </div>
+  <div class="field">
+    <%= f.label :shifts %><br>
+    <%= f.number_field :shifts %>
+  </div>
+  <div class="field">
+    <%= f.label :hours %><br>
+    <%= f.number_field :hours %>
+  </div>
+  <div class="field">
+    <%= f.label :busy %><br>
+    <%= f.number_field :busy %>
+  </div>
+  <div class="field">
+    <%= f.label :available %><br>
+    <%= f.number_field :available %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

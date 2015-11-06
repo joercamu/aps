@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @leftover.quantity %>
+</p>
+
+<p>
+  <strong>Um:</strong>
+  <%= @leftover.um %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @leftover.weight %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @leftover.location %>
+</p>
+
+<p>
+  <strong>Order origin:</strong>
+  <%= @leftover.order_origin %>
+</p>
+
+<p>
+  <strong>Sheet:</strong>
+  <%= @leftover.sheet_id %>
+</p>
+
+<p>
+  <strong>Sheet version:</strong>
+  <%= @leftover.sheet_version %>
+</p>
+
+<p>
+  <strong>Entry date:</strong>
+  <%= @leftover.entry_date %>
+</p>
+
+<p>
+  <strong>Disposition:</strong>
+  <%= @leftover.disposition %>
+</p>
+
+<p>
+  <strong>Sheet composite:</strong>
+  <%= @leftover.sheet_composite %>
+</p>
+
+<p>
+  <strong>Place origin:</strong>
+  <%= @leftover.place_origin %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @leftover.state %>
+</p>
+
+<%= link_to 'Edit', edit_leftover_path(@leftover) %> |
+<%= link_to 'Back', leftovers_path %>

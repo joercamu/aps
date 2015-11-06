@@ -1,3 +1,22 @@
 // Place all the styles related to the subprocesses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin sortable(){
+	list-style-type:none;
+    width: 142px;
+    min-height: 20px;
+    margin: 1rem;
+    padding: 1rem;
+    // float: left;
+    border: 1px solid #eee;
+}
+.sortable{
+    @include sortable();
+}
+.content-clipboard{
+	.sortable{
+		@include sortable();
+		float:none;	
+	}
+	
+}

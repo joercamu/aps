@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :leftovers
+  resources :days
   resources :subprocesses
   resources :measurements
   resources :standards
@@ -12,7 +14,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'orders#index'
 
+  #route for create standard references one machine
   get 'standards/new/:ref' => 'standards#new', as: :new_standard_machine_ref
+
+  #route for create subprocess of order
+  get 'new_subprocesses/:id' => 'orders#new_subprocess', as: :new_order_subprocesses
+
+  get 'schedule' => 'subprocesses#schedule'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

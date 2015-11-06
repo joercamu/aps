@@ -1,1 +1,1 @@
-json.extract! @subprocess, :id, :order, :procedure, :standard, :minutes, :start_date, :endtime, :meters, :sequence, :state, :created_at, :updated_at
+json.extract! @subprocess, :id, :order_id, :procedure_id, :standard_id, :minutes, :start_date, :end_time, :meter, :sequence, :state, :created_at, :updated_at

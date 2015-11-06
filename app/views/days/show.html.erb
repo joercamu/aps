@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Machine:</strong>
+  <%= @day.machine %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @day.day %>
+</p>
+
+<p>
+  <strong>Shifts:</strong>
+  <%= @day.shifts %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @day.hours %>
+</p>
+
+<p>
+  <strong>Busy:</strong>
+  <%= @day.busy %>
+</p>
+
+<p>
+  <strong>Available:</strong>
+  <%= @day.available %>
+</p>
+
+<%= link_to 'Edit', edit_day_path(@day) %> |
+<%= link_to 'Back', days_path %>

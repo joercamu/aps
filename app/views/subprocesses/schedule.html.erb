@@ -1,0 +1,19 @@
+<div class="content-clipboard">
+    <ul class="sortable" id="clipboard">
+      <li class="moveClipboard ui-state-default">Move it to paste</li>
+    </ul>
+	<ul class="sortable" id="clipboard-helper">
+	</ul>
+</div>
+<div class="days">
+	<%for i in 0..3%>
+		<ul id="sortable<%=i%>" class="sortable connectedSortable">
+		  <li id="d<%=i%>-1" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item 1</li>
+		  <li id="d<%=i%>-2" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item 2</li>
+		  <li id="d<%=i%>-3" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item 3</li>
+		  <li id="d<%=i%>-4" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item 4</li>
+		  <li id="d<%=i%>-5" class="ui-state-default"><input type="checkbox"/>Item 5</li>
+		</ul>
+	<%end%>
+
+</div>

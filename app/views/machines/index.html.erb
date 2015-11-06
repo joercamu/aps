@@ -21,7 +21,7 @@
         <td><%= machine.press %></td>
         <td>
           <% machine.procedures.each do |procedure|%>
-            <%= link_to procedure.name, procedure_path(procedure)%> |
+            <%= link_to procedure.name, procedure%>
           <%end%>
         </td>
         <td><%= link_to 'Show', machine %></td>

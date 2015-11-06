@@ -4,7 +4,7 @@ class SubprocessesController < ApplicationController
   # GET /subprocesses
   # GET /subprocesses.json
   def index
-    @subprocesses = Subprocess.all
+    @subprocesses = Subprocess.all.order(:order_id)
   end
 
   # GET /subprocesses/1
@@ -60,6 +60,8 @@ class SubprocessesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def schedule
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +71,6 @@ class SubprocessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subprocess_params
-      params.require(:subprocess).permit(:order_id, :procedure_id, :standard_id, :minutes, :start_date, :end_date, :meters, :sequence, :state)
+      params.require(:subprocess).permit(:order_id, :procedure_id, :standard_id, :minutes, :start_date, :end_date, :meter, :sequence, :state)
     end
 end

@@ -1,169 +1,202 @@
-<p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></td>
+<table>
+  <tr>
+    <td>
+    <%= link_to "Create subprocesses", new_order_subprocesses_path(@order)%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>State:</strong>
+      <%= @order.state %>
+    </td>
 
-<p>
-  <strong>State:</strong>
-  <%= @order.state %>
-</p>
+    <td>
+      <strong>Weight:</strong>
+      <%= @order.weight %>
+    </td>
 
-<p>
-  <strong>Weight:</strong>
-  <%= @order.weight %>
-</p>
+    <td>
+      <strong>Repeat:</strong>
+      <%= @order.repeat %>
+    </td>
 
-<p>
-  <strong>Repeat:</strong>
-  <%= @order.repeat %>
-</p>
+    <td>
+      <strong>Route:</strong>
+      <%= @order.route.waste %>
+    </td>
 
-<p>
-  <strong>Route:</strong>
-  <%= @order.route.waste %>
-</p>
+    <td>
+      <strong>Scheduled meters:</strong>
+      <%= @order.scheduled_meters %>
+    </td>
 
-<p>
-  <strong>Scheduled meters:</strong>
-  <%= @order.scheduled_meters %>
-</p>
+    <td>
+      <strong>Date offer:</strong>
+      <%= @order.date_offer %>
+    </td>
 
-<p>
-  <strong>Date offer:</strong>
-  <%= @order.date_offer %>
-</p>
+    <td>
+      <strong>Outsourced:</strong>
+      <%= @order.outsourced_id %>
+    </td>
 
-<p>
-  <strong>Outsourced:</strong>
-  <%= @order.outsourced_id %>
-</p>
+    <td>
+      <strong>Outsourced name:</strong>
+      <%= @order.outsourced_name %>
+    </td>
 
-<p>
-  <strong>Outsourced name:</strong>
-  <%= @order.outsourced_name %>
-</p>
+    <td>
+      <strong>Outsourced tolerance down:</strong>
+      <%= @order.outsourced_tolerance_down %>
+    </td>
 
-<p>
-  <strong>Outsourced tolerance down:</strong>
-  <%= @order.outsourced_tolerance_down %>
-</p>
+    <td>
+      <strong>Outsourced tolerance up:</strong>
+      <%= @order.outsourced_tolerance_up %>
+    </td>
 
-<p>
-  <strong>Outsourced tolerance up:</strong>
-  <%= @order.outsourced_tolerance_up %>
-</p>
+    <td>
+      <strong>Order date request:</strong>
+      <%= @order.order_date_request %>
+    </td>
 
-<p>
-  <strong>Order date request:</strong>
-  <%= @order.order_date_request %>
-</p>
+    <td>
+      <strong>Order number:</strong>
+      <%= @order.order_number %>
+    </td>
 
-<p>
-  <strong>Order number:</strong>
-  <%= @order.order_number %>
-</p>
+    <td>
+      <strong>Order quantity:</strong>
+      <%= @order.order_quantity %>
+    </td>
 
-<p>
-  <strong>Order quantity:</strong>
-  <%= @order.order_quantity %>
-</p>
+    <td>
+      <strong>Order type:</strong>
+      <%= @order.order_type %>
+    </td>
 
-<p>
-  <strong>Order type:</strong>
-  <%= @order.order_type %>
-</p>
+    <td>
+      <strong>Order um:</strong>
+      <%= @order.order_um %>
+    </td>
 
-<p>
-  <strong>Order um:</strong>
-  <%= @order.order_um %>
-</p>
+    <td>
+      <strong>Order unit value:</strong>
+      <%= @order.order_unit_value %>
+    </td>
 
-<p>
-  <strong>Order unit value:</strong>
-  <%= @order.order_unit_value %>
-</p>
+    <td>
+      <strong>Sheet caliber:</strong>
+      <%= @order.sheet_caliber %>
+    </td>
 
-<p>
-  <strong>Sheet caliber:</strong>
-  <%= @order.sheet_caliber %>
-</p>
+    <td>
+      <strong>Sheet client:</strong>
+      <%= @order.sheet_client %>
+    </td>
 
-<p>
-  <strong>Sheet client:</strong>
-  <%= @order.sheet_client %>
-</p>
+    <td>
+      <strong>Sheet composite:</strong>
+      <%= @order.sheet_composite %>
+    </td>
 
-<p>
-  <strong>Sheet composite:</strong>
-  <%= @order.sheet_composite %>
-</p>
+    <td>
+      <strong>Sheet cut type:</strong>
+      <%= @order.sheet_cut_type %>
+    </td>
 
-<p>
-  <strong>Sheet cut type:</strong>
-  <%= @order.sheet_cut_type %>
-</p>
+    <td>
+      <strong>Sheet film:</strong>
+      <%= @order.sheet_film %>
+    </td>
 
-<p>
-  <strong>Sheet film:</strong>
-  <%= @order.sheet_film %>
-</p>
+    <td>
+      <strong>Sheet guillotine:</strong>
+      <%= @order.sheet_guillotine %>
+    </td>
 
-<p>
-  <strong>Sheet guillotine:</strong>
-  <%= @order.sheet_guillotine %>
-</p>
+    <td>
+      <strong>Sheet height:</strong>
+      <%= @order.sheet_height %>
+    </td>
 
-<p>
-  <strong>Sheet height:</strong>
-  <%= @order.sheet_height %>
-</p>
+    <td>
+      <strong>Sheet height planned:</strong>
+      <%= @order.sheet_height_planned %>
+    </td>
 
-<p>
-  <strong>Sheet height planned:</strong>
-  <%= @order.sheet_height_planned %>
-</p>
+    <td>
+      <strong>Sheet:</strong>
+      <%= @order.sheet_id %>
+    </td>
 
-<p>
-  <strong>Sheet:</strong>
-  <%= @order.sheet_id %>
-</p>
+    <td>
+      <strong>Sheet meters roll:</strong>
+      <%= @order.sheet_meters_roll %>
+    </td>
 
-<p>
-  <strong>Sheet meters roll:</strong>
-  <%= @order.sheet_meters_roll %>
-</p>
+    <td>
+      <strong>Sheet number:</strong>
+      <%= @order.sheet_number %>
+    </td>
 
-<p>
-  <strong>Sheet number:</strong>
-  <%= @order.sheet_number %>
-</p>
+    <td>
+      <strong>Sheet print:</strong>
+      <%= @order.sheet_print %>
+    </td>
 
-<p>
-  <strong>Sheet print:</strong>
-  <%= @order.sheet_print %>
-</p>
+    <td>
+      <strong>Sheet product type:</strong>
+      <%= @order.sheet_product_type %>
+    </td>
 
-<p>
-  <strong>Sheet product type:</strong>
-  <%= @order.sheet_product_type %>
-</p>
+    <td>
+      <strong>Sheet route:</strong>
+      <%= @order.sheet_route %>
+    </td>
 
-<p>
-  <strong>Sheet route:</strong>
-  <%= @order.sheet_route %>
-</p>
+    <td>
+      <strong>Sheet spaces:</strong>
+      <%= @order.sheet_spaces %>
+    </td>
 
-<p>
-  <strong>Sheet spaces:</strong>
-  <%= @order.sheet_spaces %>
-</p>
+    <td>
+      <strong>Sheet version:</strong>
+      <%= @order.sheet_version %>
+    </td>
 
-<p>
-  <strong>Sheet version:</strong>
-  <%= @order.sheet_version %>
-</p>
-
-<p>
-  <strong>Sheet width:</strong>
-  <%= @order.sheet_width %>
-</p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+    <td>
+      <strong>Sheet width:</strong>
+      <%= @order.sheet_width %>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>Sequence</th>
+    <th>Procedure</th>
+    <th>Machine</th>
+    <th>Standard</th>
+    <th>Minutes</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Meter</th>
+    <th>State</th>
+  </tr>
+  <%@order.subprocesses.each do |subprocess|%>
+    <tr>
+      <td><%=subprocess.sequence%></td>
+      <td><%=subprocess.procedure.name%></td>
+      <td><%=subprocess.standard.machine.name%></td>
+      <td><%=subprocess.standard.index%></td>
+      <td><%=subprocess.minutes%></td>
+      <td><%=subprocess.start_date%></td>
+      <td><%=subprocess.end_date%></td>
+      <td><%=subprocess.meter%></td>
+      <td><%=subprocess.state%></td>
+    </tr>
+  <%end%>
+</table>
+    <%= link_to 'Edit', edit_order_path(@order) %> |
+    <%= link_to 'Back', orders_path %>

@@ -1,23 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  order: 
-  procedure: 
-  standard: 
+  order_id: 
+  procedure_id: 
+  standard_id: 
   minutes: 1
-  start_date: 2015-10-30 21:16:52
-  endtime: 2015-10-30 21:16:52
-  meters: 1
+  start_date: 2015-11-03 12:41:58
+  end_time: 2015-11-03 12:41:58
+  meter: 1
   sequence: 1
   state: MyString
 
 two:
-  order: 
-  procedure: 
-  standard: 
+  order_id: 
+  procedure_id: 
+  standard_id: 
   minutes: 1
-  start_date: 2015-10-30 21:16:52
-  endtime: 2015-10-30 21:16:52
-  meters: 1
+  start_date: 2015-11-03 12:41:58
+  end_time: 2015-11-03 12:41:58
+  meter: 1
   sequence: 1
   state: MyString

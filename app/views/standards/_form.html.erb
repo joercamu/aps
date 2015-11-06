@@ -13,11 +13,19 @@
 
   <div class="field">
     <%= f.label :index %><br>
-    <%= f.number_field :index, value:@index%>
+    <%if @index.nil?%>
+      <%= f.number_field :index %>
+    <%else%>
+      <%= f.number_field :index, value:@index %>
+    <%end%>    
   </div>
-  <div class="field">
+    <div class="field">
     <%= f.label :machine_id %><br>
-    <%= f.text_field :machine_id, value:@machine_id %>
+    <%if @machine_id.nil?%>
+      <%= f.number_field :machine_id %>
+    <%else%>
+      <%= f.number_field :machine_id, value:@machine_id %>
+    <%end%>    
   </div>
   <%=select("standard", "um", @measurements.collect {|p| [ p.name, p.value ] }, {include_blank: 'None'})%>
   <div class="field">
