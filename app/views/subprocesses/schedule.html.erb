@@ -7,12 +7,13 @@
 </div>
 <div class="days">
 	<%for i in 0..3%>
-		<ul id="sortable<%=i%>" class="sortable connectedSortable">
-		  <li id="d<%=i%>-1" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item 1</li>
-		  <li id="d<%=i%>-2" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item 2</li>
-		  <li id="d<%=i%>-3" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item 3</li>
-		  <li id="d<%=i%>-4" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item 4</li>
-		  <li id="d<%=i%>-5" class="ui-state-default"><input type="checkbox"/>Item 5</li>
+		<ul id="sortable<%=i%>" class="sortable connectedSortable" minutes="700" minutes-available="" minutes-occupied="450">
+			<label >x</label>
+		  <li id="d<%=i%>-1" minutes="120" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item <%=i%>1 120"</li>
+		  <li id="d<%=i%>-2" minutes="30" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item <%=i%>2 30"</li>
+		  <li id="d<%=i%>-3" minutes="400" class="ui-state-default"><input type="checkbox"/>Item <%=i%>3 400"</li>
+		  <li id="d<%=i%>-4" minutes="40" class="ui-state-default"><input type="checkbox"/>Item <%=i%>4 40"</li>
+		  <li id="d<%=i%>-5" minutes="60" class="ui-state-default"><input type="checkbox"/>Item <%=i%>5 60"</li>
 		</ul>
 	<%end%>
 
