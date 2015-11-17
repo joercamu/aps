@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @subprocesses = @order.subprocesses
   end
 
   # GET /orders/new
@@ -86,6 +87,7 @@ class OrdersController < ApplicationController
     #si no hay errores cree los subprocesos
     unless @order.errors.any?
       @order.create_subprocesses @procedures
+      redirect_to @order
     end
     
   end

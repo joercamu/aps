@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Machine:</strong>
-  <%= @day.machine %>
+  <%= @day.machine.name %>
 </p>
 
 <p>
@@ -14,12 +12,14 @@
   <strong>Shifts:</strong>
   <%= @day.shifts %>
 </p>
-
 <p>
   <strong>Hours:</strong>
   <%= @day.hours %>
 </p>
-
+<p>
+  <strong>Minutes:</strong>
+  <%= @day.minutes %>
+</p>
 <p>
   <strong>Busy:</strong>
   <%= @day.busy %>

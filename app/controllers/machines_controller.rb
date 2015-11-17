@@ -11,7 +11,7 @@ class MachinesController < ApplicationController
   # GET /machines/1
   # GET /machines/1.json
   def show
-
+    @days = @machine.days
   end
 
   # GET /machines/new

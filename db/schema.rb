@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105161414) do
+ActiveRecord::Schema.define(version: 20151117230100) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20151105161414) do
     t.integer  "available",  limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.time     "start_time"
+    t.integer  "minutes",    limit: 4
   end
 
   add_index "days", ["machine_id"], name: "index_days_on_machine_id", using: :btree
@@ -156,8 +158,10 @@ ActiveRecord::Schema.define(version: 20151105161414) do
     t.string   "state",        limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "day_id",       limit: 4
   end
 
+  add_index "subprocesses", ["day_id"], name: "index_subprocesses_on_day_id", using: :btree
   add_index "subprocesses", ["order_id"], name: "index_subprocesses_on_order_id", using: :btree
   add_index "subprocesses", ["procedure_id"], name: "index_subprocesses_on_procedure_id", using: :btree
   add_index "subprocesses", ["standard_id"], name: "index_subprocesses_on_standard_id", using: :btree
@@ -169,6 +173,7 @@ ActiveRecord::Schema.define(version: 20151105161414) do
   add_foreign_key "has_procedures", "procedures"
   add_foreign_key "orders", "routes"
   add_foreign_key "standards", "machines"
+  add_foreign_key "subprocesses", "days"
   add_foreign_key "subprocesses", "orders"
   add_foreign_key "subprocesses", "procedures"
   add_foreign_key "subprocesses", "standards"

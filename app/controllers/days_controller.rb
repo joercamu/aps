@@ -14,6 +14,9 @@ class DaysController < ApplicationController
 
   # GET /days/new
   def new
+    if params[:ref]
+      @machine_id = params[:ref]
+    end
     @day = Day.new
   end
 
@@ -69,6 +72,6 @@ class DaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def day_params
-      params.require(:day).permit(:machine_id, :day, :shifts, :hours, :busy, :available)
+      params.require(:day).permit(:machine_id, :day, :shifts, :hours, :start_hour, :busy, :available)
     end
 end

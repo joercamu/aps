@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery-ui/sortable
+//= require jquery-ui/selectable
+//= require jquery-ui/datepicker
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .

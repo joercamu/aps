@@ -3,20 +3,81 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @mixin sortable(){
 	list-style-type:none;
-    width: 142px;
+    width: 100%;
     min-height: 20px;
-    margin: 1rem;
-    padding: 1rem;
+    margin: .3rem;
+    padding: .3rem;
     float: left;
     border: 1px solid #eee;
 }
+.ui-state-highlight { 
+    height: 2rem; 
+    line-height: 1.2em;
+    background-color: rgba(33, 150, 243, 0.9) !important;
+    border: 1px solid #186881 !important;
+}
 .sortable{
     @include sortable();
+    li { 
+        background: #eee; 
+        position:relative;
+        margin: 2px 0; 
+        padding: 2px; 
+        border: 1px solid #ddd; 
+        padding-left: 42px; 
+        .handle { 
+            background: white; 
+            position: absolute; 
+            left: 0; 
+            top: 0; 
+            bottom: 0; 
+            padding:8px; 
+        }
+    }
+    .ui-selecting { 
+        background: #eee; 
+        .handle { 
+            background: #ddd; 
+        }
+    }
+    .ui-selected { 
+        background: #def;
+        .handle { 
+            background: #cde; 
+        }
+    }
 }
 .content-clipboard{
+    position: fixed;
 	.sortable{
 		@include sortable();
 		float:none;	
-	}
-	
+
+        li{
+            padding-left:0;
+            dl{
+                list-style-type:none;
+                margin: 0;
+                padding:0;
+                dd{
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+	}	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

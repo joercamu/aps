@@ -1,36 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Days</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Machine</th>
-      <th>Day</th>
-      <th>Shifts</th>
-      <th>Hours</th>
-      <th>Busy</th>
-      <th>Available</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @days.each do |day| %>
-      <tr>
-        <td><%= day.machine %></td>
-        <td><%= day.day %></td>
-        <td><%= day.shifts %></td>
-        <td><%= day.hours %></td>
-        <td><%= day.busy %></td>
-        <td><%= day.available %></td>
-        <td><%= link_to 'Show', day %></td>
-        <td><%= link_to 'Edit', edit_day_path(day) %></td>
-        <td><%= link_to 'Destroy', day, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'list'%>
 
 <br>
 

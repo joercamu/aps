@@ -1,20 +1,31 @@
-<div class="content-clipboard">
-    <ul class="sortable" id="clipboard">
-      <li class="moveClipboard ui-state-default">Move it to paste</li>
-    </ul>
-	<ul class="sortable" id="clipboard-helper">
-	</ul>
-</div>
-<div class="days">
-	<%for i in 0..3%>
-		<ul id="sortable<%=i%>" class="sortable connectedSortable" minutes="700" minutes-available="" minutes-occupied="450">
-			<label >x</label>
-		  <li id="d<%=i%>-1" minutes="120" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item <%=i%>1 120"</li>
-		  <li id="d<%=i%>-2" minutes="30" class="ui-state-default ui-state-disabled"><input type="checkbox"/>Item <%=i%>2 30"</li>
-		  <li id="d<%=i%>-3" minutes="400" class="ui-state-default"><input type="checkbox"/>Item <%=i%>3 400"</li>
-		  <li id="d<%=i%>-4" minutes="40" class="ui-state-default"><input type="checkbox"/>Item <%=i%>4 40"</li>
-		  <li id="d<%=i%>-5" minutes="60" class="ui-state-default"><input type="checkbox"/>Item <%=i%>5 60"</li>
-		</ul>
-	<%end%>
+<div class="row">
+	<div class="small-12 columns">
+		<div class="row">
+			<div class="small-2 columns">
+				<div class="content-clipboard">
+					<div id="result"></div>
+				    <ul class="sortable" id="clipboard">
+				    	<label id="labelItemClipboard">vacio</label>
+				    </ul>
+				</div>
+			</div>
 
+			<div class="small-10 columns">
+				<div class="days">
+					<%for i in 0..5%>
+						<ul id="sortable<%=i%>" class="sortable connectedSortable" minutes="300" minutes-available="" minutes-occupied="">
+						  <label></label>
+							<!-- ui-state-disabled #for bloqueados -->
+						  <li id="item_1" minutes="20" class="ui-state-default">Item <%=i%>1 20"</li>
+						  <li id="item_2" minutes="30" class="ui-state-default">Item <%=i%>2 30"</li>
+						  <li id="item_3" minutes="90" class="ui-state-default">Item <%=i%>3 90"</li>
+						  <li id="item_4" minutes="40" class="ui-state-default">Item <%=i%>4 40"</li>
+						  <li id="item_5" minutes="60" class="ui-state-default">Item <%=i%>5 60"</li>
+						</ul>
+						
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

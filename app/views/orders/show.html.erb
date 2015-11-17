@@ -2,8 +2,11 @@
 <table>
   <tr>
     <td>
-    <%= link_to "Create subprocesses", new_order_subprocesses_path(@order)%>
+      <%unless @order.subprocesses.any?%>
+        <%=link_to "Create subprocesses", new_order_subprocesses_path(@order)%>
+      <%end%>
     </td>
+
   </tr>
   <tr>
     <td>
@@ -80,7 +83,8 @@
       <strong>Order um:</strong>
       <%= @order.order_um %>
     </td>
-
+  </tr>
+  <tr>
     <td>
       <strong>Order unit value:</strong>
       <%= @order.order_unit_value %>
@@ -172,31 +176,8 @@
     </td>
   </tr>
 </table>
-<table>
-  <tr>
-    <th>Sequence</th>
-    <th>Procedure</th>
-    <th>Machine</th>
-    <th>Standard</th>
-    <th>Minutes</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Meter</th>
-    <th>State</th>
-  </tr>
-  <%@order.subprocesses.each do |subprocess|%>
-    <tr>
-      <td><%=subprocess.sequence%></td>
-      <td><%=subprocess.procedure.name%></td>
-      <td><%=subprocess.standard.machine.name%></td>
-      <td><%=subprocess.standard.index%></td>
-      <td><%=subprocess.minutes%></td>
-      <td><%=subprocess.start_date%></td>
-      <td><%=subprocess.end_date%></td>
-      <td><%=subprocess.meter%></td>
-      <td><%=subprocess.state%></td>
-    </tr>
-  <%end%>
-</table>
-    <%= link_to 'Edit', edit_order_path(@order) %> |
-    <%= link_to 'Back', orders_path %>
+
+<%= render 'subprocesses/list'%>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

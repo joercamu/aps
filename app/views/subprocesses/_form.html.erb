@@ -23,17 +23,21 @@
     <%= f.label :standard_id %><br>
     <%= f.text_field :standard_id %>
   </div>
+    <div class="field">
+    <%= f.label :day_id %><br>
+    <%= f.text_field :day_id %>
+  </div>
   <div class="field">
     <%= f.label :minutes %><br>
     <%= f.number_field :minutes %>
   </div>
   <div class="field">
-    <%= f.label :start_date %><br>
-    <%= f.datetime_select :start_date %>
+    <% f.label :start_date %>
+    <% f.datetime_select :start_date, class:"" %>
   </div>
   <div class="field">
-    <%= f.label :end_date %><br>
-    <%= f.datetime_select :end_date %>
+    <% f.label :end_date %>
+    <% f.datetime_select :end_date %>
   </div>
   <div class="field">
     <%= f.label :meter %><br>
@@ -51,3 +55,6 @@
     <%= f.submit %>
   </div>
 <% end %>
+<script>
+$('.datetime').datepicker();
+</script>

@@ -2,17 +2,20 @@
 
 <p>
   <strong>Order:</strong>
-  <%= @subprocess.order %>
+  <%= @subprocess.order.order_number %>
 </p>
 
 <p>
   <strong>Procedure:</strong>
-  <%= @subprocess.procedure %>
+  <%= @subprocess.procedure.name %>
 </p>
-
 <p>
   <strong>Standard:</strong>
-  <%= @subprocess.standard %>
+  <%= @subprocess.standard.index %>
+</p>
+<p>
+  <strong>Machine:</strong>
+  <%= @subprocess.standard.machine.name %>
 </p>
 
 <p>
