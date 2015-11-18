@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>State</th>
       <th>Weight</th>
       <th>Repeat</th>
@@ -45,6 +46,7 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
+        <td><%= order.id %></td>
         <td><%= order.state %></td>
         <td><%= order.weight %></td>
         <td><%= order.repeat %></td>
@@ -87,5 +89,5 @@
 </table>
 
 <br>
-
+<a href="#" id="get_orders">Get Orders</a><br>
 <%= link_to 'New Order', new_order_path %>

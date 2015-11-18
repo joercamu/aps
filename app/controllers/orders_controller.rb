@@ -87,9 +87,15 @@ class OrdersController < ApplicationController
     #si no hay errores cree los subprocesos
     unless @order.errors.any?
       @order.create_subprocesses @procedures
+      #lo envio a orders/:id
       redirect_to @order
     end
     
+  end
+  def get
+    #enviar el ultimo pedido
+    #ejecutar query y como resultado enviar pedidos encontrados
+    #crear pedidos
   end
 
 

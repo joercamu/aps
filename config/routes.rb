@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   #route for create standard references one machine
   get 'standards/new/:ref' => 'standards#new', as: :new_standard_machine_ref
   get 'days/new/:ref' => 'days#new', as: :new_day_machine_ref
+  post 'orders/get' => 'orders#get', as: :get_orders
 
   #route for create subprocess of order
   get 'new_subprocesses/:id' => 'orders#new_subprocess', as: :new_order_subprocesses
