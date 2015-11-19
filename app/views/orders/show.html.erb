@@ -1,182 +1,167 @@
-<p id="notice"><%= notice %></td>
 <table>
   <tr>
     <td>
-      <%unless @order.subprocesses.any?%>
-        <%=link_to "Create subprocesses", new_order_subprocesses_path(@order)%>
-      <%end%>
-    </td>
-
-  </tr>
-  <tr>
-    <td>
-      <strong>State:</strong>
+      <strong>Estado:</strong><br>
       <%= @order.state %>
     </td>
-
     <td>
-      <strong>Weight:</strong>
-      <%= @order.weight %>
-    </td>
-
-    <td>
-      <strong>Repeat:</strong>
-      <%= @order.repeat %>
-    </td>
-
-    <td>
-      <strong>Route:</strong>
-      <%= @order.route.waste %>
-    </td>
-
-    <td>
-      <strong>Scheduled meters:</strong>
-      <%= @order.scheduled_meters %>
-    </td>
-
-    <td>
-      <strong>Date offer:</strong>
-      <%= @order.date_offer %>
-    </td>
-
-    <td>
-      <strong>Outsourced:</strong>
-      <%= @order.outsourced_id %>
-    </td>
-
-    <td>
-      <strong>Outsourced name:</strong>
-      <%= @order.outsourced_name %>
-    </td>
-
-    <td>
-      <strong>Outsourced tolerance down:</strong>
-      <%= @order.outsourced_tolerance_down %>
-    </td>
-
-    <td>
-      <strong>Outsourced tolerance up:</strong>
-      <%= @order.outsourced_tolerance_up %>
-    </td>
-
-    <td>
-      <strong>Order date request:</strong>
-      <%= @order.order_date_request %>
-    </td>
-
-    <td>
-      <strong>Order number:</strong>
+      <strong>Numero pedido:</strong><br>
       <%= @order.order_number %>
     </td>
 
     <td>
-      <strong>Order quantity:</strong>
+      <strong>Cantidad:</strong><br>
       <%= @order.order_quantity %>
     </td>
 
     <td>
-      <strong>Order type:</strong>
+      <strong>Tipo:</strong><br>
       <%= @order.order_type %>
     </td>
 
     <td>
-      <strong>Order um:</strong>
+      <strong>Unidad medida:</strong><br>
       <%= @order.order_um %>
     </td>
-  </tr>
-  <tr>
     <td>
-      <strong>Order unit value:</strong>
+      <strong>Valor unitario:</strong><br>
       <%= @order.order_unit_value %>
     </td>
 
     <td>
-      <strong>Sheet caliber:</strong>
+      <strong>Peso:</strong><br>
+      <%= @order.weight %>
+    </td>
+
+    <td>
+      <strong>Repeticion:</strong><br>
+      <%= @order.repeat %>
+    </td>
+
+    <td>
+      <strong>Ruta:</strong><br>
+      <%= @order.route.waste %>
+    </td>
+
+    <td>
+      <strong>Metros Programados:</strong><br>
+      <%= @order.scheduled_meters %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Fecha Ofrecida:</strong><br>
+      <%= @order.date_offer %>
+    </td>
+
+    <td>
+      <strong>Cliente:</strong><br>
+      <%= @order.outsourced_id %> | 
+      <%= @order.outsourced_name %>
+    </td>
+
+    <td>
+      <strong>Tolerancia- :</strong><br>
+      <%= @order.outsourced_tolerance_down %>
+    </td>
+
+    <td>
+      <strong>Tolerancia+ :</strong><br>
+      <%= @order.outsourced_tolerance_up %>
+    </td>
+
+    <td>
+      <strong>Fecha solicitada:</strong><br>
+      <%= @order.order_date_request %>
+    </td>
+
+    <td>
+      <strong>Calibre:</strong><br>
       <%= @order.sheet_caliber %>
     </td>
 
     <td>
-      <strong>Sheet client:</strong>
-      <%= @order.sheet_client %>
+      <strong>Ficha:</strong><br>
+      <%= @order.sheet_client %> - <%= @order.sheet_number %>
     </td>
 
     <td>
-      <strong>Sheet composite:</strong>
+      <strong>Composicion:</strong><br>
       <%= @order.sheet_composite %>
     </td>
 
     <td>
-      <strong>Sheet cut type:</strong>
+      <strong>Tipo corte:</strong><br>
       <%= @order.sheet_cut_type %>
     </td>
 
     <td>
-      <strong>Sheet film:</strong>
+      <strong>Pelicula:</strong><br>
       <%= @order.sheet_film %>
     </td>
-
+  </tr>
+  <tr>
     <td>
-      <strong>Sheet guillotine:</strong>
+      <strong>Guillotinado:</strong><br>
       <%= @order.sheet_guillotine %>
     </td>
 
     <td>
-      <strong>Sheet height:</strong>
+      <strong>Largo:</strong><br>
       <%= @order.sheet_height %>
     </td>
 
     <td>
-      <strong>Sheet height planned:</strong>
+      <strong>Ancho:</strong><br>
+      <%= @order.sheet_width %>
+    </td>
+
+    <td>
+      <strong>Largo planeado:</strong><br>
       <%= @order.sheet_height_planned %>
     </td>
 
     <td>
-      <strong>Sheet:</strong>
+      <strong>Ficha ID:</strong><br>
       <%= @order.sheet_id %>
     </td>
 
     <td>
-      <strong>Sheet meters roll:</strong>
+      <strong>Metros de rollo:</strong><br>
       <%= @order.sheet_meters_roll %>
     </td>
-
     <td>
-      <strong>Sheet number:</strong>
-      <%= @order.sheet_number %>
-    </td>
-
-    <td>
-      <strong>Sheet print:</strong>
+      <strong>Impreso:</strong><br>
       <%= @order.sheet_print %>
     </td>
 
     <td>
-      <strong>Sheet product type:</strong>
+      <strong>Tipo de producto:</strong><br>
       <%= @order.sheet_product_type %>
     </td>
 
     <td>
-      <strong>Sheet route:</strong>
+      <strong>Ruta de proceso:</strong><br>
       <%= @order.sheet_route %>
     </td>
 
     <td>
-      <strong>Sheet spaces:</strong>
+      <strong>Cabidas:</strong><br>
       <%= @order.sheet_spaces %>
     </td>
-
+  </tr>
+  <tr>
     <td>
-      <strong>Sheet version:</strong>
+      <strong>Ficha version:</strong><br>
       <%= @order.sheet_version %>
     </td>
 
-    <td>
-      <strong>Sheet width:</strong>
-      <%= @order.sheet_width %>
-    </td>
   </tr>
 </table>
 
+<%unless @order.subprocesses.any?%>
+  <%=link_to "Create subprocesses", new_order_subprocesses_path(@order),class:"button"%>
+<%end%>
 <%= render 'subprocesses/list'%>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |

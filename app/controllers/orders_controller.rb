@@ -6,6 +6,11 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all
   end
+  def get
+    #enviar el ultimo pedido
+    #ejecutar query y como resultado enviar pedidos encontrados
+    #crear pedidos
+  end
 
   # GET /orders/1
   # GET /orders/1.json
@@ -92,12 +97,6 @@ class OrdersController < ApplicationController
     end
     
   end
-  def get
-    #enviar el ultimo pedido
-    #ejecutar query y como resultado enviar pedidos encontrados
-    #crear pedidos
-  end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

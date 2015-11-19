@@ -1,6 +1,8 @@
 class Order < ActiveRecord::Base
   belongs_to :route
   has_many :subprocesses
+  before_save :set_repeat
+
     # Campo que se tiene que editar aqui! 
     # t.string   "state",                     limit: 255
     # t.float    "weight",                    limit: 24
@@ -15,5 +17,9 @@ class Order < ActiveRecord::Base
   		count = count + 1
   		Subprocess.create(sequence:count,order_id:self.id ,procedure_id:key, standard_id:value.id)
   	end
+  end
+  def set_repeat
+    order = self.order_number
+    self.repeat = Order.where(order_number:order).count + 1
   end
 end

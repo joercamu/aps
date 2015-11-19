@@ -1,0 +1,93 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>State</th>
+      <th>Weight</th>
+      <th>Repeat</th>
+      <th>Route</th>
+      <th>Scheduled meters</th>
+      <th>Date offer</th>
+      <th>Outsourced</th>
+      <th>Outsourced name</th>
+      <th>Outsourced tolerance down</th>
+      <th>Outsourced tolerance up</th>
+      <th>Order date request</th>
+      <th>Order number</th>
+      <th>Order quantity</th>
+      <th>Order type</th>
+      <th>Order um</th>
+      <th>Order unit value</th>
+      <th>Sheet caliber</th>
+      <th>Sheet client</th>
+      <th>Sheet composite</th>
+      <th>Sheet cut type</th>
+      <th>Sheet film</th>
+      <th>Sheet guillotine</th>
+      <th>Sheet height</th>
+      <th>Sheet height planned</th>
+      <th>Sheet</th>
+      <th>Sheet meters roll</th>
+      <th>Sheet number</th>
+      <th>Sheet print</th>
+      <th>Sheet product type</th>
+      <th>Sheet route</th>
+      <th>Sheet spaces</th>
+      <th>Sheet version</th>
+      <th>Sheet width</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.state %></td>
+        <td><%= order.weight %></td>
+        <td><%= order.repeat %></td>
+        <td><%= "Ruta #{order.route.id} #{order.route.waste*100}%" %></td>
+        <td><%= order.scheduled_meters %></td>
+        <td><%= order.date_offer %></td>
+        <td><%= order.outsourced_id %></td>
+        <td><%= order.outsourced_name %></td>
+        <td><%= order.outsourced_tolerance_down %></td>
+        <td><%= order.outsourced_tolerance_up %></td>
+        <td><%= order.order_date_request %></td>
+        <td><%= link_to order.order_number, order %></td>
+        <td><%= order.order_quantity %></td>
+        <td><%= order.order_type %></td>
+        <td><%= order.order_um %></td>
+        <td><%= order.order_unit_value %></td>
+        <td><%= order.sheet_caliber %></td>
+        <td><%= order.sheet_client %></td>
+        <td><%= order.sheet_composite %></td>
+        <td><%= order.sheet_cut_type %></td>
+        <td><%= order.sheet_film %></td>
+        <td><%= order.sheet_guillotine %></td>
+        <td><%= order.sheet_height %></td>
+        <td><%= order.sheet_height_planned %></td>
+        <td><%= order.sheet_id %></td>
+        <td><%= order.sheet_meters_roll %></td>
+        <td><%= order.sheet_number %></td>
+        <td><%= order.sheet_print %></td>
+        <td><%= order.sheet_product_type %></td>
+        <td><%= order.sheet_route %></td>
+        <td><%= order.sheet_spaces %></td>
+        <td><%= order.sheet_version %></td>
+        <td><%= order.sheet_width %></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<a href="#" id="get_orders">Get Orders</a><br>
+<%= link_to 'New Order', new_order_path %>

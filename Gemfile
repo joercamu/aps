@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#style of site
+gem 'foundation-rails'
 
 gem 'jquery-ui-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
