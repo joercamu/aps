@@ -1,8 +1,8 @@
 class Order < ActiveRecord::Base
+  include AASM
   belongs_to :route
   has_many :subprocesses
   before_save :set_repeat
-
     # Campo que se tiene que editar aqui! 
     # t.string   "state",                     limit: 255
     # t.float    "weight",                    limit: 24
@@ -21,5 +21,22 @@ class Order < ActiveRecord::Base
   def set_repeat
     order = self.order_number
     self.repeat = Order.where(order_number:order).count + 1
+  end
+
+  aasm column: "state" do
+    state :activo, initial: true
+    state :aprobado
+    state :rechazado
+    state :en_programacion
+    state :programado
+    state :reprogramado
+    state :en_proceso
+    state :suspendido
+    state :terminado
+
+    event :approve do
+      transitions :from => :activo, :to => :aprobado
+    end
+
   end
 end

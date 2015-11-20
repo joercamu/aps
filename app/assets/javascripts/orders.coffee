@@ -69,6 +69,7 @@ $ ->
 				error: (error)->
 					console.log(error)
 		buildHtml:(order,index,nameclass)->
+			#nameclass es la clase que se le aplica al button dependiendo de ella cambioa de color y realiza diferentes acciones
 			if nameclass == "alert"
 				textbutton = "Eliminar"
 			else

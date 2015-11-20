@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#admin states
+gem 'aasm'
 #style of site
 gem 'foundation-rails'
 

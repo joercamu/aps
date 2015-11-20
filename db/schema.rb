@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117230100) do
+ActiveRecord::Schema.define(version: 20151119232734) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20151117230100) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string   "state",                     limit: 255
+    t.string   "state",                     limit: 255,   default: "activo"
     t.float    "weight",                    limit: 24
     t.integer  "repeat",                    limit: 4
     t.integer  "scheduled_meters",          limit: 4
@@ -114,8 +114,8 @@ ActiveRecord::Schema.define(version: 20151117230100) do
     t.integer  "sheet_spaces",              limit: 4
     t.integer  "sheet_version",             limit: 4
     t.float    "sheet_width",               limit: 24
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.integer  "route_id",                  limit: 4
   end
 
