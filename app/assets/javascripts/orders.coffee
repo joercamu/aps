@@ -73,7 +73,7 @@ $ ->
 			if nameclass == "alert"
 				textbutton = "Eliminar"
 			else
-				textbutton = "Programar"
+				textbutton = "Activar"
 
 			html = "<tr id='row#{index}'>
 		        <td>#{ order.order_number }</td>

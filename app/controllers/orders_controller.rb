@@ -1,15 +1,11 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :new_subprocess]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess]
+  before_action :set_subprocesses, only:[:show,:schedule]
 
   # GET /orders
   # GET /orders.json
   def index
     @orders = Order.all
-  end
-  def get
-    #enviar el ultimo pedido
-    #ejecutar query y como resultado enviar pedidos encontrados
-    #crear pedidos
   end
 
   # GET /orders/1
@@ -66,6 +62,12 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #GET /get_orders
+  def get
+  end
+  #GET /programar/:id
+  def schedule
+  end
   # CREATE subprocess POST
   def new_subprocess
     @route_all = @order.sheet_route
@@ -93,7 +95,7 @@ class OrdersController < ApplicationController
     unless @order.errors.any?
       @order.create_subprocesses @procedures
       #lo envio a orders/:id
-      redirect_to @order
+      redirect_to schedule_order_path(@order)
     end
     
   end
@@ -102,6 +104,9 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+    end
+    def set_subprocesses
+      @subprocesses = @order.subprocesses
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

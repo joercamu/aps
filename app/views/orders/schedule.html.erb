@@ -1,0 +1,24 @@
+<!-- a.	Consultar sobrantes
+b.	Calcular metros del pedido
+c.	Confirmar la ruta de proceso de origen khronos
+d.	Realizar cambios en la ruta proceso (+/- proceso, +/- maquina)
+e.	Crear rutas de proceso (base de datos)
+f.	Asignar estándar de producción a cada ruta, por defecto es 1
+x.	Asignar tiempo de alistamiento
+g.	Formular campo “minutos” en cada proceso
+h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días disponibles (validar fecha solicitada) -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<div class="schedule" ng-app>
+	<%=render 'show'%>
+	<button>Calcular metros</button>
+	<input ng-model="meters">
+	{{meters}}
+	<p>Confirmar ruta de proceso</p>
+	<%unless @order.subprocesses.any?%>
+	  <% if @order.state == "aprobado"%>
+	   <%= link_to "Crear rutas de procesos", new_order_subprocesses_path(@order),class:"button"%>
+	   <% end%>
+	<%end%>
+	<p>Asignar estandar de produccion</p>
+	<%=render 'subprocesses/list'%>
+</div>

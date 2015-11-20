@@ -1,3 +1,4 @@
+<!-- Esta vista parcial es una version sin tanta contamicacion visual -->
 <div id="foo"></div>
 <table id="table_orders">
   <thead>
@@ -18,7 +19,7 @@
   <tbody id="tbody_orders">
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.order_number %></td>
+        <td><%= link_to order.order_number, order %></td>
         <td><%= order.repeat %></td>
         <td><%= "#{order.sheet_client}-#{order.sheet_number}" %></td>
         <td><%= order.outsourced_name %></td>
@@ -27,9 +28,9 @@
         <td><%= order.order_unit_value %></td>
         <td><%= order.order_date_request %></td>
         <td><%= order.state %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% link_to 'Show', order %></td>
+        <td><% link_to 'Edit', edit_order_path(order) %></td>
+        <td><% link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

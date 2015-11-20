@@ -16,13 +16,19 @@ Rails.application.routes.draw do
 
   #route for create standard references one machine
   get 'standards/new/:ref' => 'standards#new', as: :new_standard_machine_ref
+  #route for create day references one machine
   get 'days/new/:ref' => 'days#new', as: :new_day_machine_ref
-  get 'get_orders' => 'orders#get'
+  #interface for get orders from khronos
 
+  get 'get_orders' => 'orders#get'
+  #route for programm at order
+  get 'orders/:id/schedule' => 'orders#schedule', as: :schedule_order
   #route for create subprocess of order
   get 'new_subprocesses/:id' => 'orders#new_subprocess', as: :new_order_subprocesses
 
-  get 'schedule' => 'subprocesses#schedule'
+  
+  #route where it's do order "drag on drop"
+  get 'sorting' => 'subprocesses#schedule'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

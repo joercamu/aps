@@ -71,6 +71,6 @@ class SubprocessesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subprocess_params
-      params.require(:subprocess).permit(:order_id, :procedure_id, :standard_id, :day_id, :minutes, :start_date, :end_date, :meter, :sequence, :state)
+      params.require(:subprocess).permit(:order_id, :procedure_id, :standard_id, :day_id, :minutes, :setup_time, :start_date, :end_date, :meter, :sequence, :state)
     end
 end

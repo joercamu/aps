@@ -34,7 +34,7 @@ class StandardsController < ApplicationController
 
     respond_to do |format|
       if @standard.save
-        format.html { redirect_to @standard, notice: 'Standard was successfully created.' }
+        format.html { redirect_to @standard.machine, notice: 'Standard was successfully created.' }
         format.json { render :show, status: :created, location: @standard }
       else
         format.html { render :new }
