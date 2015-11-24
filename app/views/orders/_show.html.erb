@@ -150,9 +150,13 @@
     </td>
   </tr>
   <tr>
-    <td colspan="10">
+    <td colspan="8">
       <strong>Ruta de proceso:</strong><br>
       <%= @order.sheet_route.gsub(',','<br>').html_safe%>
+    </td>
+    <td colspan="2">
+      <strong>Fecha Creacion</strong><br>
+      <%=@order.created_at%>
     </td>
   </tr>
 </table>

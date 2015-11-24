@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :procedures
   resources :orders
   resources :routes
+  # resources :orders do
+  #   resources :subprocesses, only:[:index,:show,:create,:update]
+  # end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -28,7 +31,7 @@ Rails.application.routes.draw do
 
   
   #route where it's do order "drag on drop"
-  get 'sorting' => 'subprocesses#schedule'
+  get 'machines/:id/sorting' => 'subprocesses#schedule', as: :sort_subprocess
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

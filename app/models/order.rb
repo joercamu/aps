@@ -2,6 +2,8 @@ class Order < ActiveRecord::Base
   include AASM
   belongs_to :route
   has_many :subprocesses
+  has_many :has_leftovers
+  has_many :leftovers, through: :has_leftovers
   before_create :set_repeat
     # Campo que se tiene que editar aqui! 
     # t.string   "state",                     limit: 255
@@ -25,11 +27,14 @@ class Order < ActiveRecord::Base
   def calculate_meters
     case self.order_um
       when "UND"
-        
+        1000
       when "ROL"
+        2000
       when "KIL"
+        3000
+      when "MTR"
+        4000
     end
-    self.update(scheduled_meters:300)
   end
   aasm column: "state" do
     state :activo, initial: true

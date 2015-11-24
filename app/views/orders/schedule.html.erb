@@ -1,4 +1,5 @@
-<!-- a.	Consultar sobrantes
+<!-- 
+a.	Consultar sobrantes
 b.	Calcular metros del pedido
 c.	Confirmar la ruta de proceso de origen khronos
 d.	Realizar cambios en la ruta proceso (+/- proceso, +/- maquina)
@@ -7,18 +8,68 @@ f.	Asignar estándar de producción a cada ruta, por defecto es 1
 x.	Asignar tiempo de alistamiento
 g.	Formular campo “minutos” en cada proceso
 h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días disponibles (validar fecha solicitada) -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-<div class="schedule" ng-app>
+<div class="schedule" ng-app="apsApp">
+	<p class="subtitle">Informacion del pedido</p>
 	<%=render 'show'%>
-	<button>Calcular metros</button>
-	<input ng-model="meters">
-	{{meters}}
-	<p>Confirmar ruta de proceso</p>
-	<%unless @order.subprocesses.any?%>
-	  <% if @order.state == "aprobado"%>
-	   <%= link_to "Crear rutas de procesos", new_order_subprocesses_path(@order),class:"button"%>
-	   <% end%>
-	<%end%>
-	<p>Asignar estandar de produccion</p>
-	<%=render 'subprocesses/list'%>
+	<input id="IdOrder" value="<%=@order.id%>" type="hidden">
+
+	<div ng-controller="OrdersController">
+		<p class="subtitle">Consulta de sobrantes</p>
+		<p class="subtitle">Metros a programar</p>
+		<div ng-hide="programmed">
+			<input id="input_scheduled_meters" type="hidden" value="<%=@meters%>">
+			<label>Metros programados</label>
+			<input ng-model="order.scheduled_meters" >
+			<button ng-click="updateOrder()" class="success">Guardar </button>
+		</div>
+		<p>{{order.scheduled_meters}} Metros programados</p> 
+		<p class="subtitle">Confirmar ruta de proceso</p>
+		<%unless @order.subprocesses.any?%>
+		  <% if @order.state == "aprobado"%>
+		   <%= link_to "Crear rutas de procesos", new_order_subprocesses_path(@order),class:"button"%>
+		   <% end%>
+		<%end%>
+		<p class="subtitle">Asignar estandar de produccion</p>
+		<table>
+		  <thead>
+		    <tr>
+		      <th>#</th>
+		      <th>Proceso</th>
+		      <th>Maquina</th>
+		      <th>Estandar</th>
+		      <th>UM Estandar</th>
+		      <th>Alistamiento"</th>
+		      <th>Tiempo"</th>
+		      <th>Dia(yyyy-mm-dd)</th>
+		      <th>Fecha de inicio</th>
+		      <th>Fecha de fin</th>
+		      <th>Metros</th>      
+		      <th>Estado</th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+		      <tr ng-repeat="subprocess in order.subprocesses">
+		        <td>{{ subprocess.sequence }}</td>
+		        <td>{{ subprocess.procedure }}</td>
+		        <td>{{ subprocess.machine}}</td>
+		        <td>{{ subprocess.standard }}</td>
+		        <td>{{ subprocess.standard_um }}</td>
+		        <td><input ng-model="subprocess.setup_time"></td>
+		        <td>{{ subprocess.minutes }}</td>
+		        <td>
+		        	<select style="width:100px"ng-model="subprocess.day_id" ng-options="day.id as day.day for day in subprocess.days">
+		        	</select>
+		        </td>
+		        <td>{{ subprocess.start_date }}</td>
+		        <td>{{ subprocess.end_date }}</td>
+		        <td>{{ subprocess.meter }}</td>
+		        <td>{{ subprocess.state }}</td>
+		      </tr>
+		  </tbody>
+		  	<tr>
+		  		<td colspan="13"> <button ng-click="updateSubprocesses()" class="button">Guardar cambios</button> </td>
+		  	</tr>
+		</table>
+	</div>
 </div>

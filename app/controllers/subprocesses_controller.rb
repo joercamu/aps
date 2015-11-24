@@ -1,5 +1,6 @@
 class SubprocessesController < ApplicationController
   before_action :set_subprocess, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   # GET /subprocesses
   # GET /subprocesses.json
@@ -61,6 +62,7 @@ class SubprocessesController < ApplicationController
     end
   end
   def schedule
+    @machine = Machine.find(params[:id])
   end
 
   private

@@ -1,3 +1,4 @@
+<p class="subtitle"><%=@machine.name%></p>
 <div class="row">
 	<div class="small-12 columns">
 		<div class="row">
@@ -12,15 +13,15 @@
 
 			<div class="small-10 columns">
 				<div class="days">
-					<%for i in 0..5%>
-						<ul id="sortable<%=i%>" class="sortable connectedSortable" minutes="500" minutes-available="" minutes-occupied="">
+					<%@machine.days.each do |day|%>
+						<ul id="sortable<%day.id%>" class="sortable connectedSortable" minutes="500" minutes-available="" minutes-occupied="">
 						  <label></label>
+						  <%day.subprocesses.each do |subprocess|%>
 							<!-- ui-state-disabled #for bloqueados -->
-						  <li id="item_1" minutes="20" class="ui-state-default">Item <%=i%>1 20"</li>
-						  <li id="item_2" minutes="30" class="ui-state-default">Item <%=i%>2 30"</li>
-						  <li id="item_3" minutes="90" class="ui-state-default">Item <%=i%>3 90"</li>
-						  <li id="item_4" minutes="40" class="ui-state-default">Item <%=i%>4 40"</li>
-						  <li id="item_5" minutes="60" class="ui-state-default">Item <%=i%>5 60"</li>
+						  <li id="item_<%=subprocess.id%>" minutes="20" class="ui-state-default">
+						  	 K<%=subprocess.order.order_number%>
+						  </li>
+						  <%end%>
 						</ul>
 						
 					<%end%>

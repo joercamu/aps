@@ -9,7 +9,7 @@
       <th>Name</th>
       <th>Press</th>
       <th>Procedures</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -24,6 +24,7 @@
             <%= link_to procedure.name, procedure%>
           <%end%>
         </td>
+        <td><%= link_to 'ordenar', sort_subprocess_path(machine) %></td>
         <td><%= link_to 'Show', machine %></td>
         <td><%= link_to 'Edit', edit_machine_path(machine) %></td>
         <td><%= link_to 'Destroy', machine, method: :delete, data: { confirm: 'Are you sure?' } %></td>

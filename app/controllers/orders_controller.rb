@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess]
   before_action :set_subprocesses, only:[:show,:schedule]
+  skip_before_action :verify_authenticity_token
 
   # GET /orders
   # GET /orders.json
@@ -65,8 +66,9 @@ class OrdersController < ApplicationController
   #GET /get_orders
   def get
   end
-  #GET /programar/:id
+  #GET /orders/:id/schedule
   def schedule
+    @meters = @order.calculate_meters
   end
   # CREATE subprocess POST
   def new_subprocess
