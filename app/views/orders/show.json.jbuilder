@@ -11,3 +11,7 @@ json.subprocesses @order.subprocesses do |subprocess|
 		json.day day.day
 	end
 end
+json.leftovers @order.has_leftovers do |leftover|
+	json.extract! leftover, :leftover_id, :order_id, :quantity
+	json.sheet_code leftover.leftover.sheet_code
+end

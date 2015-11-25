@@ -1,0 +1,66 @@
+<%= form_for(@leftover) do |f| %>
+  <% if @leftover.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@leftover.errors.count, "error") %> prohibited this leftover from being saved:</h2>
+
+      <ul>
+      <% @leftover.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :order_origin %><br>
+    <%= f.number_field :order_origin,readonly:"true" %>
+  </div>
+  <div class="field">
+    <%= f.label :sheet_id %><br>
+    <%= f.number_field :sheet_id,readonly:"true" %>
+  </div>
+  <div class="field">
+    <%= f.label :sheet_version %><br>
+    <%= f.number_field :sheet_version,readonly:"true" %>
+  </div>
+  <div class="field">
+    <%= f.label :sheet_composite %><br>
+    <%= f.text_field :sheet_composite,readonly:"true" %>
+  </div>
+  <div class="field">
+    <%= f.label :um %><br>
+    <%= f.text_field :um,readonly:"true" %>
+  </div>
+    <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.text_field :quantity,readonly:"true" %>
+  </div>
+  <div class="field">
+    <%= f.label :weight %><br>
+    <%= f.text_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= f.label :entry_date %><br>
+    <%= f.date_select :entry_date %>
+  </div>
+  <div class="field">
+    <%= f.label :disposition %><br>
+    <%= f.text_field :disposition %>
+  </div>
+
+  <div class="field">
+    <%= f.label :place_origin %><br>
+    <%= f.text_field :place_origin %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br>
+    <%= f.text_field :state %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

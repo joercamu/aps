@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120190954) do
+ActiveRecord::Schema.define(version: 20151124152007) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20151120190954) do
     t.string   "state",              limit: 255
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.string   "sheet_code",         limit: 255
   end
 
   create_table "machines", force: :cascade do |t|

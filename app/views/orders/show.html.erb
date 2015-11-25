@@ -1,4 +1,7 @@
 <%=render 'show'%>
+<ul>
+<li> <%=link_to "Programar", schedule_order_path(@order), target:"_self"%> </li>
+</ul>
 <%=render 'subprocesses/list'%>
 
 <% link_to 'Edit', edit_order_path(@order) %>

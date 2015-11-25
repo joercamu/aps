@@ -1,0 +1,1 @@
+json.extract! @has_leftover, :order_id, :leftover_id, :quantity

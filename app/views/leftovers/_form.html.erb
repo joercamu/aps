@@ -1,65 +1,75 @@
-<%= form_for(@leftover) do |f| %>
-  <% if @leftover.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@leftover.errors.count, "error") %> prohibited this leftover from being saved:</h2>
+<div ng-app="apsApp">
+  <div ng-controller="leftoversController">    
+    <%= form_for(@leftover) do |f| %>
+      <% if @leftover.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@leftover.errors.count, "error") %> prohibited this leftover from being saved:</h2>
 
-      <ul>
-      <% @leftover.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @leftover.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <div class="field">
+        <label for="leftover_order_origin">Pedido (origen)</label><br>
+        <input type="text" name="leftover[order_origin]" id="leftover_order_origin" ng-model="leftover.order_origin"/>
+        <a ng-click="get()" href="#" class="button">Consultar</a>
+      </div>
+      <div class="field">
+        <label for="leftover_sheet_id">Ficha ID</label><br>
+        <input type="text" name="leftover[sheet_id]" id="leftover_sheet_id" ng-model="leftover.sheet_id" readonly/>
+      </div>
+      <div class="field">
+        <label for="leftover_sheet_code">Ficha codigo</label><br>
+        <input type="text" name="leftover[sheet_code]" id="leftover_sheet_code" ng-model="leftover.sheet_code" readonly/>
+      </div>
+      <div class="field">
+        <label for="leftover_sheet_version">Ficha version</label><br>
+        <input type="text" name="leftover[sheet_version]" id="leftover_sheet_version" ng-model="leftover.sheet_version" readonly/>
+      </div>
+      <div class="field">
+        <label for="leftover_sheet_composite">Ficha composición</label><br>
+        <input type="text" name="leftover[sheet_composite]" id="leftover_sheet_composite" ng-model="leftover.sheet_composite" readonly/>
+      </div>
+      <div class="field">
+        <label for="leftover_um">Unidad de medida</label><br>
+        <input type="text" name="leftover[um]" id="leftover_um" ng-model="leftover.um" readonly/>
+      </div>
+      <div class="field">
+        <%= f.label :quantity, "Cantidad" %><br>
+        <%= f.text_field :quantity %>
+      </div>
+      <div class="field">
+        <%= f.label :weight,"Peso" %><br>
+        <%= f.text_field :weight %>
+      </div>
+      <div class="field">
+        <%= f.label :location,"Ubicacion" %><br>
+        <%= f.text_field :location %>
+      </div>
 
-  <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.text_field :quantity %>
+      <div class="field">
+        <%= f.label :entry_date,"Fecha de entrada" %><br>
+        <%= f.date_select :entry_date %>
+      </div>
+      <div class="field">
+        <%= f.label :disposition,"Disposicion" %><br>
+        <%= f.text_field :disposition %>
+      </div>
+
+      <div class="field">
+        <%= f.label :place_origin,"Lugar de origen" %><br>
+        <%= f.text_field :place_origin %>
+      </div>
+      <div class="field">
+        <%= f.label :state ,"Estado"%><br>
+        <%= f.text_field :state %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Guardar sobrante",class:"button success"%>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :um %><br>
-    <%= f.text_field :um %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br>
-    <%= f.text_field :weight %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :order_origin %><br>
-    <%= f.number_field :order_origin %>
-  </div>
-  <div class="field">
-    <%= f.label :sheet_id %><br>
-    <%= f.number_field :sheet_id %>
-  </div>
-  <div class="field">
-    <%= f.label :sheet_version %><br>
-    <%= f.number_field :sheet_version %>
-  </div>
-  <div class="field">
-    <%= f.label :entry_date %><br>
-    <%= f.date_select :entry_date %>
-  </div>
-  <div class="field">
-    <%= f.label :disposition %><br>
-    <%= f.text_field :disposition %>
-  </div>
-  <div class="field">
-    <%= f.label :sheet_composite %><br>
-    <%= f.text_field :sheet_composite %>
-  </div>
-  <div class="field">
-    <%= f.label :place_origin %><br>
-    <%= f.text_field :place_origin %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

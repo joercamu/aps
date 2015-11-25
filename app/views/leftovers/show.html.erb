@@ -1,64 +1,99 @@
-<p id="notice"><%= notice %></p>
+<table>
+  <thead>
+    <tr>
+      <th>ID:</th>
+      <th>Cantidad:</th>
+      <th>Cantidad disponible:</th>
+      <th>Um:</th>
+      <th>Peso:</th>
+      <th>Ubicacion:</th>
+      <th>Pedido Origen:</th>
+      <th>Ficha ID:</th>
+    </tr>
 
-<p>
-  <strong>Quantity:</strong>
-  <%= @leftover.quantity %>
-</p>
-
-<p>
-  <strong>Um:</strong>
-  <%= @leftover.um %>
-</p>
-
-<p>
-  <strong>Weight:</strong>
-  <%= @leftover.weight %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @leftover.location %>
-</p>
-
-<p>
-  <strong>Order origin:</strong>
-  <%= @leftover.order_origin %>
-</p>
-
-<p>
-  <strong>Sheet:</strong>
-  <%= @leftover.sheet_id %>
-</p>
-
-<p>
-  <strong>Sheet version:</strong>
-  <%= @leftover.sheet_version %>
-</p>
-
-<p>
-  <strong>Entry date:</strong>
-  <%= @leftover.entry_date %>
-</p>
-
-<p>
-  <strong>Disposition:</strong>
-  <%= @leftover.disposition %>
-</p>
-
-<p>
-  <strong>Sheet composite:</strong>
-  <%= @leftover.sheet_composite %>
-</p>
-
-<p>
-  <strong>Place origin:</strong>
-  <%= @leftover.place_origin %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @leftover.state %>
-</p>
-
+  <tbody>
+    <tr>
+      <td>
+        <%= @leftover.id %>
+      </td>
+      <td>
+        <%= @leftover.quantity %>
+      </td>
+      <td>
+        <%= @leftover.quantity_available %>
+      </td>
+      <td>        
+        <%= @leftover.um %>
+      </td>
+      <td>        
+        <%= @leftover.weight %>
+      </td>
+      <td>        
+        <%= @leftover.location %>
+      </td>
+      <td>        
+        <%= @leftover.order_origin %>
+      </td>
+      <td>        
+        <%= @leftover.sheet_id %>
+    </tr>
+  </tbody>
+    </thead>  
+    <tr>
+      <th>Ficha codigo:</th>
+      <th>Ficha version:</th>
+      <th>Fecha entrada:</th>
+      <th>Disposicion:</th>
+      <th>Ficha composicion:</th>
+      <th>Lugar de origen:</th>
+      <th>Estado:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      </td>
+      <td>        
+        <%= @leftover.sheet_code %>
+      </td>
+      <td>        
+        <%= @leftover.sheet_version %>
+      </td>
+      <td>        
+        <%= @leftover.entry_date %>
+      </td>
+      <td>        
+        <%= @leftover.disposition %>
+      </td>
+      <td>        
+        <%= @leftover.sheet_composite %>
+      </td>
+      <td>        
+        <%= @leftover.place_origin %>
+      </td>
+      <td>        
+        <%= @leftover.state %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="subtitle">Relacion de sobrantes</p>
+<table>
+  <thead>
+    <tr>
+      <th>Pedido</th>
+      <th>Cantidad</th>
+      <th>Unidad de medida</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@leftover.has_leftovers.each do |hasLeftover|%>
+      <tr>
+        <td><%=link_to hasLeftover.order.order_number, hasLeftover.order%></td>
+        <td><%=hasLeftover.quantity%></td>
+        <td><%=@leftover.um%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
 <%= link_to 'Edit', edit_leftover_path(@leftover) %> |
 <%= link_to 'Back', leftovers_path %>

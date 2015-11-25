@@ -1,22 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Leftovers</h1>
-
-<table>
+<p class="subtitle">Sobrantes</p>
+<%= link_to 'Nuevo sobrante', new_leftover_path, target:"_self" %>
+<table class="scroll">
   <thead>
     <tr>
-      <th>Quantity</th>
+      <th>ID</th>
+      <th>Pedido origen</th>
+      <th>Ficha ID</th>
+      <th>Ficha numero</th>
+      <th>Ficha version</th>
+
+      <th>Cantidad</th>
+      <th>Cantidad disponible</th>
       <th>Um</th>
-      <th>Weight</th>
-      <th>Location</th>
-      <th>Order origin</th>
-      <th>Sheet</th>
-      <th>Sheet version</th>
-      <th>Entry date</th>
-      <th>Disposition</th>
-      <th>Sheet composite</th>
-      <th>Place origin</th>
-      <th>State</th>
+      <th>Peso</th>
+      <th>Ubicacion</th>
+
+      <th>Fecha de entrada</th>
+      <th>Disposicion</th>
+      <th>Ficha composicion</th>
+      <th>Lugar de origen</th>
+      <th>Estado</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,26 +27,27 @@
   <tbody>
     <% @leftovers.each do |leftover| %>
       <tr>
+        <td><%= link_to leftover.id, leftover %></td>
+        <td><%= leftover.order_origin %></td>
+        <td><%= leftover.sheet_id %></td>
+        <td><%= leftover.sheet_code %></td>
+        <td><%= leftover.sheet_version %></td>
+
         <td><%= leftover.quantity %></td>
+        <td><%= leftover.quantity_available %></td>
         <td><%= leftover.um %></td>
         <td><%= leftover.weight %></td>
         <td><%= leftover.location %></td>
-        <td><%= leftover.order_origin %></td>
-        <td><%= leftover.sheet_id %></td>
-        <td><%= leftover.sheet_version %></td>
+         
         <td><%= leftover.entry_date %></td>
         <td><%= leftover.disposition %></td>
         <td><%= leftover.sheet_composite %></td>
         <td><%= leftover.place_origin %></td>
         <td><%= leftover.state %></td>
         <td><%= link_to 'Show', leftover %></td>
-        <td><%= link_to 'Edit', edit_leftover_path(leftover) %></td>
-        <td><%= link_to 'Destroy', leftover, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_leftover_path(leftover), target:"_self" %></td>
+        <td><% link_to 'Destroy', leftover, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Leftover', new_leftover_path %>

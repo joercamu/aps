@@ -15,6 +15,66 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 
 	<div ng-controller="OrdersController">
 		<p class="subtitle">Consulta de sobrantes</p>
+		<p ng-show="changes_saved">Cambios guardados correctamente!</p>
+		<div>
+			<h3>Sobrantes relacionados</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>ficha</th>
+						<th>Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="hasleftover in order.leftovers">
+						<td>{{ hasleftover.sheet_code }}</td>
+						<td>{{ hasleftover.quantity }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div ng-hide="changes_saved">
+			<h3>Añadir nuevo sobrante</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Cantidad disponible</th>
+						<th>UM</th>
+						<th>Pedido</th>
+						<th>Ficha</th>
+						<th>Cantidad a usar</th>
+						<th>Guardar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="leftover in leftovers">
+						<td>{{leftover.quantity_available}}</td>
+						<td>{{leftover.um}}</td>
+						<td>{{leftover.order_origin}}</td>
+						<td>{{leftover.sheet_code}}</td>
+						<td><input ng-model="new_order_leftover.quantity" type="number"></td>
+						<td><button ng-click="addHasLeftovers(leftover.id,leftover.sheet_code)" class="button tiny">Agregar</button></td> 
+					</tr>
+				</tbody>
+			</table>
+			<table>
+				<thead>
+					<tr>
+						<th>Ficha</th>
+						<th>Cantidad</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="order_leftover in order_leftovers">
+						<td>{{order_leftover.sheet_code}}</td>
+						<td>{{order_leftover.quantity}}</td>
+						<td> <button class="button tiny" ng-click="removeHasLeftovers(order_leftover.index)">Eliminar</button> </td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="#" class="button alert" ng-click="saveHasLeftovers()">Guardar cambios</a>
+		</div>
 		<p class="subtitle">Metros a programar</p>
 		<div ng-hide="programmed">
 			<input id="input_scheduled_meters" type="hidden" value="<%=@meters%>">

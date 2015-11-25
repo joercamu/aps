@@ -84,7 +84,7 @@ $ ->
 		        <td>#{ order.order_um }</td>
 		        <td>#{ order.order_unit_value }</td>
 		        <td>#{ order.order_date_request }</td>
-		        <td><button class='#{nameclass}' item='#{index}'>#{textbutton}</button></td>
+		        <td><button class='#{nameclass} button' item='#{index}'>#{textbutton}</button></td>
 		    </tr>"
 		addEventSchedule:->
 			$('.schedule').click ->

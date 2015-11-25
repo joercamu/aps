@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :procedures
   resources :orders
   resources :routes
+  resources :has_leftovers
   # resources :orders do
   #   resources :subprocesses, only:[:index,:show,:create,:update]
   # end
