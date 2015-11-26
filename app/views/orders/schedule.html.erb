@@ -32,7 +32,7 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			  </a>
 			</div>
 		</div>
-
+<!-- modules -->
 		<p class="subtitle" id="space-leftovers">Consulta de sobrantes</p>
 		<div ng-hide="state_leftovers">
 			<h3>Sobrantes relacionados</h3>
@@ -101,13 +101,13 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 				<label>Cantidad a programar ({{order.order_um}})</label>
 				<input ng-model="quantity_at_calculate" type="number">
 			</div>
-			<button type="button" class="button" ng-click="calculateScheduleMeters()">Calcular</button>
+			<button type="button" class="button" ng-click="calculateScheduleMeters() ; calculated=true">Calcular</button>
 			<input id="input_scheduled_meters" type="hidden" value="<%=@meters%>">
 			<label>Metros programados</label>
 			<label><input ng-model="edit_scheduled_meters" type="checkbox">Protegido</label>
 			<input ng-model="order.scheduled_meters" ng-class="{disabled: edit_scheduled_meters}">
 			<p>{{order.scheduled_meters}} Metros programados</p> 
-			<button ng-click="saveScheduleMeters()" class="button alert">Guardar</button>
+			<button ng-show="calculated" ng-click="saveScheduleMeters()" class="button alert">Guardar</button>
 		</div>
 		<p id="space_route" class="subtitle">Confirmar ruta de proceso</p>
 		<div ng-hide="state_route">
@@ -136,12 +136,15 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 		</div>
 		<p id="space_subprocesses"class="subtitle">Parametros subprocesos</p>
 		<div ng-hide="state_subprocesses">
+			<ul ng-repeat="error in errors">
+				<li>{{error}}</li>
+			</ul>
 			<%unless @order.subprocesses.any?%>
-				<% if @order.state == "aprobado"%>
-				<%= link_to "Crear rutas de procesos", new_order_subprocesses_path(@order),class:"button"%>
+				<% if @order.state %>
+				<button ng-hide="order.subprocesses.length > 0"ng-click="submitSubprocesses()" class="button">Crear subprocesos</button>
 				<% end%>
 			<%end%>
-			<table>
+			<table class="scroll">
 			  <thead>
 			    <tr>
 			      <th>#</th>
@@ -158,7 +161,6 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			      <th>Estado</th>
 			    </tr>
 			  </thead>
-
 			  <tbody>
 			      <tr ng-repeat="subprocess in order.subprocesses">
 			        <td>{{ subprocess.sequence }}</td>
@@ -179,10 +181,10 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			      </tr>
 			  </tbody>
 			  	<tr>
-			  		<td colspan="13"> <button ng-click="updateSubprocesses()" class="button alert">Guardar</button> </td>
+			  		<td colspan="13"> <button ng-show="order.subprocesses.length > 0"ng-click="updateSubprocesses()" class="button alert">Guardar</button> </td>
 			  	</tr>
 			</table>
 		</div>
-
+		<button ng-show="validateReady()" class="button success expand">Programar pedido</button>
 	</div>
 </div>

@@ -6,7 +6,7 @@ json.subprocesses @order.subprocesses do |subprocess|
 	json.machine subprocess.standard.machine.name
 	json.standard subprocess.standard.index
 	json.standard_um subprocess.standard.um
-	json.days subprocess.standard.machine.days do |day|
+	json.days subprocess.standard.machine.days.availables do |day|
 		json.id day.id
 		json.day day.day
 	end

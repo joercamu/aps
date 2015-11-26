@@ -3,20 +3,29 @@ app.factory("apiKhronos",function(){
 	return "192.168.1.247";
 });
 app.controller('OrdersController',function($scope,$resource,$routeParams){
+	$scope.errors = [];//array errors subprocesses
+
 	$scope.quantity_at_calculate = 0;//quantiyy of order - leftovers
+
 	$scope.state_programmed = false;//boolean for show or hide form "meters_programed"
 	$scope.state_leftovers = false;//boolean gor shoe or hide form "consult leftovers"
 	$scope.state_route = false;//boolean for show or hide form "meters_programed"
 	$scope.state_subprocesses = false;//boolean gor shoe or hide form "consult leftovers"
 	//array with object for save order_leftovers
 	$scope.order_leftovers = [];//registros a guardar
-	$scope.new_order_leftover = {};//new registro
-	$scope.new_order_leftover_index = 1;
+	$scope.new_order_leftover = {};//new record
+	$scope.new_order_leftover_index = 1;//index each record
 
 	$scope.routes = [];
 	$scope.new_route = {};
 	$scope.machines = [];
 	$scope.routesGenerated = false;
+
+	$scope.validateReady = function(){
+		if ($scope.state_programmed && $scope.state_route && $scope.state_leftovers && $scope.state_subprocesses){
+			return true;
+		}
+	};
 
 	// orders, pedidos
 	Orders = $resource("/orders/:id.json",{id:"@id"},{update: {method: 'PUT'} });
@@ -28,6 +37,8 @@ app.controller('OrdersController',function($scope,$resource,$routeParams){
 	Calculate_meters = $resource('/calculate_meters.json',{id:"@id",quantity:"@quantity"});
 	// Procesos generles
 	Procedures = $resource('/procedures.json');
+	// Subprocesses
+	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	
 
 	//consult procesos and machines references
@@ -55,7 +66,12 @@ app.controller('OrdersController',function($scope,$resource,$routeParams){
 			object = element.split("-");
 			$scope.new_route.procedure = parseInt(object[0]);
 			if (parseInt(object[0]) == 3){
-				$scope.new_route.machine = $scope.machines[object[1]];
+				// validacion que se debe hacer cuando se modifica la ruta por segunda vez, ya que las maquinas ya no tendrian press, sino name como clave
+				if(typeof $scope.machines[object[1]] != "undefined"){
+					$scope.new_route.machine = $scope.machines[object[1]];
+				}else{//si es la segunda vez, (aplica solo para "prensa")
+					$scope.new_route.machine = object[1]
+				}
 			}else{
 				$scope.new_route.machine = object[1];
 			}
@@ -175,13 +191,27 @@ app.controller('OrdersController',function($scope,$resource,$routeParams){
 		}
 		$scope.state_leftovers = true;
 	};
-
+	//funcion que envia la señal para que se creen las rutas
+	$scope.submitSubprocesses = function(){
+		//Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+		NewSubprocess = $resource('/new_subprocesses/:id.json',{id:"@id"});
+		NewSubprocess.get({id:order_id},function(response){
+			console.log(response);
+			if (response.errors){
+				$scope.errors = response.errors;
+				alert("Upps, tenemos problemas...");
+			}else{
+				$scope.errors = [];
+				$scope.order = response;
+			}
+		});
+	};
 	//funcion que actualiza todos los subprocesos
 	$scope.updateSubprocesses = function(){
-		Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 		for (var i = 0; i < $scope.order.subprocesses.length; i++) {
 			Subprocesses.update({id:$scope.order.subprocesses[i].id},$scope.order.subprocesses[i],function(response){
 				console.log(response)
+				$scope.state_subprocesses = true;
 			});
 		};
 	};

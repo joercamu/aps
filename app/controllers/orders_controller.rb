@@ -74,36 +74,30 @@ class OrdersController < ApplicationController
   def calculate_meters
     @meters = @order.calculate_meters(params[:quantity])
   end
-  # CREATE subprocess POST
+  #GET /new_subprocesses/:id
   def new_subprocess
     @route_all = @order.sheet_route
     @procedures = {}
     #separar la cadena por proceso y maquina
     @route_all.split(",").each_with_index do |route,index|
       detail = route.split("-")
-      #@procedures[detail.first] = detail.last
-      #si el proceso es 3 evalua con el campo press, ya que las maquinas de tipo prensa estan creadas con 2 nombres distintos
-      if detail.first == '3'
-        machine = Machine.find_by(press:detail.last)
-      else
-        machine = Machine.find_by(name:detail.last)
-      end  
-      
+      machine = Machine.find_by(name:detail.last)
       #validar que cada maquina tengan standard creado
       standard = Standard.find_by(machine_id:machine)
       if standard.nil?
-        @order.errors.add(:subprocesses,"No hay estandar para la maquina #{detail.last}")
+      @order.errors.add(:errors,"No hay estandar para la maquina #{detail.last}")
       else
-        @procedures[detail.first] = standard
+      @procedures[detail.first] = standard
       end
     end
-    #si no hay errores cree los subprocesos
-    unless @order.errors.any?
-      @order.create_subprocesses @procedures
-      #lo envio a orders/:id
-      redirect_to schedule_order_path(@order)
+    respond_to do |format|
+      if @order.errors.any?
+        format.json { render json: @order.errors}
+      else
+        @order.create_subprocesses(@procedures)
+        format.json { render :show, status: :created, location: @order }
+      end
     end
-    
   end
 
   private
