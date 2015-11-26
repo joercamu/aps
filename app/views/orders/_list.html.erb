@@ -1,6 +1,6 @@
 <!-- Esta vista parcial es una version sin tanta contamicacion visual -->
 <div id="foo"></div>
-<table id="table_orders">
+<table id="table_orders" class="scroll">
   <thead>
     <tr>
       <th>pedido</th>
@@ -12,7 +12,7 @@
       <th>valor unitario</th>
       <th>fecha solicitada</th>
       <th>estado</th>
-      <th colspan="3"></th>
+      <th>ruta</th>
     </tr>
   </thead>
 
@@ -28,6 +28,7 @@
         <td><%= order.order_unit_value %></td>
         <td><%= order.order_date_request %></td>
         <td><%= order.state %></td>
+        <td><%= order.sheet_route %></td>
         <td><% link_to 'Show', order %></td>
         <td><% link_to 'Edit', edit_order_path(order) %></td>
         <td><% link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>

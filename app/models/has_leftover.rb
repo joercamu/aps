@@ -3,7 +3,7 @@ class HasLeftover < ActiveRecord::Base
   belongs_to :leftover
   after_save :update_leftover
 
-
+  # subtract quantity of leftover available
   def update_leftover
   	new_leftover = self
   	leftover = Leftover.find(new_leftover.leftover_id)

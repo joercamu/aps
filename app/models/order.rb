@@ -24,16 +24,17 @@ class Order < ActiveRecord::Base
     order = self.order_number
     self.repeat = Order.where(order_number:order).count + 1
   end
-  def calculate_meters
+  def calculate_meters quantity
+    quantity = quantity.to_f
     case self.order_um
       when "UND"
-        1000
+        quantity * 2
       when "ROL"
-        2000
+        quantity*3
       when "KIL"
-        3000
+        quantity*4
       when "MTR"
-        4000
+        quantity*5
     end
   end
   aasm column: "state" do

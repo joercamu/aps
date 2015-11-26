@@ -27,12 +27,17 @@ Rails.application.routes.draw do
   get 'get_orders' => 'orders#get'
   #route for programm at order
   get 'orders/:id/schedule' => 'orders#schedule', as: :schedule_order
+  #route for calculate meters by quantity
+  post 'calculate_meters' => 'orders#calculate_meters'
   #route for create subprocess of order
   get 'new_subprocesses/:id' => 'orders#new_subprocess', as: :new_order_subprocesses
 
   
   #route where it's do order "drag on drop"
   get 'machines/:id/sorting' => 'subprocesses#schedule', as: :sort_subprocess
+  
+  #route delivery leftovers availables by sheet_id
+  get 'leftovers/by_sheet/:sheet_id' => 'leftovers#by_sheet'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

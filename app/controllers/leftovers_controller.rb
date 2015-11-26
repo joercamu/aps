@@ -7,6 +7,11 @@ class LeftoversController < ApplicationController
     @leftovers = Leftover.all
   end
 
+  def by_sheet
+    @leftovers = Leftover.where(sheet_id:params[:sheet_id]).availables
+    render 'index'
+  end
+
   # GET /leftovers/1
   # GET /leftovers/1.json
   def show

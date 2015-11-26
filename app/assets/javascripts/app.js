@@ -3,56 +3,163 @@ app.factory("apiKhronos",function(){
 	return "192.168.1.247";
 });
 app.controller('OrdersController',function($scope,$resource,$routeParams){
-	
-	$scope.programmed = false;//boolean for show or hide form "meters_programed"
-	$scope.changes_saved = false;//boolean gor shoe or hide form "consult leftovers"
+	$scope.quantity_at_calculate = 0;//quantiyy of order - leftovers
+	$scope.state_programmed = false;//boolean for show or hide form "meters_programed"
+	$scope.state_leftovers = false;//boolean gor shoe or hide form "consult leftovers"
+	$scope.state_route = false;//boolean for show or hide form "meters_programed"
+	$scope.state_subprocesses = false;//boolean gor shoe or hide form "consult leftovers"
 	//array with object for save order_leftovers
 	$scope.order_leftovers = [];//registros a guardar
 	$scope.new_order_leftover = {};//new registro
 	$scope.new_order_leftover_index = 1;
 
+	$scope.routes = [];
+	$scope.new_route = {};
+	$scope.machines = [];
+	$scope.routesGenerated = false;
+
 	// orders, pedidos
 	Orders = $resource("/orders/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	// days, dias
 	Days = $resource("/days.json");
-	// Leftover, sobrantes
-	Leftovers = $resource("/leftovers.json");
+	// Leftover, sobrantes /leftovers/by_sheet/:id.json
+	Leftovers = $resource("/leftovers/by_sheet/:sheet_id.json",{sheet_id:"@sheet_id"});
+	// Calculate meters
+	Calculate_meters = $resource('/calculate_meters.json',{id:"@id",quantity:"@quantity"});
+	// Procesos generles
+	Procedures = $resource('/procedures.json');
+	
 
+	//consult procesos and machines references
+	$scope.getProcedures = function(callback){
+		$scope.procedures = Procedures.query(function(response){
+			response[2].machines.forEach(function(machine){
+				$scope.machines[machine.press] = machine.name;
+			});
+			console.log($scope.machines);
+
+		});
+	callback();
+	};
+	//trigger chenge machine or procedure
+	$scope.swRoutesGenerated = function(){
+		$scope.routesGenerated = false;
+	};
 
 	//consult days available
 	$scope.days = Days.query(function(response){
 		console.log(response);
 	});
+	$scope.structureRoutes = function(){
+		$scope.order.sheet_route.split(",").forEach(function(element){
+			object = element.split("-");
+			$scope.new_route.procedure = parseInt(object[0]);
+			if (parseInt(object[0]) == 3){
+				$scope.new_route.machine = $scope.machines[object[1]];
+			}else{
+				$scope.new_route.machine = object[1];
+			}
+			
+			$scope.routes.push($scope.new_route);
+			$scope.new_route = {};
+		});
+		console.log($scope.routes);
+	};
+	$scope.generateRoutes = function(){
+		$scope.order.sheet_route = '';
+		$scope.routes.forEach(function(element){
+			$scope.order.sheet_route = $scope.order.sheet_route + element.procedure + '-' + element.machine+ ',';
+		});
+		$scope.order.sheet_route = $scope.order.sheet_route.slice(0, -1);
+		$scope.routesGenerated = true;
+	};
+	$scope.saveRoutes = function(){
+		$scope.updateOrder();
+		$scope.state_route = true;
+	};
+	
 	//consult order
 	order_id = $('#IdOrder').val();
-	$scope.order = Orders.get({id:order_id},function(response){
-		//actualizo el dato enviado por el backend "sugerido segun formula @order.calculate_meters"
-		$scope.order.scheduled_meters = $('#input_scheduled_meters').val();
-		console.log(response);
-	});
+	$scope.getOrder = function(){
+		$scope.order = Orders.get({id:order_id},function(response){
+			//actualizo el dato enviado por el backend "sugerido segun formula @order.calculate_meters"
+			// $scope.order.scheduled_meters = $('#input_scheduled_meters').val();
+			console.log(response);
+			$scope.getLeftovers($scope.order.sheet_id);//consult leftovers references order
+			$scope.calculateQuantity();
+			$scope.structureRoutes();
+		});
+	};
+	// funcion que actualizar los metros programados
+	$scope.updateOrder = function(){
+		Orders.update({id:order_id},$scope.order,function(response){
+			console.log(response);
+		});
+	};
+	$scope.calculateQuantity = function(){
+		quantity_leftovers = 0;
+		for (var i = 0; i < $scope.order.leftovers.length; i++) {
+			quantity_leftovers = quantity_leftovers + $scope.order.leftovers[i].quantity;
+		};
+		$scope.quantity_at_calculate = $scope.order.order_quantity - quantity_leftovers;
+	};
+	$scope.calculateScheduleMeters = function(){
+		// orders/:id/calculate_meters/:quantity
+		Calculate_meters.save({id:$scope.order.id,quantity:$scope.quantity_at_calculate},function(response){
+			$scope.order.scheduled_meters = response.meters;
+		});
+
+		//$scope.order.scheduled_meters = calculate_meters.meters;
+		//$scope.order.scheduled_meters = $scope.quantity_at_calculate;
+	};
+	$scope.saveScheduleMeters = function(){
+		$scope.updateOrder();
+		$scope.state_programmed = true;
+	};
 	//consult leftovers
-	$scope.leftovers = Leftovers.query(function(response){
-		console.log(response);
-	});
-	// function for add order_leftovers
-	$scope.addHasLeftovers = function(leftover_id,sheet_code){
+	$scope.getLeftovers = function(sheet_id){
+		$scope.leftovers = Leftovers.query({sheet_id:sheet_id},function(response){
+			console.log(response);
+		});		
+	};
+
+	// function for add order_leftovers 
+	$scope.addHasLeftovers = function(leftover_id,sheet_code, leftover){
 		$scope.new_order_leftover.leftover_id = leftover_id;
 		$scope.new_order_leftover.order_id = order_id;
-		$scope.new_order_leftover.sheet_code = sheet_code;
-		$scope.new_order_leftover.index = $scope.new_order_leftover_index++;
-
-		$scope.order_leftovers.push($scope.new_order_leftover);//add object at array
-		$scope.new_order_leftover = {};//empty object
-		console.log($scope.order_leftovers);
+		$scope.new_order_leftover.sheet_code = sheet_code;//info
+		// $scope.new_order_leftover.quantity = // from view
+		for (var i = 0; i < $scope.leftovers.length; i++) {//each leftover
+			if ($scope.leftovers[i].id == leftover.id && $scope.new_order_leftover.quantity){
+				if ( $scope.leftovers[i].quantity_available >= $scope.new_order_leftover.quantity){
+					$scope.new_order_leftover.index = $scope.new_order_leftover_index++;//increase index
+					$scope.order_leftovers.push($scope.new_order_leftover);//add object at array
+					$scope.leftovers[i].quantity_available = $scope.leftovers[i].quantity_available - $scope.new_order_leftover.quantity;
+					$scope.new_order_leftover = {};//empty object
+					console.log($scope.order_leftovers);	
+				}else{
+					alert("No hay disponible");
+				}
+				
+			}
+		};
+		
 	};
 	//
-	$scope.removeHasLeftovers = function(element_at_remove){
+	$scope.removeHasLeftovers = function(element_at_remove,leftover_id){
+		quantity_element_at_remove = 0;
 		$scope.order_leftovers = $scope.order_leftovers.filter(function(element){
-			console.log(element.index);
-			console.log(element_at_remove);
-			return element.index != element_at_remove;
+			if (element.index == element_at_remove){
+				quantity_element_at_remove = element.quantity;//capture quantity of element will be remover
+			}
+			return element.index != element_at_remove;//condicion of "filter"
 		});
-		console.log($scope.order_leftovers);
+		for (var i = 0; i < $scope.leftovers.length; i++) {//each leftover
+			if ($scope.leftovers[i].id == leftover_id){
+				//increase quantity_available in leftover
+				$scope.leftovers[i].quantity_available = $scope.leftovers[i].quantity_available + quantity_element_at_remove;
+			}
+		}
 	};
 	//guardar en la base de datos
 	$scope.saveHasLeftovers = function(){
@@ -60,18 +167,15 @@ app.controller('OrdersController',function($scope,$resource,$routeParams){
 		for (var i = 0; i < $scope.order_leftovers.length; i++) {
 			HasLeftovers.save($scope.order_leftovers[i],function(response){
 				console.log(response);
-				$scope.changes_saved = true;
+				$scope.getOrder();
 			});
 		};
+		if ($scope.order_leftovers.length == 0){
+			alert("No se relacionaron sobrantes");	
+		}
+		$scope.state_leftovers = true;
 	};
 
-	// funcion que actualizar los metros programados
-	$scope.updateOrder = function(){
-		Orders.update({id:order_id},$scope.order,function(response){
-			console.log(response);
-			$scope.programmed = true;
-		});
-	};
 	//funcion que actualiza todos los subprocesos
 	$scope.updateSubprocesses = function(){
 		Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
@@ -81,6 +185,8 @@ app.controller('OrdersController',function($scope,$resource,$routeParams){
 			});
 		};
 	};
+	//get process and machines, callback geOrder
+	$scope.getProcedures($scope.getOrder);
 });
 app.controller("leftoversController", function($scope,$resource,apiKhronos){
 	$scope.leftover = {};
