@@ -1,12 +1,17 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess,:calculate_meters]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess,:calculate_meters,:change_state]
   before_action :set_subprocesses, only:[:show,:schedule]
   skip_before_action :verify_authenticity_token
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    if params[:state]
+      @orders = Order.where(state:params[:state])
+      @state = params[:state]
+    else
+      @orders = Order.all
+    end
   end
 
   # GET /orders/1
@@ -99,7 +104,14 @@ class OrdersController < ApplicationController
       end
     end
   end
+  #GET 
+  def change_state
+    @action = params[:action]
+    respond_to do |format|
+      format.json {render json: @action}
+    end
 
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order

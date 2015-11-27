@@ -33,7 +33,7 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			</div>
 		</div>
 <!-- modules -->
-		<p class="subtitle" id="space-leftovers">Consulta de sobrantes</p>
+		<p class="subtitle" id="space-leftovers">Consulta de sobrantes <a href="#space-leftovers" ng-click="state_leftovers=!state_leftovers">x</a></p>
 		<div ng-hide="state_leftovers">
 			<h3>Sobrantes relacionados</h3>
 			<table>
@@ -93,7 +93,7 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			</table>
 			<a href="#" class="button alert" ng-click="saveHasLeftovers()">Guardar</a>
 		</div>
-		<p id="space_programmed" class="subtitle">Metros a programar</p>
+		<p id="space_programmed" class="subtitle">Metros a programar <a href="#space_programmed" ng-click="state_programmed=!state_programmed">x</a></p>
 		<div ng-hide="state_programmed" ng-init="edit_scheduled_meters = true">
 			<label></label>
 			<p>Cantidad solicitada: {{order.order_quantity}} {{order.order_um}}</p>
@@ -109,7 +109,7 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			<p>{{order.scheduled_meters}} Metros programados</p> 
 			<button ng-show="calculated" ng-click="saveScheduleMeters()" class="button alert">Guardar</button>
 		</div>
-		<p id="space_route" class="subtitle">Confirmar ruta de proceso</p>
+		<p id="space_route" class="subtitle">Confirmar ruta de proceso <a href="#space_route" ng-click="state_route=!state_route">x</a></p>
 		<div ng-hide="state_route">
 			<p>{{order.sheet_route}}</p>
 			<table>
@@ -134,7 +134,7 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			<button ng-click="generateRoutes()" class="button">Generar</button>
 			<button ng-click="saveRoutes()" ng-show="routesGenerated" class="button alert">Guardar</button>
 		</div>
-		<p id="space_subprocesses"class="subtitle">Parametros subprocesos</p>
+		<p id="space_subprocesses"class="subtitle">Parametros subprocesos <a href="#space_subprocesses" ng-click="state_subprocesses=!state_subprocesses">x</a></p>
 		<div ng-hide="state_subprocesses">
 			<ul ng-repeat="error in errors">
 				<li>{{error}}</li>
@@ -144,6 +144,7 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 				<button ng-hide="order.subprocesses.length > 0"ng-click="submitSubprocesses()" class="button">Crear subprocesos</button>
 				<% end%>
 			<%end%>
+			<p>Fecha solicitada: {{order.order_date_request}}</p>
 			<table class="scroll">
 			  <thead>
 			    <tr>
@@ -163,13 +164,13 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			  </thead>
 			  <tbody>
 			      <tr ng-repeat="subprocess in order.subprocesses">
-			        <td>{{ subprocess.sequence }}</td>
+			        <td>{{ subprocess.id }}</td>
 			        <td>{{ subprocess.procedure }}</td>
 			        <td>{{ subprocess.machine}}</td>
 			        <td>{{ subprocess.standard }}</td>
 			        <td>{{ subprocess.standard_um }}</td>
 			        <td><input ng-model="subprocess.setup_time" type="number"></td>
-			        <td>{{ subprocess.minutes }}</td>
+			        <td><input ng-model="subprocess.minutes" type="number" style="width:80px"></td>
 			        <td>
 			        	<select style="width:100px" ng-model="subprocess.day_id" ng-options="day.id as day.day for day in subprocess.days">
 			        	</select>

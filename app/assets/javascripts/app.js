@@ -40,6 +40,7 @@ app.controller('OrdersController',function($scope,$resource,$routeParams){
 	// Subprocesses
 	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	
+	$scope.orders = Orders.query();
 
 	//consult procesos and machines references
 	$scope.getProcedures = function(callback){
@@ -216,7 +217,10 @@ app.controller('OrdersController',function($scope,$resource,$routeParams){
 		};
 	};
 	//get process and machines, callback geOrder
-	$scope.getProcedures($scope.getOrder);
+	if (order_id){
+		$scope.getProcedures($scope.getOrder);
+	}
+	
 });
 app.controller("leftoversController", function($scope,$resource,apiKhronos){
 	$scope.leftover = {};

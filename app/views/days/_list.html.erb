@@ -1,13 +1,14 @@
 <table>
   <thead>
     <tr>
-      <th>Machine</th>
-      <th>Day</th>
-      <th>Shifts</th>
-      <th>Hours</th>
-      <th>Minutes</th>
-      <th>Busy</th>
-      <th>Available</th>
+      <th>Maquina</th>
+      <th>Dia</th>
+      <th>Hora de inicio</th>
+      <th>Turnos</th>
+      <th>Horas por turno</th>
+      <th>" Minutos totales</th>
+      <th>" Ocupados</th>
+      <th>" Disponibles</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
       <tr>
         <td><%= day.machine.name %></td>
         <td><%= day.day %></td>
+        <td><%= day.start_time %></td>
         <td><%= day.shifts %></td>
         <td><%= day.hours %></td>
         <td><%= day.minutes %></td>

@@ -1,6 +1,21 @@
 <!-- Esta vista parcial es una version sin tanta contamicacion visual -->
 <div id="foo"></div>
-<table id="table_orders" class="scroll">
+<form action=""method="get" accept-charset="utf-8">
+  <label>Filtrar por estado:</label>
+  <select name="state" required>
+        <option></option>
+        <option value="activo" <%="selected" if @state=="activo"%> >Activo</option>
+        <option value="aprobado" <%="selected" if @state=="aprobado"%>>Aprobado</option>
+        <option value="rechazado" <%="selected" if @state=="rechazado"%> >Rechazado</option>
+        <option value="programado" <%="selected" if @state=="programado"%> >Programado</option>
+        <option value="reprogramado" <%="selected" if @state=="reprogramado"%> >Reprogramado</option>
+        <option value="en_proceso" <%="selected" if @state=="en_proceso"%> >En proceso</option>
+        <option value="suspendido" <%="selected" if @state=="suspendido"%> >Suspendido</option>
+        <option value="terminado" <%="selected" if @state=="terminado"%> >Terminado</option>
+  </select>
+  <button class="button postfix">Filtrar</button>
+</form>
+<table id="example" class="scroll" width="100%">
   <thead>
     <tr>
       <th>pedido</th>
@@ -15,11 +30,24 @@
       <th>ruta</th>
     </tr>
   </thead>
-
+  <tfoot>
+    <tr>
+      <th>pedido</th>
+      <th>repeticion</th>
+      <th>ficha</th>
+      <th>cliente</th>
+      <th>cantidad</th>
+      <th>um</th>
+      <th>valor unitario</th>
+      <th>fecha solicitada</th>
+      <th>estado</th>
+      <th>ruta</th>
+    </tr>
+    </tfoot>
   <tbody id="tbody_orders">
     <% @orders.each do |order| %>
       <tr>
-        <td><%= link_to order.order_number, order %></td>
+        <td><%= link_to "K#{order.order_number}", order %></td>
         <td><%= order.repeat %></td>
         <td><%= "#{order.sheet_client}-#{order.sheet_number}" %></td>
         <td><%= order.outsourced_name %></td>
@@ -29,9 +57,6 @@
         <td><%= order.order_date_request %></td>
         <td><%= order.state %></td>
         <td><%= order.sheet_route %></td>
-        <td><% link_to 'Show', order %></td>
-        <td><% link_to 'Edit', edit_order_path(order) %></td>
-        <td><% link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

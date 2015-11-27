@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   has_many :has_leftovers
   has_many :leftovers, through: :has_leftovers
   before_create :set_repeat
+  validates :order_number, uniqueness: true, if: :exists_order?
     # Campo que se tiene que editar aqui! 
     # t.string   "state",                     limit: 255
     # t.float    "weight",                    limit: 24
@@ -28,7 +29,8 @@ class Order < ActiveRecord::Base
     quantity = quantity.to_f
     case self.order_um
       when "UND"
-        quantity * 2
+        # self.outsourced_tolerance_up/100.to_f
+        ((quantity/1000)*self.sheet_height)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
       when "ROL"
         quantity*3
       when "KIL"
@@ -36,6 +38,14 @@ class Order < ActiveRecord::Base
       when "MTR"
         quantity*5
     end
+  end
+  def exists_order?
+    if Order.where(order_number:self.order_number).where(state:self.state).count > 0
+      true
+    else
+      false
+    end
+    
   end
   aasm column: "state" do
     state :activo, initial: true

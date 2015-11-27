@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124152007) do
+ActiveRecord::Schema.define(version: 20151126154557) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -156,9 +156,9 @@ ActiveRecord::Schema.define(version: 20151124152007) do
     t.datetime "end_date"
     t.integer  "meter",        limit: 4
     t.integer  "sequence",     limit: 4
-    t.string   "state",        limit: 255
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.string   "state",        limit: 255, default: "activo"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "day_id",       limit: 4
     t.integer  "setup_time",   limit: 4,   default: 0
   end

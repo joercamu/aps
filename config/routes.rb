@@ -31,10 +31,11 @@ Rails.application.routes.draw do
   post 'calculate_meters' => 'orders#calculate_meters'
   #route for create subprocess of order
   get 'new_subprocesses/:id' => 'orders#new_subprocess', as: :new_order_subprocesses
+  # route for change state of order by param
+  get 'orders/:id/change_state' => 'orders#change_state', as: :change_state_order
 
-  
   #route where it's do order "drag on drop"
-  get 'machines/:id/sorting' => 'subprocesses#schedule', as: :sort_subprocess
+  get 'machines/:id/sorting' => 'subprocesses#sorting', as: :sort_subprocess
   
   #route delivery leftovers availables by sheet_id
   get 'leftovers/by_sheet/:sheet_id' => 'leftovers#by_sheet'
