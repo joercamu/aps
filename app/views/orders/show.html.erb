@@ -5,6 +5,7 @@
 <ul>
 	<li><%= link_to "Aprobar", change_state_order_path(id:340,action:'approve')%></li>
 </ul>
+<%=render 'has_leftovers/list'%>
 <%=render 'subprocesses/list'%>
 
 <% link_to 'Edit', edit_order_path(@order) %>

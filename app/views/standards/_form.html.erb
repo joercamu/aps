@@ -20,23 +20,24 @@
     <%end%>    
   </div>
     <div class="field">
-    <%= f.label :machine_id %><br>
+    <%= f.label :machine_id,"ID maquina" %><br>
     <%if @machine_id.nil?%>
       <%= f.number_field :machine_id %>
     <%else%>
       <%= f.number_field :machine_id, value:@machine_id %>
     <%end%>    
   </div>
-  <%=select("standard", "um", @measurements.collect {|p| [ p.name, p.value ] }, {include_blank: 'None'})%>
+  <label>Unidad de medida (metros)</label>
+  <%=select("standard", "um", Measurement.all.collect {|p| [ p.name, p.value ] }, {include_blank: 'None'})%>
   <div class="field">
-    <%= f.label :per_hour %><br>
+    <%= f.label :per_hour, "Por hora" %><br>
     <%= f.number_field :per_hour %>
   </div>
   <div class="field">
-    <%= f.label :waste %><br>
+    <%= f.label :waste,"Desperdicio ej: 0.09 = 9%" %><br>
     <%= f.text_field :waste %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Guardar", class:"button" %>
   </div>
 <% end %>

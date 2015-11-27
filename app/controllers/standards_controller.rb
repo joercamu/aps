@@ -19,12 +19,10 @@ class StandardsController < ApplicationController
       @index = Standard.where(machine_id:@machine_id).count+1
     end
     @standard = Standard.new
-    @measurements = Measurement.all
   end
 
   # GET /standards/1/edit
   def edit
-    @measurements = Measurement.all
   end
 
   # POST /standards

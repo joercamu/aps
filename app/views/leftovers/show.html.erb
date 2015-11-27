@@ -76,26 +76,6 @@
     </tr>
   </tbody>
 </table>
-<p class="subtitle">Relacion de sobrantes</p>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Pedido</th>
-      <th>Cantidad</th>
-      <th>Unidad de medida</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%@leftover.has_leftovers.each do |hasLeftover|%>
-      <tr>
-        <td><%=hasLeftover.id%></td>
-        <td><%=link_to hasLeftover.order.order_number, hasLeftover.order%></td>
-        <td><%=hasLeftover.quantity%></td>
-        <td><%=@leftover.um%></td>
-      </tr>
-    <%end%>
-  </tbody>
-</table>
+<%= render 'has_leftovers/list'%>
 <%= link_to 'Edit', edit_leftover_path(@leftover) %> |
 <%= link_to 'Back', leftovers_path %>

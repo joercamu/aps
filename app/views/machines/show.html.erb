@@ -1,11 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
+<p class="subtitle">
   <%= @machine.name %>
 </p>
 <p>
-  <strong>Press:</strong>
+  <strong>Prensa:</strong>
   <%= @machine.press %>
 </p>
 <p>
@@ -15,14 +12,14 @@
   <%end%>
 </p>
 <p>
-  <strong>Standards:</strong>
-  <%=link_to "Create Standard", new_standard_machine_ref_path(@machine)%>
+  <strong>Estandares:</strong>
+  <%=link_to "Crear Estandar", new_standard_machine_ref_path(@machine)%>
   <table>
   	<tr>
   		<th>Index</th>
   		<th>UM</th>
-  		<th>Per Hour</th>
-  		<th>Waste</th>
+  		<th>Por Hora</th>
+  		<th>Desperdicio</th>
   	</tr>
   <%@machine.standards.each do |standard|%>
 	  <tr>
@@ -34,8 +31,8 @@
   <%end%>
 </table>
 </p>
-<p> <strong>Days:</strong>
-  <%= link_to "Create Day", new_day_machine_ref_path(@machine)%>
+<p> <strong>Dias:</strong><br>
+  <%= link_to "Habilitar Dia", new_day_machine_ref_path(@machine)%>
 <%= render 'days/list'%></p>
 
 

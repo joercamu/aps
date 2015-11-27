@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
     @subprocesses = @order.subprocesses
+    @has_leftovers = @order.has_leftovers
   end
 
   # GET /orders/new

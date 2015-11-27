@@ -1,0 +1,21 @@
+<p class="subtitle">Relacion de sobrantes</p>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Pedido</th>
+      <th>Cantidad</th>
+      <th>Unidad de medida</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @has_leftovers.each do |hasLeftover|%>
+      <tr>
+        <td><%=hasLeftover.id%></td>
+        <td><%=link_to hasLeftover.order.order_number, hasLeftover.order%></td>
+        <td><%=hasLeftover.quantity%></td>
+        <td><%=hasLeftover.leftover.um%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>

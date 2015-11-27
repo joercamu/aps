@@ -102,7 +102,12 @@ updateInfo:(element)->
   minutes = parseInt($(element).attr('minutes'))
   available = parseInt($(element).attr('minutes-available'))
   occupied = parseInt($(element).attr('minutes-occupied'))
-  $(element).find('label').text("#{available} / #{minutes} #{Math.round((occupied/minutes)*100)}% ocupado")
+  name_day = moment($(element).attr('day'),"YYYY-MM-DD").format("dddd DD-MM-YYYY")
+  # #{available} / #{minutes} 
+  $(element).find('.info_date').text("#{name_day} #{available} / #{minutes}")
+  $(element).find('.progress span')
+  .css("width","#{Math.round((occupied/minutes)*100)}%")
+  .find('.percent').text("#{Math.round((occupied/minutes)*100)}%")
 }
 #------------------------------------------------------------------------------------------------------------
 $ ->

@@ -3,6 +3,17 @@ $font-family: 'Montserrat', sans-serif;
 *{
 	font-family:$font-family;
 }
+body{
+	background-color:#D4D4D4 !important;
+
+}
+.content-main{
+	background-color:white;
+	box-shadow:0 1px 1px 0 rgba(0,0,0,.06),0 2px 5px 0 rgba(0,0,0,.2);
+	margin-bottom:5rem !important;
+	margin-top:2rem !important;
+	padding-top:1rem;
+}
 .subtitle{
 	font-size:1.3rem;
 	padding:1em;

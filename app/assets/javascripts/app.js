@@ -190,6 +190,7 @@ app.controller('OrdersController',function($scope,$resource,$routeParams){
 		if ($scope.order_leftovers.length == 0){
 			alert("No se relacionaron sobrantes");	
 		}
+		$scope.order_leftovers = [];
 		$scope.state_leftovers = true;
 	};
 	//funcion que envia la señal para que se creen las rutas

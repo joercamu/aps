@@ -15,6 +15,7 @@ class LeftoversController < ApplicationController
   # GET /leftovers/1
   # GET /leftovers/1.json
   def show
+    @has_leftovers = @leftover.has_leftovers
   end
 
   # GET /leftovers/new
