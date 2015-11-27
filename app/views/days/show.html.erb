@@ -1,34 +1,33 @@
 <p>
-  <strong>Machine:</strong>
+  <strong>Maquina:</strong>
   <%= @day.machine.name %>
 </p>
 
 <p>
-  <strong>Day:</strong>
+  <strong>Dia:</strong>
   <%= @day.day %>
 </p>
 
 <p>
-  <strong>Shifts:</strong>
+  <strong>Turnos:</strong>
   <%= @day.shifts %>
 </p>
 <p>
-  <strong>Hours:</strong>
+  <strong>Horas por turno:</strong>
   <%= @day.hours %>
 </p>
 <p>
-  <strong>Minutes:</strong>
+  <strong>Minutos:</strong>
   <%= @day.minutes %>
 </p>
 <p>
-  <strong>Busy:</strong>
+  <strong>Minutos disponibles:</strong>
+  <%= @day.available %>
+</p>
+<p>
+  <strong>Minutos Ocupado:</strong>
   <%= @day.busy %>
 </p>
 
-<p>
-  <strong>Available:</strong>
-  <%= @day.available %>
-</p>
-
-<%= link_to 'Edit', edit_day_path(@day) %> |
-<%= link_to 'Back', days_path %>
+<%= link_to 'Editar', edit_day_path(@day) %> |
+<%= link_to 'Volver', days_path %>

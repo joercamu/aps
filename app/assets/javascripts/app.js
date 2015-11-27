@@ -1,8 +1,9 @@
-var app = angular.module("apsApp", ["ngResource","ngRoute"])
+var app = angular.module("apsApp", ["ngResource"])
 app.factory("apiKhronos",function(){
 	return "192.168.1.247";
 });
-app.controller('OrdersController',function($scope,$resource,$routeParams){
+// quite $routeParams en 'OrdersController' y 'ngRoute' en dependencias
+app.controller('OrdersController',function($scope,$resource){
 	$scope.errors = [];//array errors subprocesses
 
 	$scope.quantity_at_calculate = 0;//quantiyy of order - leftovers
@@ -239,5 +240,28 @@ app.controller("leftoversController", function($scope,$resource,apiKhronos){
 		});
 	};
 			
+});
+app.controller("machinesController",function($scope,$resource){
+	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+	$scope.saveChanges = function(){
+		// var arrs = $('#sortable12').sortable('toArray');
+		// console.log(arrs.length);
+		$('.sortable:not(#clipboard)').each(function(){
+			day = $(this).sortable('toArray');
+			if (day.length > 0){
+				dayElement = this;
+				day.forEach(function(element, index, array){
+					subprocess = {};
+					subprocess.day_id = parseInt($(dayElement).attr('id-day'));
+					subprocess.sequence = index+1;
+					subprocess.id = parseInt(element.replace('item_',''));
+					Subprocesses.update({id:subprocess.id},subprocess,function(response){
+						console.log(response);
+					});
+				});
+			}
+			
+		});
+	};
 });
 		

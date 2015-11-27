@@ -28,7 +28,8 @@ clipboard = {
     $('#clipboard').append(html)
   add: (item)->
     @items.push(item)
-    $("<dd id='c#{$(item).attr('id')}'>ss</dd>").text($(item).text()).addClass("ui-state-default").appendTo('#clipboard-helper')
+    name_item = $(item).find('table tr  td:first').text()
+    $("<dd id='c#{$(item).attr('id')}'>ss</dd>").text(name_item).addClass("ui-state-default").appendTo('#clipboard-helper')
     #incrementar item-helper-clipboard 
     minutes_helper = parseInt($('#item-helper-clipboard').attr('minutes'))
     $('#item-helper-clipboard').attr('minutes', minutes_helper + parseInt($(item).attr('minutes')))
@@ -102,9 +103,11 @@ updateInfo:(element)->
   minutes = parseInt($(element).attr('minutes'))
   available = parseInt($(element).attr('minutes-available'))
   occupied = parseInt($(element).attr('minutes-occupied'))
-  name_day = moment($(element).attr('day'),"YYYY-MM-DD").format("dddd DD-MM-YYYY")
+  moment.locale('es')
+  name_day = moment($(element).attr('day'),"YYYY-MM-DD").format("dddd DD MMMM YYYY")
   # #{available} / #{minutes} 
-  $(element).find('.info_date').text("#{name_day} #{available} / #{minutes}")
+  $(element).find('.date').text(name_day)
+  $(element).find('.equivalence').text("#{available} de #{minutes} minutos")
   $(element).find('.progress span')
   .css("width","#{Math.round((occupied/minutes)*100)}%")
   .find('.percent').text("#{Math.round((occupied/minutes)*100)}%")

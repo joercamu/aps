@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : "APS::SuprapakApps" %></title>
     
-    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
 
     <script src="http://localhost/angular/angular.min.js"></script>
     <script src="http://localhost/angular/angular-route.min.js"></script>
@@ -26,6 +26,8 @@
   <body>
     <div class="row content-main">
       <div class="small-12 columns">
+        <p id="notice"><%= notice %></p>
+        <p id="alert"><%= alert %></p>
         <%= yield %>    
       </div>
       

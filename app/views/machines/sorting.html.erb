@@ -1,0 +1,70 @@
+<p class="subtitle"><%=@machine.name%></p>
+<div ng-app="apsApp">
+	<div class="row" ng-app="apsApp" ng-controller="machinesController">
+		<div class="small-2 columns">
+			<div class="content-clipboard">
+				<div id="result"></div>
+			    <ul class="sortable" id="clipboard">
+			    	<button ng-click="saveChanges()" class="button success tiny" style="width:100%">Guardar cambios</button>
+			    	<label id="labelItemClipboard">vacio</label>
+			    </ul>
+			</div>
+		</div>
+		<div class="small-10 columns">
+			<div class="head-subprocess">
+				<div class="handle"><span class="ui-icon  ui-icon-blank"></span></div>
+				<table class="table-record-subprocess">
+					<tr>
+						<th>PEDIDO</th>
+						<th>TIPO</th>
+						<th>CLIENTE</th>
+						<th>FICHA</th>
+						<th>METROS</th>
+						<th>MINUTES</th>
+						<th>PELICULA</th>
+						<th>CABIDAS</th>
+					</tr>
+				</table>
+			</div>
+
+			<div class="days">
+				<%@machine.days.order(:day).each do |day|%>
+					<ul id="sortable<%=day.id%>" class="sortable connectedSortable" minutes="<%=day.minutes%>" minutes-available="" minutes-occupied="" day="<%=day.day%>" id-day="<%=day.id%>">
+						<div class="row">
+							<div class="small-4 columns">
+									<label class="date"></label>
+							</div>
+							<div class="small-2 columns">
+								<label class="equivalence"></label>
+							</div>
+							<div class="small-6 columns">
+								<div class="progress small-6 alert round">
+									<span class="meter">
+										<p class="percent"></p>
+									</span>
+								</div>
+							</div>
+						</div>
+						<%day.subprocesses.order(:sequence).each do |subprocess|%>
+							<!-- ui-state-disabled #for bloqueados -->
+					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes%>" class="ui-state-default">
+					  			<table class="table-record-subprocess">
+				  					<tr>
+				  						<td>K<%=subprocess.order.order_number%></td>
+				  						<td><%=subprocess.order.order_type%></td>
+				  						<td><%=subprocess.order.outsourced_name%></td>
+				  						<td><%="#{subprocess.order.sheet_client}-#{subprocess.order.sheet_number}"%></td>
+				  						<td><%=subprocess.meter%> MTR</td>
+				  						<td><%=subprocess.minutes%> "</td>
+				  						<td><%="#{subprocess.order.sheet_film} #{subprocess.order.sheet_caliber}"%></td>
+				  						<td><%=subprocess.order.sheet_spaces%></td>
+				  					</tr>
+			  					</table>
+					  		</li>
+					  	<%end%>
+					</ul>
+				<%end%>
+			</div>
+		</div>
+	</div>
+</div>

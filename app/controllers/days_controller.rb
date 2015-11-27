@@ -4,7 +4,7 @@ class DaysController < ApplicationController
   # GET /days
   # GET /days.json
   def index
-    @days = Day.all
+    @days = Day.all.order(:day)
   end
 
   # GET /days/1
@@ -14,10 +14,11 @@ class DaysController < ApplicationController
 
   # GET /days/new
   def new
+    @day = Day.new
     if params[:ref]
       @machine_id = params[:ref]
     end
-    @day = Day.new
+    
   end
 
   # GET /days/1/edit

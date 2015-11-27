@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :machine_id %><br>
+    <%= f.label :machine_id, "ID Maquina" %><br>
     <%if @machine_id.nil?%>
       <%= f.text_field :machine_id%>
     <%else%>
@@ -20,19 +20,19 @@
     <%end%>
   </div>
   <div class="field">
-    <%= f.label :day %><br>
+    <%= f.label :day, "Dia" %><br>
     <%= f.text_field :day, class:"date" %>
   </div>
   <div class="field">
-    <%= f.label :shifts %><br>
+    <%= f.label :shifts, "Turnos" %><br>
     <%= f.number_field :shifts %>
   </div>
   <div class="field">
-    <%= f.label :hours %><br>
+    <%= f.label :hours, "Horas por turno" %><br>
     <%= f.number_field :hours %>
   </div>
   <div class="field">
-    <%= f.label :start_time %><br>
+    <%= f.label :start_time, "Hora de inicio" %><br>
     <%= f.time_field :start_time %>
   </div>
   
@@ -45,11 +45,14 @@
     <% f.number_field :available %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Guardar",class:"button"%>
   </div>
 <% end %>
 <script >
-$('.date').datepicker({
-  dateFormat:"yy-mm-dd"
+$(document).ready(function(){
+  $('.date').datepicker({
+    dateFormat:"yy-mm-dd"
+  });  
 });
+
 </script>

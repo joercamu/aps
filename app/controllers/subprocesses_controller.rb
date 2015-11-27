@@ -61,10 +61,6 @@ class SubprocessesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  # GET /machines/:id/sorting
-  def sorting
-    @machine = Machine.find(params[:id])
-  end
 
 
   private

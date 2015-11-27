@@ -4,7 +4,7 @@ class StandardsController < ApplicationController
   # GET /standards
   # GET /standards.json
   def index
-    @standards = Standard.all.order(:machine_id)
+    @standards = Standard.all
   end
 
   # GET /standards/1

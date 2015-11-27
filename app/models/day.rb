@@ -1,7 +1,9 @@
 class Day < ActiveRecord::Base
   belongs_to :machine
   has_many :subprocesses
+
   validates :day, uniqueness: true, if: :exists_day?
+  validates :day, :shifts, :hours, :start_time, presence: true
   before_create :set_available
 
   scope :availables, -> {where('day > ?', DateTime.now.to_date).where('available > ?',0)}
