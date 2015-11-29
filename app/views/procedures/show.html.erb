@@ -1,22 +1,16 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
+<p class="subtitle">
   <%= @procedure.name %>
 </p>
 
 <p>
-  <strong>Press:</strong>
+  <strong>Prensa:</strong>
   <%= @procedure.press %>
 </p>
 <p>
-	<strong>Machines:</strong>
-	<ul>
+	<strong>Maquinas:</strong>
+	<ul class="side-nav">
 	<%@machines.each do |machine|%>
 		<li><%=link_to machine.name, machine_path(machine)%></li>
 	<%end%>
 	</ul>
 </p>
-
-<%= link_to 'Edit', edit_procedure_path(@procedure) %> |
-<%= link_to 'Back', procedures_path %>

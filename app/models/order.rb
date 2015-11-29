@@ -4,6 +4,8 @@ class Order < ActiveRecord::Base
   has_many :subprocesses
   has_many :has_leftovers
   has_many :leftovers, through: :has_leftovers
+  has_many :order_comments
+
   before_create :set_repeat
   validates :order_number, uniqueness: true, if: :exists_order?
     # Campo que se tiene que editar aqui! 

@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
   def show
     @subprocesses = @order.subprocesses
     @has_leftovers = @order.has_leftovers
+    @comment = OrderComment.new
   end
 
   # GET /orders/new

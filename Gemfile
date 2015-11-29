@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#logins and users
+gem 'devise'
 #admin states
 gem 'aasm'
 #style of site

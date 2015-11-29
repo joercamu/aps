@@ -20,7 +20,7 @@
       <th>Ficha composicion</th>
       <th>Lugar de origen</th>
       <th>Estado</th>
-      <th colspan="3"></th>
+      <th>Editar</th>
     </tr>
   </thead>
 
@@ -44,10 +44,28 @@
         <td><%= leftover.sheet_composite %></td>
         <td><%= leftover.place_origin %></td>
         <td><%= leftover.state %></td>
-        <td><%= link_to 'Show', leftover %></td>
         <td><%= link_to 'Edit', edit_leftover_path(leftover), target:"_self" %></td>
-        <td><% link_to 'Destroy', leftover, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('table').DataTable({
+        "language": {
+          "lengthMenu":     "Mostrar _MENU_ sobrantes",
+          "info": "Mostrando _START_ hasta _END_ de _TOTAL_ sobrantes",
+          "search":         "Buscar:",
+          "zeroRecords":    "Sobrante no encontrado",
+          "loadingRecords": "Cargando...",
+        "processing":     "Procesando...",
+           "paginate": {
+            "first":      "Primero",
+            "last":       "Ultimo",
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+        }
+        }
+      });
+  } );
+</script>

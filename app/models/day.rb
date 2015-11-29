@@ -24,11 +24,10 @@ class Day < ActiveRecord::Base
   # update Day, busy = increase each subprocess.minutes
   def update_busy
     minutes = 0
-    self.subprocesses do |subprocess|
+    self.subprocesses.each do |subprocess|
       minutes = minutes + subprocess.minutes
     end
-    self.busy = minutes
-    self.save
+    self.update(busy:minutes,available:self.minutes-minutes)
   end
 
 end

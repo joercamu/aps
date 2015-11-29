@@ -7,6 +7,8 @@
 </ul>
 <%=render 'has_leftovers/list'%>
 <%=render 'subprocesses/list'%>
+<p class="subtitle">Observaciones</p>
+<%= render 'order_comments/form'%>
 
 <% link_to 'Edit', edit_order_path(@order) %>
 <% link_to 'Back', orders_path %>

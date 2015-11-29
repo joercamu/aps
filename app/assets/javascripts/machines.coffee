@@ -28,7 +28,7 @@ clipboard = {
     $('#clipboard').append(html)
   add: (item)->
     @items.push(item)
-    name_item = $(item).find('table tr  td:first').text()
+    name_item = $(item).find('table tr  td:nth-child(2)').text()
     $("<dd id='c#{$(item).attr('id')}'>ss</dd>").text(name_item).addClass("ui-state-default").appendTo('#clipboard-helper')
     #incrementar item-helper-clipboard 
     minutes_helper = parseInt($('#item-helper-clipboard').attr('minutes'))
@@ -105,8 +105,9 @@ updateInfo:(element)->
   occupied = parseInt($(element).attr('minutes-occupied'))
   moment.locale('es')
   name_day = moment($(element).attr('day'),"YYYY-MM-DD").format("dddd DD MMMM YYYY")
+  stat_time_day = moment($(element).attr('start-time'),"YYYY-MM-DD HH:mm").format("h:mm a")
   # #{available} / #{minutes} 
-  $(element).find('.date').text(name_day)
+  $(element).find('.date').text("#{name_day} inicia: #{stat_time_day}")
   $(element).find('.equivalence').text("#{available} de #{minutes} minutos")
   $(element).find('.progress span')
   .css("width","#{Math.round((occupied/minutes)*100)}%")

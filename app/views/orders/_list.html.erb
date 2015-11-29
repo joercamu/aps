@@ -18,20 +18,22 @@
 <table id="example" class="scroll" width="100%">
   <thead>
     <tr>
-      <th>pedido</th>
-      <th>repeticion</th>
-      <th>ficha</th>
-      <th>cliente</th>
-      <th>cantidad</th>
-      <th>um</th>
-      <th>valor unitario</th>
-      <th>fecha solicitada</th>
-      <th>estado</th>
-      <th>ruta</th>
+      <th>PEDIDO</th>
+      <th>REPETICION</th>
+      <th>FICHA</th>
+      <th>CLIENTE</th>
+      <th>CANTIDAD</th>
+      <th>UM</th>
+      <th>VALOR UNI</th>
+      <th>FECHA SOLICITADA</th>
+      <th>ESTADO</th>
+      <th>RUTA</th>
+      <th>FECHA INGRESO APS</th>
     </tr>
   </thead>
   <tfoot>
     <tr>
+      <th>button</th>
       <th>pedido</th>
       <th>repeticion</th>
       <th>ficha</th>
@@ -42,6 +44,7 @@
       <th>fecha solicitada</th>
       <th>estado</th>
       <th>ruta</th>
+      <th>Fecha Ingreso aps</th>
     </tr>
     </tfoot>
   <tbody id="tbody_orders">
@@ -57,6 +60,7 @@
         <td><%= order.order_date_request %></td>
         <td><%= order.state %></td>
         <td><%= order.sheet_route %></td>
+        <td><%= order.created_at.strftime("%F %I:%M%p") %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,7 +1,7 @@
 <p class="subtitle"><%=@machine.name%></p>
 <div id="foo"></div>
 <div ng-app="apsApp">
-	<div class="row" ng-app="apsApp" ng-controller="machinesController">
+	<div class="row" ng-controller="machinesController">
 		<div class="small-2 columns">
 			<div class="content-clipboard">
 				<div id="result"></div>
@@ -17,7 +17,7 @@
 				<div class="handle"><span class="ui-icon  ui-icon-blank"></span></div>
 				<table class="table-record-subprocess">
 					<tr>
-						<th>ORDEN</th>
+						<th>#</th>
 						<th>PEDIDO</th>
 						<th>TIPO</th>
 						<th>CLIENTE</th>
@@ -26,14 +26,15 @@
 						<th>MINUTES</th>
 						<th>PELICULA</th>
 						<th>CABIDAS</th>
-						<th>FECHA</th>
+						<th>FECHA I</th>
+						<th>FECHA F</th>
 					</tr>
 				</table>
 			</div>
 
 			<div class="days">
 				<%@machine.days.order(:day).where('day > ?',DateTime.now-1).each do |day|%>
-					<ul id="sortable<%=day.id%>" class="sortable connectedSortable" minutes="<%=day.minutes%>" minutes-available="" minutes-occupied="" day="<%=day.day%>" id-day="<%=day.id%>">
+					<ul id="sortable<%=day.id%>" class="sortable connectedSortable" minutes="<%=day.minutes%>" minutes-available="" minutes-occupied="" day="<%=day.day%>" start-time="<%=day.start_time%>" id-day="<%=day.id%>">
 						<div class="row">
 							<div class="small-4 columns">
 									<label class="date"></label>
@@ -63,7 +64,8 @@
 				  						<td><%=subprocess.minutes%> "</td>
 				  						<td><%="#{subprocess.order.sheet_film} #{subprocess.order.sheet_caliber}"%></td>
 				  						<td><%=subprocess.order.sheet_spaces%> Cab</td>
-				  						<td><%=subprocess.id%></td>
+				  						<td><%=subprocess.start_date.strftime("%F %I:%M%p")%></td>
+				  						<td><%=subprocess.end_date.strftime("%F %I:%M%p")%></td>
 				  					</tr>
 			  					</table>
 					  		</li>

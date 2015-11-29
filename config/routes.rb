@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :leftovers
   resources :days
   resources :subprocesses
@@ -6,9 +7,15 @@ Rails.application.routes.draw do
   resources :standards
   resources :machines
   resources :procedures
-  resources :orders
+
   resources :routes
   resources :has_leftovers
+  resources :orders 
+  resources :order_comments
+  
+  # resources :orders do
+  #   resources :order_comments, only: [:create]
+  # end
   # resources :orders do
   #   resources :subprocesses, only:[:index,:show,:create,:update]
   # end
@@ -36,7 +43,10 @@ Rails.application.routes.draw do
 
   #route where it's do order "drag on drop"
   get 'machines/:id/sorting' => 'machines#sorting', as: :sort_subprocess
-  
+
+  #route where it's do order "drag on drop"
+  get 'machines/:id/todo' => 'machines#todo', as: :todo_subprocess
+
   #route delivery leftovers availables by sheet_id
   get 'leftovers/by_sheet/:sheet_id' => 'leftovers#by_sheet'
 

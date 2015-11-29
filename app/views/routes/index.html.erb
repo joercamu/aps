@@ -1,26 +1,21 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Routes</h1>
-
+<p class="subtitle">Rutas de proceso</p>
 <table>
   <thead>
     <tr>
       <th>ID</th>
-      
-      <th>Waste</th>
-      <th colspan="3"></th>
+      <th>Desperdicio %</th>
+      <th>Editar</th>
     </tr>
   </thead>
 
   <tbody>
     <% @routes.each do |route| %>
       <tr>
-        <td><%= route.id %></td>
+        <td><%= link_to route.id, route %></td>
         
         <td><%= route.waste * 100 %> %</td>
-        <td><%= link_to 'Show', route %></td>
-        <td><%= link_to 'Edit', edit_route_path(route) %></td>
-        <td><%= link_to 'Destroy', route, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Editar', edit_route_path(route) %></td>
+        <% link_to 'Eliminar', route, method: :delete, data: { confirm: 'Are you sure?' } %>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Route', new_route_path %>
+<% link_to 'Nueva ruta Route', new_route_path %>

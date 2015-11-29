@@ -24,10 +24,11 @@
   </head>
 
   <body>
+    <%= render 'partials/nav'%>
     <div id="contentMain" class="row content-main" >
       <div class="small-12 columns">
-        <p id="notice"><%= notice %></p>
-        <p id="alert"><%= alert %></p>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
         <%= yield %>    
       </div>
       
@@ -35,4 +36,7 @@
     
 
   </body>
+  <script type="text/javascript">
+  $(function(){ $(document).foundation(); });
+  </script>
 </html>

@@ -6,12 +6,15 @@ class Subprocess < ActiveRecord::Base
   belongs_to :subprocess
   belongs_to :day
   
-  before_create :set_meter, :set_minutes, :set_day, :set_start_date
-  before_update :set_start_date
+  before_create :set_meter, :set_minutes, :set_day
+
+  before_save :set_start_date
+
   after_create :validate_day
   after_update :validate_day
   
-
+  scope :scheduled, -> {where(state:"programado")}
+  
   def set_meter
     if self.order.sheet_print
       case self.procedure_id
@@ -50,9 +53,12 @@ class Subprocess < ActiveRecord::Base
     end
   end
   def set_start_date
-    # generate start day
+    # generate start day if have day assign
     # 1 Day subprocess:[{id:2,secuence:1},{id:2,secuence:2}]
     unless self.day_id.nil?
+      # update minutes to day (mejorar ya que cada actualizacion ejecutará este metodo)
+      self.day.update_busy
+      # convert date
       f = self.day.day.strftime("%F").to_s #DATE 
       t = self.day.start_time.strftime("%T%:z").to_s #TIME INITIAL
       dateTimeInitial = DateTime.parse("#{f} #{t}")

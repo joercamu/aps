@@ -242,10 +242,12 @@ app.controller("leftoversController", function($scope,$resource,apiKhronos){
 });
 app.controller("machinesController",function($scope,$resource){
 	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+	// Days = $resource("/days/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+
 	$scope.saveChanges = function(){
 		// var arrs = $('#sortable12').sortable('toArray');
 		// console.log(arrs.length);
-		$('.sortable:not(#clipboard)').each(function(){
+		$('.sortable:not(#clipboard)').each(function(){//cada dia
 			day = $(this).sortable('toArray');
 			if (day.length > 0){
 				dayElement = this;
@@ -263,6 +265,21 @@ app.controller("machinesController",function($scope,$resource){
 			}
 			
 		});
+	};
+	$scope.endSubprocess = function(id_subprocess){
+		console.log(id_subprocess);
+		subprocess = {
+			state:"teminado"
+		};
+		if (confirm("Esta seguro de terminar el subproceso "+id_subprocess+" ?")) {
+			Subprocesses.update({id:id_subprocess},subprocess,function(data){
+				alert("Terminado correctamente!");
+				$('#subprocess'+id_subprocess).fadeOut();
+			},function(error){
+				alert(error);
+			});
+		};
+
 	};
 });
 		
