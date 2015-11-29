@@ -90,10 +90,13 @@ class OrdersController < ApplicationController
       machine = Machine.find_by(name:detail.last)
       #validar que cada maquina tengan standard creado
       standard = Standard.find_by(machine_id:machine)
+      if @order.subprocesses.any?
+        @order.errors.add(:errors,"Ya existen procesos creados.")
+      end
       if standard.nil?
-      @order.errors.add(:errors,"No hay estandar para la maquina #{detail.last}")
+        @order.errors.add(:errors,"No hay estandar para la maquina #{detail.last}")
       else
-      @procedures[detail.first] = standard
+        @procedures[detail.first] = standard
       end
     end
     respond_to do |format|

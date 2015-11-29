@@ -1,33 +1,41 @@
-<p>
-  <strong>Maquina:</strong>
-  <%= @day.machine.name %>
-</p>
+<table>
+  <tr>
+    <td>
+      <strong>Maquina:</strong>
+      <%= @day.machine.name %>
+    </td>
 
-<p>
-  <strong>Dia:</strong>
-  <%= @day.day %>
-</p>
+    <td>
+      <strong>Dia:</strong>
+      <%= @day.day %>
+    </td>
+    <td>
+      <strong>Hora inicio:</strong>
+      <%= @day.start_time.strftime("%I:%M%p") %>
+    </td>
 
-<p>
-  <strong>Turnos:</strong>
-  <%= @day.shifts %>
-</p>
-<p>
-  <strong>Horas por turno:</strong>
-  <%= @day.hours %>
-</p>
-<p>
-  <strong>Minutos:</strong>
-  <%= @day.minutes %>
-</p>
-<p>
-  <strong>Minutos disponibles:</strong>
-  <%= @day.available %>
-</p>
-<p>
-  <strong>Minutos Ocupado:</strong>
-  <%= @day.busy %>
-</p>
+    <td>
+      <strong>Turnos:</strong>
+      <%= @day.shifts %>
+    </td>
+    <td>
+      <strong>Horas por turno:</strong>
+      <%= @day.hours %>
+    </td>
+    <td>
+      <strong>Minutos:</strong>
+      <%= @day.minutes %>
+    </td>
+    <td>
+      <strong>Minutos disponibles:</strong>
+      <%= @day.available %>
+    </td>
+    <td>
+      <strong>Minutos Ocupado:</strong>
+      <%= @day.busy %>
+    </td>
+  </tr>
+</table>
+<%= render 'subprocesses/list'%>
 
-<%= link_to 'Editar', edit_day_path(@day) %> |
-<%= link_to 'Volver', days_path %>
+<%= link_to 'Volver', days_path, class:"button" %>

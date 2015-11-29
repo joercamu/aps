@@ -1,4 +1,5 @@
 <p class="subtitle"><%=@machine.name%></p>
+<div id="foo"></div>
 <div ng-app="apsApp">
 	<div class="row" ng-app="apsApp" ng-controller="machinesController">
 		<div class="small-2 columns">
@@ -8,6 +9,7 @@
 			    	<button ng-click="saveChanges()" class="button success tiny" style="width:100%">Guardar cambios</button>
 			    	<label id="labelItemClipboard">vacio</label>
 			    </ul>
+			    <label id="dateTimeNow" style="color:gray"><label>
 			</div>
 		</div>
 		<div class="small-10 columns">
@@ -15,6 +17,7 @@
 				<div class="handle"><span class="ui-icon  ui-icon-blank"></span></div>
 				<table class="table-record-subprocess">
 					<tr>
+						<th>ORDEN</th>
 						<th>PEDIDO</th>
 						<th>TIPO</th>
 						<th>CLIENTE</th>
@@ -23,12 +26,13 @@
 						<th>MINUTES</th>
 						<th>PELICULA</th>
 						<th>CABIDAS</th>
+						<th>FECHA</th>
 					</tr>
 				</table>
 			</div>
 
 			<div class="days">
-				<%@machine.days.order(:day).each do |day|%>
+				<%@machine.days.order(:day).where('day > ?',DateTime.now-1).each do |day|%>
 					<ul id="sortable<%=day.id%>" class="sortable connectedSortable" minutes="<%=day.minutes%>" minutes-available="" minutes-occupied="" day="<%=day.day%>" id-day="<%=day.id%>">
 						<div class="row">
 							<div class="small-4 columns">
@@ -50,6 +54,7 @@
 					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes%>" class="ui-state-default">
 					  			<table class="table-record-subprocess">
 				  					<tr>
+				  						<td><%=subprocess.sequence%></td>
 				  						<td>K<%=subprocess.order.order_number%></td>
 				  						<td><%=subprocess.order.order_type%></td>
 				  						<td><%=subprocess.order.outsourced_name%></td>
@@ -57,7 +62,8 @@
 				  						<td><%=subprocess.meter%> MTR</td>
 				  						<td><%=subprocess.minutes%> "</td>
 				  						<td><%="#{subprocess.order.sheet_film} #{subprocess.order.sheet_caliber}"%></td>
-				  						<td><%=subprocess.order.sheet_spaces%></td>
+				  						<td><%=subprocess.order.sheet_spaces%> Cab</td>
+				  						<td><%=subprocess.id%></td>
 				  					</tr>
 			  					</table>
 					  		</li>
@@ -68,3 +74,10 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#contentMain').addClass('full-width');
+		$('#dateTimeNow').text(moment().format('LL'));
+		
+	});
+</script>

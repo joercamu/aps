@@ -133,16 +133,15 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			<button ng-click="generateRoutes()" class="button">Generar</button>
 			<button ng-click="saveRoutes()" ng-show="routesGenerated" class="button alert">Guardar</button>
 		</div>
-		<p id="space_subprocesses"class="subtitle">Parametros subprocesos <a href="#space_subprocesses" ng-click="state_subprocesses=!state_subprocesses">x</a></p>
+		<p id="space_subprocesses"class="subtitle">Parametros subprocesos 
+			<a href="#space_subprocesses" ng-click="state_subprocesses=!state_subprocesses">x</a>
+			<button ng-click="getOrder()">Actualizar</button>
+		</p>
 		<div ng-hide="state_subprocesses">
 			<ul ng-repeat="error in errors">
 				<li>{{error}}</li>
 			</ul>
-			<%unless @order.subprocesses.any?%>
-				<% if @order.state %>
-				<button ng-hide="order.subprocesses.length > 0"ng-click="submitSubprocesses()" class="button">Crear subprocesos</button>
-				<% end%>
-			<%end%>
+			<button ng-hide="order.subprocesses.length > 0"ng-click="submitSubprocesses()" class="button">Crear subprocesos</button>
 			<p>Fecha solicitada: {{order.order_date_request}}</p>
 			<table class="scroll">
 			  <thead>
@@ -174,8 +173,8 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			        	<select style="width:100px" ng-model="subprocess.day_id" ng-options="day.id as day.day for day in subprocess.days">
 			        	</select>
 			        </td>
-			        <td>{{ subprocess.start_date }}</td>
-			        <td>{{ subprocess.end_date }}</td>
+			        <td>{{ subprocess.start_date | date:'short'}}</td>
+			        <td>{{ subprocess.end_date | date:'short'}}</td>
 			        <td>{{ subprocess.meter }}</td>
 			        <td>{{ subprocess.state }}</td>
 			      </tr>

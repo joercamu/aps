@@ -6,9 +6,10 @@ json.subprocesses @order.subprocesses do |subprocess|
 	json.machine subprocess.standard.machine.name
 	json.standard subprocess.standard.index
 	json.standard_um subprocess.standard.um
-	json.days subprocess.standard.machine.days.availables do |day|
+	json.days subprocess.standard.machine.days.availables.where('available >= ?',subprocess.minutes) do |day|
 		json.id day.id
 		json.day day.day
+		json.available day.available
 	end
 end
 json.leftovers @order.has_leftovers do |leftover|

@@ -18,7 +18,7 @@ class Order < ActiveRecord::Base
   	count = 0
   	data.each do |key,value|
   		count = count + 1
-  		Subprocess.create(sequence:count,order_id:self.id ,procedure_id:key, standard_id:value.id)
+  		@subprocess = Subprocess.create(sequence:count,order_id:self.id ,procedure_id:key, standard_id:value.id)
   	end
   end
   def set_repeat

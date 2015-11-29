@@ -194,9 +194,8 @@ app.controller('OrdersController',function($scope,$resource){
 		$scope.order_leftovers = [];
 		$scope.state_leftovers = true;
 	};
-	//funcion que envia la señal para que se creen las rutas
+	//funcion que envia la SEÑAL para que se creen las rutas
 	$scope.submitSubprocesses = function(){
-		//Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 		NewSubprocess = $resource('/new_subprocesses/:id.json',{id:"@id"});
 		NewSubprocess.get({id:order_id},function(response){
 			console.log(response);
@@ -214,7 +213,7 @@ app.controller('OrdersController',function($scope,$resource){
 		for (var i = 0; i < $scope.order.subprocesses.length; i++) {
 			Subprocesses.update({id:$scope.order.subprocesses[i].id},$scope.order.subprocesses[i],function(response){
 				console.log(response)
-				$scope.state_subprocesses = true;
+				// $scope.state_subprocesses = true;
 			});
 		};
 	};
@@ -257,6 +256,8 @@ app.controller("machinesController",function($scope,$resource){
 					subprocess.id = parseInt(element.replace('item_',''));
 					Subprocesses.update({id:subprocess.id},subprocess,function(response){
 						console.log(response);
+					},function(error){
+						alert(error.statusText);
 					});
 				});
 			}

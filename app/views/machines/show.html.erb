@@ -1,6 +1,7 @@
 <p class="subtitle">
   <%= @machine.name %>
 </p>
+<p><%= link_to 'Ordenar', sort_subprocess_path(@machine),target:"_self",class:"button" %></p>
 <p>
   <strong>Prensa:</strong>
   <%= @machine.press %>

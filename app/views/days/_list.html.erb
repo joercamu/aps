@@ -1,6 +1,7 @@
 <table>
   <thead>
     <tr>
+      <th>ID</th>
       <th>Maquina</th>
       <th>Dia</th>
       <th>Hora de inicio</th>
@@ -9,14 +10,14 @@
       <th>" Minutos totales</th>
       <th>" Ocupados</th>
       <th>" Disponibles</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @days.each do |day| %>
       <tr>
-        <td><%= day.machine.name %></td>
+        <td><%= link_to day.id, day %></td>
+        <td><%= link_to day.machine.name, day.machine %></td>
         <td><%= day.day %></td>
         <td><%= day.start_time %></td>
         <td><%= day.shifts %></td>
@@ -24,9 +25,6 @@
         <td><%= day.minutes %></td>
         <td><%= day.busy %></td>
         <td><%= day.available %></td>
-        <td><%= link_to 'Show', day %></td>
-        <td><%= link_to 'Edit', edit_day_path(day) %></td>
-        <td><%= link_to 'Destroy', day, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

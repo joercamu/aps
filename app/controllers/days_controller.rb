@@ -10,6 +10,7 @@ class DaysController < ApplicationController
   # GET /days/1
   # GET /days/1.json
   def show
+    @subprocesses = @day.subprocesses
   end
 
   # GET /days/new

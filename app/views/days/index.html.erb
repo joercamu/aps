@@ -1,7 +1,26 @@
 <p class="subtitle">Dias</p>
-
 <%= render 'list'%>
 
 <br>
+<script type="text/javascript">
+$(document).ready(function(){
+    	$('table').DataTable({
+    		"language": {
+    			"lengthMenu":     "Mostrar _MENU_ pedidos",
+    			"info": "Mostrando _START_ hasta _END_ de _TOTAL_ pedidos",
+    			"search":         "Buscar:",
+    			"zeroRecords":    "Pedido no encontrado",
+    			"loadingRecords": "Cargando...",
+				"processing":     "Procesando...",
+    			 "paginate": {
+				    "first":      "Primero",
+				    "last":       "Ultimo",
+				    "next":       "Siguiente",
+				    "previous":   "Anterior"
+				}
+    		}
+    	});
+});
+</script>
 
-<%= link_to 'New Day', new_day_path %>
+

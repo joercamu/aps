@@ -13,6 +13,7 @@
       <th>Fecha Dia</th>
       <th>Fecha de inicio</th>
       <th>Fecha de fin</th>
+      <th>Secuencia</th>
       <th>Metros</th>
       
       <th>Estado</th>
@@ -21,19 +22,20 @@
   </thead>
 
   <tbody>
-    <% @subprocesses.each do |subprocess| %>
+    <% @subprocesses.order(:sequence).each do |subprocess| %>
       <tr>
         <td><%= subprocess.id %></td>
-        <td><%= subprocess.order.order_number %></td>
+        <td><%= link_to subprocess.order.order_number, subprocess.order%></td>
         <td><%= subprocess.procedure.name %></td>
         <td><%= link_to subprocess.standard.machine.name,  subprocess.standard.machine%></td>
         <td><%= subprocess.standard.index %></td>
         <td><%= subprocess.standard.um %></td>
         <td><%= subprocess.setup_time %></td>
         <td><%= subprocess.minutes %></td>
-        <td><%= subprocess.day %></td>
+        <td><%= subprocess.day.day unless subprocess.day_id.nil? %></td>
         <td><%= subprocess.start_date %></td>
         <td><%= subprocess.end_date %></td>
+        <td><%= subprocess.sequence %></td>
         <td><%= subprocess.meter %></td>
         
         <td><%= subprocess.state %></td>

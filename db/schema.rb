@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126154557) do
+ActiveRecord::Schema.define(version: 20151128144009) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
     t.date     "day"
     t.integer  "shifts",     limit: 4
     t.integer  "hours",      limit: 4
-    t.integer  "busy",       limit: 4
+    t.integer  "busy",       limit: 4, default: 0
     t.integer  "available",  limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.time     "start_time"
     t.integer  "minutes",    limit: 4
   end
