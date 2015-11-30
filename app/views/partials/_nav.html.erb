@@ -31,7 +31,7 @@
                       <%= link_to machine.name, machine %>
                       <ul class="dropdown">
                         <li><%= link_to "ORDENAR", sort_subprocess_path(machine), target:"_self"%></li>
-                        <li><%= link_to "QUE HACER",todo_subprocess_path(machine)%></li>
+                        <li><%= link_to "QUE HACER",todo_subprocess_path(machine),target:"_self"%></li>
                       </ul>
                     </li>
                     <% end%>
@@ -48,16 +48,22 @@
       </li>
     </ul>
     <!-- Right Nav Section -->
-    <!-- <ul class="right">
-      <li class="active"><a href="#">Right Button Active</a></li>
-      <li class="has-dropdown">
+    <ul class="right">
+      <li class="active">
+        <%=link_to "Cerrar sesión", destroy_user_session_path, method:"DELETE" if user_signed_in? %>
+        <%=link_to "Iniciar sesión", new_user_session_path unless user_signed_in? %>
+      </li>
+      <li>
+        <%= link_to current_user.email, "#" if user_signed_in? %>
+      </li>
+<!--       <li class="has-dropdown">
         <a href="#">Right Button Dropdown</a>
         <ul class="dropdown">
           <li><a href="#">First link in dropdown</a></li>
           <li class="active"><a href="#">Active link in dropdown</a></li>
         </ul>
-      </li>
-    </ul> -->
+      </li> -->
+    </ul>
 
 
   </section>

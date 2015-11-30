@@ -18,172 +18,181 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 		<div class="fixed">
 			<div class="icon-bar five-up">
 			  <a class="item" href="#space-leftovers" ng-class="{'item-success':state_leftovers,'item-slope':!state_leftovers}">
-			    <label>Sobrantes</label>
+			    <label>1. Sobrantes</label>
 			  </a>
 			  <a class="item" href="#space_programmed" ng-class="{'item-success':state_programmed,'item-slope':!state_programmed}">
-			    <label>Metros</label>
+			    <label>2. Metros</label>
 			  </a>
 			  <a class="item" href="#space_route" ng-class="{'item-success':state_route,'item-slope':!state_route}">
-			    <label>Ruta</label>
+			    <label>3. Ruta</label>
 			  </a>
 			  <a class="item" href="#space_subprocesses" ng-class="{'item-success':state_subprocesses,'item-slope':!state_subprocesses}">
-			    <label>Subprocesos</label>
+			    <label>4. Subprocesos</label>
 			  </a>
 			</div>
 		</div>
 <!-- modules -->
-		<p class="subtitle" id="space-leftovers">Consulta de sobrantes <a href="#space-leftovers" ng-click="state_leftovers=!state_leftovers">x</a></p>
-		<div ng-hide="state_leftovers">
-			<h3>Sobrantes relacionados</h3>
-			<table>
-				<thead>
-					<tr>
-						<th>ficha</th>
-						<th>Cantidad</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="hasleftover in order.leftovers">
-						<td>{{ hasleftover.sheet_code }}</td>
-						<td>{{ hasleftover.quantity }} <%=@order.order_um%></td>
-					</tr>
-				</tbody>
-			</table>
-			<h3>Añadir nuevo sobrante</h3>
-			<table>
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Cantidad disponible</th>
-						<th>UM</th>
-						<th>Pedido</th>
-						<th>Ficha</th>
-						<th>Cantidad a usar</th>
-						<th>Guardar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="leftover in leftovers">
-						<td>{{leftover.id}}</td>
-						<td>{{leftover.quantity_available}}</td>
-						<td>{{leftover.um}}</td>
-						<td>{{leftover.order_origin}}</td>
-						<td>{{leftover.sheet_code}}</td>
-						<td><input ng-model="new_order_leftover.quantity" type="number"></td>
-						<td><button ng-click="addHasLeftovers(leftover.id,leftover.sheet_code,leftover)" class="button tiny">Agregar</button></td> 
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<thead>
-					<tr>
-						<th>Ficha</th>
-						<th>Cantidad</th>
-						<th>Eliminar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="order_leftover in order_leftovers">
-						<td>{{order_leftover.sheet_code}}</td>
-						<td>{{order_leftover.quantity}}</td>
-						<td> <button class="button tiny" ng-click="removeHasLeftovers(order_leftover.index,order_leftover.leftover_id)">Eliminar</button> </td>
-					</tr>
-				</tbody>
-			</table>
-			<a href="#" class="button alert" ng-click="saveHasLeftovers()">Guardar</a>
-		</div>
-		<p id="space_programmed" class="subtitle">Metros a programar <a href="#space_programmed" ng-click="state_programmed=!state_programmed">x</a></p>
-		<div ng-hide="state_programmed" ng-init="edit_scheduled_meters = true">
-			<label></label>
-			<p>Cantidad solicitada: {{order.order_quantity}} {{order.order_um}}</p>
-			<div class="field">
-				<label>Cantidad a programar ({{order.order_um}})</label>
-				<input ng-model="quantity_at_calculate" type="number">
-			</div>
-			<button type="button" class="button" ng-click="calculateScheduleMeters() ; calculated=true">Calcular</button>
-			<input id="input_scheduled_meters" type="hidden" value="<%=@meters%>">
-			<label>Metros programados</label>
-			<label><input ng-model="edit_scheduled_meters" type="checkbox">Protegido</label>
-			<input ng-model="order.scheduled_meters" ng-class="{disabled: edit_scheduled_meters}">
-			<p>{{order.scheduled_meters}} Metros programados</p> 
-			<button ng-show="calculated" ng-click="saveScheduleMeters()" class="button alert">Guardar</button>
-		</div>
-		<p id="space_route" class="subtitle">Confirmar ruta de proceso <a href="#space_route" ng-click="state_route=!state_route">x</a></p>
-		<div ng-hide="state_route">
-			<p>{{order.sheet_route}}</p>
-			<table>
-				<thead>
-					<tr>
-						<th>Proceso</th>
-						<th>Maquina</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="route in routes">
-							<td>
-								<select ng-model="route.procedure" ng-options="procedure.id as procedure.name for procedure in procedures" ng-change="swRoutesGenerated()"></select>
-							</td>
-							<td>
-								<select ng-model="route.machine" ng-options="machine.name as machine.name for machine in procedures[route.procedure - 1].machines" ng-change="swRoutesGenerated()"></select>
-							</td>
+		<ul class="accordion" data-accordion>
+			<li class="accordion-navigation" ng-class="{'item-success':state_leftovers}">
+				<a href="#space_leftovers">1. Consulta de sobrantes</a>
+				<div id="space_leftovers" os="state_leftovers" class="content">
+					<h3>Sobrantes relacionados</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>ficha</th>
+								<th>Cantidad</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="hasleftover in order.leftovers">
+								<td>{{ hasleftover.sheet_code }}</td>
+								<td>{{ hasleftover.quantity }} <%=@order.order_um%></td>
+							</tr>
+						</tbody>
+					</table>
+					<h3>Añadir nuevo sobrante</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Cantidad disponible</th>
+								<th>UM</th>
+								<th>Pedido</th>
+								<th>Ficha</th>
+								<th>Cantidad a usar</th>
+								<th>Guardar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="leftover in leftovers">
+								<td>{{leftover.id}}</td>
+								<td>{{leftover.quantity_available}}</td>
+								<td>{{leftover.um}}</td>
+								<td>{{leftover.order_origin}}</td>
+								<td>{{leftover.sheet_code}}</td>
+								<td><input ng-model="new_order_leftover.quantity" type="number"></td>
+								<td><button ng-click="addHasLeftovers(leftover.id,leftover.sheet_code,leftover)" class="button tiny">Agregar</button></td> 
+							</tr>
+						</tbody>
+					</table>
+					<table>
+						<thead>
+							<tr>
+								<th>Ficha</th>
+								<th>Cantidad</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="order_leftover in order_leftovers">
+								<td>{{order_leftover.sheet_code}}</td>
+								<td>{{order_leftover.quantity}}</td>
+								<td> <button class="button tiny" ng-click="removeHasLeftovers(order_leftover.index,order_leftover.leftover_id)">Eliminar</button> </td>
+							</tr>
+						</tbody>
+					</table>
+					<a href="#" class="button alert" ng-click="saveHasLeftovers()">Guardar</a>
+				</div>
+			</li>
+			<li class="accordion-navigation" ng-class="{'item-success':state_programmed}">
+				<a href="#space_programmed">2. Metros a programar</a>
+				<div id="space_programmed" os="state_programmed" ng-init="edit_scheduled_meters = true" class="content">
+					<label></label>
+					<p>Cantidad solicitada: {{order.order_quantity}} {{order.order_um}}</p>
+					<div class="field">
+						<label>Cantidad a programar ({{order.order_um}})</label>
+						<input ng-model="quantity_at_calculate" type="number">
+					</div>
+					<button type="button" class="button" ng-click="calculateScheduleMeters() ; calculated=true">Calcular</button>
+					<input id="input_scheduled_meters" type="hidden" value="<%=@meters%>">
+					<label>Metros programados</label>
+					<label><input ng-model="edit_scheduled_meters" type="checkbox">Protegido</label>
+					<input ng-model="order.scheduled_meters" ng-class="{disabled: edit_scheduled_meters}">
+					<p>{{order.scheduled_meters}} Metros programados</p> 
+					<button ng-show="calculated" ng-click="saveScheduleMeters()" class="button alert">Guardar</button>
+				</div>
+			</li>
+			<li class="accordion-navigation" ng-class="{'item-success':state_route}">
+				<a href="#space_route">3. Confirmar ruta de proceso</a>
+				<div id="space_route" os="state_route" class="content">
+					<p>{{order.sheet_route}}</p>
+					<table>
+						<thead>
+							<tr>
+								<th>Proceso</th>
+								<th>Maquina</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="route in routes">
+									<td>
+										<select ng-model="route.procedure" ng-options="procedure.id as procedure.name for procedure in procedures" ng-change="swRoutesGenerated()"></select>
+									</td>
+									<td>
+										<select ng-model="route.machine" ng-options="machine.name as machine.name for machine in procedures[route.procedure - 1].machines" ng-change="swRoutesGenerated()"></select>
+									</td>
 
-					</tr>
-				</tbody>
-			</table>
-			<button ng-click="generateRoutes()" class="button">Generar</button>
-			<button ng-click="saveRoutes()" ng-show="routesGenerated" class="button alert">Guardar</button>
-		</div>
-		<p id="space_subprocesses"class="subtitle">Parametros subprocesos 
-			<a href="#space_subprocesses" ng-click="state_subprocesses=!state_subprocesses">x</a>
-			<button ng-click="getOrder()">Actualizar</button>
-		</p>
-		<div ng-hide="state_subprocesses">
-			<ul ng-repeat="error in errors">
-				<li>{{error}}</li>
-			</ul>
-			<button ng-hide="order.subprocesses.length > 0"ng-click="submitSubprocesses()" class="button">Crear subprocesos</button>
-			<p>Fecha solicitada: {{order.order_date_request}}</p>
-			<table class="scroll">
-			  <thead>
-			    <tr>
-			      <th>#</th>
-			      <th>Proceso</th>
-			      <th>Maquina</th>
-			      <th>Estandar</th>
-			      <th>UM Estandar</th>
-			      <th>Alistamiento"</th>
-			      <th>Tiempo"</th>
-			      <th>Dia(yyyy-mm-dd)</th>
-			      <th>Fecha de inicio</th>
-			      <th>Fecha de fin</th>
-			      <th>Metros</th>      
-			      <th>Estado</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			      <tr ng-repeat="subprocess in order.subprocesses">
-			        <td>{{ subprocess.id }}</td>
-			        <td>{{ subprocess.procedure }}</td>
-			        <td>{{ subprocess.machine}}</td>
-			        <td>{{ subprocess.standard }}</td>
-			        <td>{{ subprocess.standard_um }}</td>
-			        <td><input ng-model="subprocess.setup_time" type="number"></td>
-			        <td><input ng-model="subprocess.minutes" type="number" style="width:80px"></td>
-			        <td>
-			        	<select style="width:100px" ng-model="subprocess.day_id" ng-options="day.id as day.day for day in subprocess.days">
-			        	</select>
-			        </td>
-			        <td>{{ subprocess.start_date | date:'short'}}</td>
-			        <td>{{ subprocess.end_date | date:'short'}}</td>
-			        <td>{{ subprocess.meter }}</td>
-			        <td>{{ subprocess.state }}</td>
-			      </tr>
-			  </tbody>
-			  	<tr>
-			  		<td colspan="13"> <button ng-show="order.subprocesses.length > 0"ng-click="updateSubprocesses()" class="button alert">Guardar</button> </td>
-			  	</tr>
-			</table>
-		</div>
-		<button ng-show="validateReady()" class="button success expand">Programar pedido</button>
+							</tr>
+						</tbody>
+					</table>
+					<button ng-click="generateRoutes()" class="button">Generar</button>
+					<button ng-click="saveRoutes()" ng-show="routesGenerated" class="button alert">Guardar</button>
+				</div>
+			</li>
+			<li class="accordion-navigation" ng-class="{'item-success':state_subprocesses}">
+				<a href="#space_subprocesses">4. Parametros subprocesos</a>
+				<div id="space_subprocesses" class="content">
+					<button ng-click="getOrder()" class="button">Actualizar</button>
+					<button ng-hide="order.subprocesses.length > 0"ng-click="submitSubprocesses()" class="button">Crear subprocesos</button>
+					<p>Fecha solicitada: {{order.order_date_request}}</p>
+					<table class="scroll">
+					  <thead>
+					    <tr>
+					      <th>#</th>
+					      <th>Proceso</th>
+					      <th>Maquina</th>
+					      <th>Estandar</th>
+					      <th>UM Estandar</th>
+					      <th>Alistamiento"</th>
+					      <th>Tiempo"</th>
+					      <th>Dia(yyyy-mm-dd)</th>
+					      <th>Fecha de inicio</th>
+					      <th>Fecha de fin</th>
+					      <th>Metros</th>      
+					      <th>Estado</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					      <tr ng-repeat="subprocess in order.subprocesses">
+					        <td>{{ subprocess.id }}</td>
+					        <td>{{ subprocess.procedure }}</td>
+					        <td>{{ subprocess.machine}}</td>
+					        <td>{{ subprocess.standard }}</td>
+					        <td>{{ subprocess.standard_um }}</td>
+					        <td><input ng-model="subprocess.setup_time" type="number"></td>
+					        <td><input ng-model="subprocess.minutes" type="number" style="width:80px"></td>
+					        <td>
+					        	<select style="width:100px" ng-model="subprocess.day_id" ng-options="day.id as day.day for day in subprocess.days">
+					        	</select>
+					        </td>
+					        <td>{{ subprocess.start_date | date:'short'}}</td>
+					        <td>{{ subprocess.end_date | date:'short'}}</td>
+					        <td>{{ subprocess.meter }}</td>
+					        <td>{{ subprocess.state }}</td>
+					      </tr>
+					  </tbody>
+					  	<tr>
+					  		<td colspan="13"> <button ng-show="order.subprocesses.length > 0"ng-click="updateSubprocesses()" class="button alert">Guardar</button> </td>
+					  	</tr>
+					</table>
+				</div>
+			</li>
+		</ul>
+		<ul ng-repeat="error in errors">
+			<li>{{error}}</li>
+		</ul>
+		<!-- ng-show="validateReady()" -->
+		<button ng-click="approveOrder()" class="button success expand">Programar pedido</button>
 	</div>
 </div>

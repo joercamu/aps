@@ -57,7 +57,9 @@ class Subprocess < ActiveRecord::Base
     # 1 Day subprocess:[{id:2,secuence:1},{id:2,secuence:2}]
     unless self.day_id.nil?
       # update minutes to day (mejorar ya que cada actualizacion ejecutará este metodo)
-      self.day.update_busy
+      self.standard.machine.days.each do |day|
+        day.update_busy
+      end 
       # convert date
       f = self.day.day.strftime("%F").to_s #DATE 
       t = self.day.start_time.strftime("%T%:z").to_s #TIME INITIAL
@@ -66,12 +68,12 @@ class Subprocess < ActiveRecord::Base
 
       Day.find(self.day_id).subprocesses.order(:sequence).each do |subprocess|
         if self.id == subprocess.id
-          puts "cali #{self.id} igual #{subprocess.id} sumar#{count_minutes}"
+          puts "cali #{self.id} igual #{subprocess.id} sumar #{count_minutes}"
           temp_date = dateTimeInitial+(count_minutes.to_f/1440)
           self.start_date = temp_date
-          self.end_date = temp_date+(self.minutes.to_f/1440)
+          self.end_date = temp_date+((self.minutes.to_f+self.setup_time.to_f)/1440)
         else
-          count_minutes = count_minutes + subprocess.minutes
+          count_minutes = count_minutes + (subprocess.minutes+subprocess.setup_time)
         end
       end
     end

@@ -19,7 +19,7 @@
         <td><%= link_to day.id, day %></td>
         <td><%= link_to day.machine.name, day.machine %></td>
         <td><%= day.day %></td>
-        <td><%= day.start_time %></td>
+        <td><%= day.start_time.strftime("%I:%M%p") %></td>
         <td><%= day.shifts %></td>
         <td><%= day.hours %></td>
         <td><%= day.minutes %></td>

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess,:calculate_meters,:change_state]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess,:calculate_meters,:change_state,:approve_order]
   before_action :set_subprocesses, only:[:show,:schedule]
   skip_before_action :verify_authenticity_token
 
@@ -115,7 +115,29 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.json {render json: @action}
     end
+  end
+  def approve_order
+    count = 0
+    count_subprocess = @order.subprocesses.count
+    if count_subprocess == 0
+      @order.errors.add(:errors,"No hay subprocesos")
+    else
+      @order.subprocesses.each do |subprocess|
+        count += 1 if subprocess.state=="programado"
+      end
+    end
 
+    respond_to do |format|
+      if count == count_subprocess && @order.subprocesses.any?
+        if @order.may_schedule?
+          @order.schedule!
+          format.json {render json:{state:"ok"}}
+        end
+      else
+        @order.errors.add(:errors,"Faltan #{count_subprocess-count} procesos por programar")
+        format.json {render json: @order.errors}
+      end
+    end
   end
   private
     # Use callbacks to share common setup or constraints between actions.

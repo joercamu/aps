@@ -10,12 +10,12 @@ Rails.application.routes.draw do
 
   resources :routes
   resources :has_leftovers
-  resources :orders 
-  resources :order_comments
-  
-  # resources :orders do
-  #   resources :order_comments, only: [:create]
-  # end
+  # resources :orders 
+  # resources :order_comments
+
+  resources :orders do
+    resources :order_comments
+  end
   # resources :orders do
   #   resources :subprocesses, only:[:index,:show,:create,:update]
   # end
@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get 'new_subprocesses/:id' => 'orders#new_subprocess', as: :new_order_subprocesses
   # route for change state of order by param
   get 'orders/:id/change_state' => 'orders#change_state', as: :change_state_order
+  # route for approve order
+  get 'approve_order/:id' => 'orders#approve_order'
 
   #route where it's do order "drag on drop"
   get 'machines/:id/sorting' => 'machines#sorting', as: :sort_subprocess

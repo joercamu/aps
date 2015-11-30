@@ -7,6 +7,7 @@ class Order < ActiveRecord::Base
   has_many :order_comments
 
   before_create :set_repeat
+  before_save :set_date_offer
   validates :order_number, uniqueness: true, if: :exists_order?
     # Campo que se tiene que editar aqui! 
     # t.string   "state",                     limit: 255
@@ -20,7 +21,7 @@ class Order < ActiveRecord::Base
   	count = 0
   	data.each do |key,value|
   		count = count + 1
-  		@subprocess = Subprocess.create(sequence:count,order_id:self.id ,procedure_id:key, standard_id:value.id)
+  		@subprocess = Subprocess.create(sequence_process:count,order_id:self.id ,procedure_id:key, standard_id:value.id)
   	end
   end
   def set_repeat
@@ -32,9 +33,19 @@ class Order < ActiveRecord::Base
     case self.order_um
       when "UND"
         # self.outsourced_tolerance_up/100.to_f
-        ((quantity/1000)*self.sheet_height)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
+        meter = ((quantity/1000)*self.sheet_height)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
+        if self.sheet_spaces > 0
+          meter / self.sheet_spaces
+        else
+          meter
+        end
       when "ROL"
-        quantity*3
+        meter = (quantity*sheet_meters_roll)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
+        if self.sheet_spaces > 0
+          meter / self.sheet_spaces
+        else
+          meter
+        end
       when "KIL"
         quantity*4
       when "MTR"
@@ -47,7 +58,11 @@ class Order < ActiveRecord::Base
     else
       false
     end
-    
+  end
+  def set_date_offer
+    if self.subprocesses.any?
+      self.date_offer = self.subprocesses.order(:sequence_process).last.end_date+172800
+    end
   end
   aasm column: "state" do
     state :activo, initial: true

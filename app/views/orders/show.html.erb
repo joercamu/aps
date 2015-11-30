@@ -8,7 +8,12 @@
 <%=render 'has_leftovers/list'%>
 <%=render 'subprocesses/list'%>
 <p class="subtitle">Observaciones</p>
-<%= render 'order_comments/form'%>
+<%= render 'order_comments/form' if  user_signed_in? %>
+<ul>
+	<%@order.order_comments.each do |comment|%>
+		<li><string><%=comment.user.email%></stong> | <%=comment.body%></li>
+	<%end%>
+</ul>
 
 <% link_to 'Edit', edit_order_path(@order) %>
 <% link_to 'Back', orders_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129202758) do
+ActiveRecord::Schema.define(version: 20151130184812) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -159,19 +159,20 @@ ActiveRecord::Schema.define(version: 20151129202758) do
   add_index "standards", ["machine_id"], name: "index_standards_on_machine_id", using: :btree
 
   create_table "subprocesses", force: :cascade do |t|
-    t.integer  "order_id",     limit: 4
-    t.integer  "procedure_id", limit: 4
-    t.integer  "standard_id",  limit: 4
-    t.integer  "minutes",      limit: 4
+    t.integer  "order_id",         limit: 4
+    t.integer  "procedure_id",     limit: 4
+    t.integer  "standard_id",      limit: 4
+    t.integer  "minutes",          limit: 4
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer  "meter",        limit: 4
-    t.integer  "sequence",     limit: 4
-    t.string   "state",        limit: 255, default: "activo"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.integer  "day_id",       limit: 4
-    t.integer  "setup_time",   limit: 4,   default: 0
+    t.integer  "meter",            limit: 4
+    t.integer  "sequence",         limit: 4
+    t.string   "state",            limit: 255, default: "activo"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "day_id",           limit: 4
+    t.integer  "setup_time",       limit: 4,   default: 0
+    t.integer  "sequence_process", limit: 4,   default: 0
   end
 
   add_index "subprocesses", ["day_id"], name: "index_subprocesses_on_day_id", using: :btree

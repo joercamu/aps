@@ -1,4 +1,4 @@
-<%= form_for(@comment) do |f|%>
+<%= form_for([@order,@comment]) do |f|%>
 	<%= f.text_area :body%>
-	<%= f.submit %>
+	<%= f.submit "Insertar", class:"button"%>
 <%end%>

@@ -3,7 +3,7 @@ app.factory("apiKhronos",function(){
 	return "192.168.1.247";
 });
 // quite $routeParams en 'OrdersController' y 'ngRoute' en dependencias
-app.controller('OrdersController',function($scope,$resource){
+app.controller('OrdersController',function($scope,$resource,$http){
 	$scope.errors = [];//array errors subprocesses
 
 	$scope.quantity_at_calculate = 0;//quantiyy of order - leftovers
@@ -64,6 +64,7 @@ app.controller('OrdersController',function($scope,$resource){
 		console.log(response);
 	});
 	$scope.structureRoutes = function(){
+		$scope.routes = [];
 		$scope.order.sheet_route.split(",").forEach(function(element){
 			object = element.split("-");
 			$scope.new_route.procedure = parseInt(object[0]);
@@ -212,10 +213,26 @@ app.controller('OrdersController',function($scope,$resource){
 	$scope.updateSubprocesses = function(){
 		for (var i = 0; i < $scope.order.subprocesses.length; i++) {
 			Subprocesses.update({id:$scope.order.subprocesses[i].id},$scope.order.subprocesses[i],function(response){
-				console.log(response)
-				// $scope.state_subprocesses = true;
+				// console.log(response)
+				$scope.state_subprocesses = true;
 			});
 		};
+	};
+	$scope.approveOrder = function(){
+		ApproveOrder = $resource('/approve_order/:id.json',{id:"@id"});
+		ApproveOrder.get({id: $scope.order.id},
+			function(data){
+				if (data.state == "ok"){
+					alert("Pedido programado correctamente");
+					location.href = '/orders/'+$scope.order.id;
+				}
+				$scope.errors = data.errors;
+				console.log(data);
+			},
+			function(response){
+				console.log(response);
+			}
+		);
 	};
 	//get process and machines, callback geOrder
 	if (order_id){
