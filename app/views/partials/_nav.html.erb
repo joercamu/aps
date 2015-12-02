@@ -1,70 +1,77 @@
-<nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name">
-      <h1><%= link_to "apsApp by Suprapak", root_path %></h1>
-    </li>
-     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
-    <section class="top-bar-section">
-    <!-- Left Nav Section -->
-    <ul class="left">
-      <li><%= link_to "PEDIDOS", orders_path %></li>
-      <li class="has-dropdown">
-        <a href="#">MODULOS</a>
-        <ul class="dropdown">
-          <li class="has-dropdown"> <%= link_to "PEDIDOS", orders_path %> 
+<div class="">
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><%= link_to "apsApp by Suprapak", root_path %></h1>
+      </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+      <section class="top-bar-section">
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li><%= link_to "PEDIDOS", orders_path %></li>
+        <li class="has-dropdown">
+          <a href="#">MODULOS</a>
+          <ul class="dropdown">
+            <li class="has-dropdown"> <%= link_to "PEDIDOS", orders_path %> 
+              <ul class="dropdown">
+                <li><%= link_to "OBTENER PEDIDOS", get_orders_path, target:"_self"%></li>
+              </ul>
+            </li>
+            <li> <%= link_to "DIAS", days_path %> </li>
+            <li class="has-dropdown"> 
+              <%= link_to "MAQUINAS", machines_path %> 
+              <ul class="dropdown">
+                <%Procedure.all.each do |procedure|%>
+                  <li class="has-dropdown">
+                    <%= link_to procedure.name, procedure%>
+                    <ul class="dropdown">
+                      <% procedure.machines.each do |machine|%>
+                      <li class="has-dropdown">
+                        <%= link_to machine.name, machine %>
+                        <ul class="dropdown">
+                          <li><%= link_to "ORDENAR", sort_subprocess_path(machine), target:"_self"%></li>
+                          <li><%= link_to "QUE HACER",todo_subprocess_path(machine),target:"_self"%></li>
+                        </ul>
+                      </li>
+                      <% end%>
+                    </ul>
+                  </li>
+                <%end%>
+              </ul>
+            </li>
+            <li> <%= link_to "ESTANDARES", standards_path %> </li>
+            <li> <%= link_to "SOBRANTES", leftovers_path %> </li>
+            <li> <%= link_to "PROCESOS", procedures_path %> </li>
+            <li> <%= link_to "RUTAS", routes_path %> </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="active">
+          <%=link_to "Cerrar sesión", destroy_user_session_path, method:"DELETE" if user_signed_in? %>
+          <%=link_to "Iniciar sesión", new_user_session_path unless user_signed_in? %>
+        </li>
+        <%if user_signed_in? %>
+          <li class="has-dropdown">
+            <%= link_to current_user.email,"#"  %>
             <ul class="dropdown">
-              <li><%= link_to "OBTENER PEDIDOS", get_orders_path, target:"_self"%></li>
+              <li><%=link_to "Editar mi cuenta", edit_user_registration_path, method:"GET"%></li>
             </ul>
           </li>
-          <li> <%= link_to "DIAS", days_path %> </li>
-          <li class="has-dropdown"> 
-            <%= link_to "MAQUINAS", machines_path %> 
-            <ul class="dropdown">
-              <%Procedure.all.each do |procedure|%>
-                <li class="has-dropdown">
-                  <%= link_to procedure.name, procedure%>
-                  <ul class="dropdown">
-                    <% procedure.machines.each do |machine|%>
-                    <li class="has-dropdown">
-                      <%= link_to machine.name, machine %>
-                      <ul class="dropdown">
-                        <li><%= link_to "ORDENAR", sort_subprocess_path(machine), target:"_self"%></li>
-                        <li><%= link_to "QUE HACER",todo_subprocess_path(machine),target:"_self"%></li>
-                      </ul>
-                    </li>
-                    <% end%>
-                  </ul>
-                </li>
-              <%end%>
-            </ul>
-          </li>
-          <li> <%= link_to "ESTANDARES", standards_path %> </li>
-          <li> <%= link_to "SOBRANTES", leftovers_path %> </li>
-          <li> <%= link_to "PROCESOS", procedures_path %> </li>
-          <li> <%= link_to "RUTAS", routes_path %> </li>
-        </ul>
-      </li>
-    </ul>
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="active">
-        <%=link_to "Cerrar sesión", destroy_user_session_path, method:"DELETE" if user_signed_in? %>
-        <%=link_to "Iniciar sesión", new_user_session_path unless user_signed_in? %>
-      </li>
-      <li>
-        <%= link_to current_user.email, "#" if user_signed_in? %>
-      </li>
-<!--       <li class="has-dropdown">
-        <a href="#">Right Button Dropdown</a>
-        <ul class="dropdown">
-          <li><a href="#">First link in dropdown</a></li>
-          <li class="active"><a href="#">Active link in dropdown</a></li>
-        </ul>
-      </li> -->
-    </ul>
+        <%end%>
+  <!--       <li class="has-dropdown">
+          <a href="#">Right Button Dropdown</a>
+          <ul class="dropdown">
+            <li><a href="#">First link in dropdown</a></li>
+            <li class="active"><a href="#">Active link in dropdown</a></li>
+          </ul>
+        </li> -->
+      </ul>
 
 
-  </section>
-</nav>
+    </section>
+  </nav>
+</div>

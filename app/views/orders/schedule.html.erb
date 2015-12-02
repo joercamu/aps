@@ -9,13 +9,12 @@ x.	Asignar tiempo de alistamiento
 g.	Formular campo “minutos” en cada proceso
 h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días disponibles (validar fecha solicitada) -->
 
-	<div class="schedule" ng-app="apsApp" style="margin-top:100px;">
-		
+	<div class="schedule" ng-app="apsApp">
 	<%=render 'show'%>
 	<input id="IdOrder" value="<%=@order.id%>" type="hidden">
-
 	<div ng-controller="OrdersController">
-		<div class="fixed">
+		
+		<div class="fixed" style="top:44px !important">
 			<div class="icon-bar five-up">
 			  <a class="item" href="#space-leftovers" ng-class="{'item-success':state_leftovers,'item-slope':!state_leftovers}">
 			    <label>1. Sobrantes</label>
@@ -33,6 +32,12 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 		</div>
 <!-- modules -->
 		<ul class="accordion" data-accordion>
+			<li class="accordion-navigation active">
+				<a href="#space_comments">Observaciones</a>
+				<div id="space_comments"class="content">
+					<%=render 'order_comments/list'%>
+				</div>
+			</li>
 			<li class="accordion-navigation" ng-class="{'item-success':state_leftovers}">
 				<a href="#space_leftovers">1. Consulta de sobrantes</a>
 				<div id="space_leftovers" os="state_leftovers" class="content">
@@ -92,7 +97,7 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 							</tr>
 						</tbody>
 					</table>
-					<a href="#" class="button alert" ng-click="saveHasLeftovers()">Guardar</a>
+					<button class="button alert" ng-click="saveHasLeftovers()">Guardar</button>
 				</div>
 			</li>
 			<li class="accordion-navigation" ng-class="{'item-success':state_programmed}">
@@ -193,6 +198,6 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 			<li>{{error}}</li>
 		</ul>
 		<!-- ng-show="validateReady()" -->
-		<button ng-click="approveOrder()" class="button success expand">Programar pedido</button>
+		<button ng-click="approveOrder()" ng-show="validateReady()" class="button success expand">Programar pedido</button>
 	</div>
 </div>

@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: applications_production
-  username: applications
-  password: <%= ENV['APPLICATIONS_DATABASE_PASSWORD'] %>
+  username: root
+  password: DB_Suprapakaps_2015_root
+  # password: <%= ENV['APPLICATIONS_DATABASE_PASSWORD'] %>

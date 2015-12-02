@@ -22,6 +22,17 @@ app.controller('OrdersController',function($scope,$resource,$http){
 	$scope.machines = [];
 	$scope.routesGenerated = false;
 
+	$(document).on("ajax:success","form#form-comments",function(ev,data){
+		$scope.order.comments.push(data);
+		console.log(data);
+		console.log($scope.order.comments);
+		$scope.$apply(function(){
+			$('#form-comments').trigger("reset");
+		});
+
+	});
+
+
 	$scope.validateReady = function(){
 		if ($scope.state_programmed && $scope.state_route && $scope.state_leftovers && $scope.state_subprocesses){
 			return true;

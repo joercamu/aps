@@ -1,8 +1,11 @@
 class OrderCommentsController < ApplicationController
 	before_action :set_comment, only: [:show,:edit,:update,:destroy]
-	before_action :set_order, only: [:create]
+	before_action :set_order, only: [:create,:show]
 	def new
 		# @comment = OrderComment.new
+	end
+	def show
+		
 	end
 	def create
 		# @comment = OrderComment.new(comment_params)
@@ -10,10 +13,11 @@ class OrderCommentsController < ApplicationController
 		@comment.order = @order
 		respond_to do |format|
 			if @comment.save
-				format.html {redirect_to @comment.order}
-				format.json { render :show, status: :created, location: @order }
+				format.html { redirect_to @comment.order}
+				format.json { render :show, status: :created, location: @comment.order }
 			else
-				format.html {}
+        		format.html { render :new }
+        		format.json { render json: @comment.order.errors, status: :unprocessable_entity }
 			end
 		end
 	end

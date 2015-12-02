@@ -26,6 +26,7 @@
       <th>UM</th>
       <th>VALOR UNI</th>
       <th>FECHA SOLICITADA</th>
+      <th>FECHA OFRECIDA</th>
       <th>ESTADO</th>
       <th>RUTA</th>
       <th>FECHA INGRESO APS</th>
@@ -41,6 +42,7 @@
       <th>UM</th>
       <th>VALOR UNI</th>
       <th>FECHA SOLICITADA</th>
+      <th>FECHA OFRECIDA</th>
       <th>ESTADO</th>
       <th>RUTA</th>
       <th>FECHA INGRESO APS</th>
@@ -49,7 +51,7 @@
   <tbody id="tbody_orders">
     <% @orders.each do |order| %>
       <tr>
-        <td><%= link_to "K#{order.order_number}", order %></td>
+        <td><%= link_to "K#{order.order_number}", order,target:"_self" %></td>
         <td><%= order.repeat %></td>
         <td><%= "#{order.sheet_client}-#{order.sheet_number}" %></td>
         <td><%= order.outsourced_name %></td>
@@ -57,6 +59,7 @@
         <td><%= order.order_um %></td>
         <td><%= order.order_unit_value %></td>
         <td><%= order.order_date_request %></td>
+        <td><%= order.date_offer %></td>
         <td><%= order.state %></td>
         <td><%= order.sheet_route %></td>
         <td><%= order.created_at.strftime("%F %I:%M%p") %></td>

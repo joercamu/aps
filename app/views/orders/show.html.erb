@@ -1,19 +1,18 @@
-<%=render 'show'%>
-<ul>
-<li> <%=link_to "Programar", schedule_order_path(@order), target:"_self"%> </li>
-</ul>
-<ul>
-	<li><%= link_to "Aprobar", change_state_order_path(id:340,action:'approve')%></li>
-</ul>
-<%=render 'has_leftovers/list'%>
-<%=render 'subprocesses/list'%>
-<p class="subtitle">Observaciones</p>
-<%= render 'order_comments/form' if  user_signed_in? %>
-<ul>
-	<%@order.order_comments.each do |comment|%>
-		<li><string><%=comment.user.email%></stong> | <%=comment.body%></li>
-	<%end%>
-</ul>
+<div class="schedule" ng-app="apsApp">
+	<input id="IdOrder" value="<%=@order.id%>" type="hidden">
+	<div ng-controller="OrdersController">
+		<%=render 'show'%>
+		<ul>
+		<li> <%=link_to "Programar", schedule_order_path(@order), target:"_self"%> </li>
+		</ul>
+		<ul>
+			<li><%= link_to "Aprobar", change_state_order_path(id:340,action:'approve')%></li>
+		</ul>
+		<%=render 'has_leftovers/list'%>
+		<%#render 'subprocesses/list'%>
+		<p class="subtitle">Observaciones</p>
+		<%= render 'order_comments/form' if  user_signed_in? %>
+		<%= render 'order_comments/list'%>
+	</div>
+</div>
 
-<% link_to 'Edit', edit_order_path(@order) %>
-<% link_to 'Back', orders_path %>

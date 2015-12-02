@@ -42,7 +42,9 @@ $ ->
 					order.orders = data
 					if data.length > 0
 						if confirm("Se encontraron #{data.length} resultados, ¿Desear traerlos?")
+							console.log(data)
 							index = 0
+							$('#tfoot_orders').empty()
 							for item in order.orders
 								$('#tfoot_orders').append(order.buildHtml(item,index,"schedule"))
 								index++
@@ -67,6 +69,7 @@ $ ->
 					$("#row#{index}").remove()
 					$('#tbody_orders').append(order.buildHtml(data,data.id,"alert"))
 				error: (error)->
+					alert(error.responseText)
 					console.log(error)
 		buildHtml:(order,index,nameclass)->
 			#nameclass es la clase que se le aplica al button dependiendo de ella cambioa de color y realiza diferentes acciones

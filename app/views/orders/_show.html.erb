@@ -122,6 +122,11 @@
     </td>
 
     <td>
+      <strong>Ancho lamina:</strong><br>
+      <%= @order.sheet_width_planned %>
+    </td>
+
+    <td>
       <strong>Largo planeado:</strong><br>
       <%= @order.sheet_height_planned %>
     </td>
@@ -145,19 +150,20 @@
       <%= @order.sheet_product_type %>
     </td>
 
+
+  </tr>
+  <tr>
     <td>
       <strong>Cabidas:</strong><br>
       <%= @order.sheet_spaces %>
     </td>
-  </tr>
-  <tr>
-    <td colspan="8">
+    <td colspan="7">
       <strong>Ruta de proceso:</strong><br>
       <%= @order.sheet_route.gsub(',','<br>').html_safe%>
     </td>
     <td colspan="2">
       <strong>Fecha Creacion</strong><br>
-      <%=@order.created_at%>
+      <%=@order.created_at.strftime("%F %I:%M%p")%>
     </td>
   </tr>
 </table>

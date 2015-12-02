@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130184812) do
+ActiveRecord::Schema.define(version: 20151202123900) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -129,6 +129,10 @@ ActiveRecord::Schema.define(version: 20151130184812) do
     t.datetime "created_at",                                                 null: false
     t.datetime "updated_at",                                                 null: false
     t.integer  "route_id",                  limit: 4
+    t.float    "sheet_width_planned",       limit: 24
+    t.string   "sheet_roller",              limit: 255
+    t.float    "sheet_width_lap",           limit: 24
+    t.string   "presses",                   limit: 255
   end
 
   add_index "orders", ["route_id"], name: "index_orders_on_route_id", using: :btree

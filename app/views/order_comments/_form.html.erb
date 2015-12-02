@@ -1,4 +1,4 @@
-<%= form_for([@order,@comment]) do |f|%>
-	<%= f.text_area :body%>
-	<%= f.submit "Insertar", class:"button"%>
+<%= form_for([@order,@comment], remote:true, html:{id:"form-comments",:"data-type"=>"json"}) do |f|%>
+	<%= f.text_area :body,required:true,placeholder:"Escribir observacion."%>
+	<%= f.submit "Insertar", class:"button expand"%>
 <%end%>

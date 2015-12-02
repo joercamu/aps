@@ -47,7 +47,7 @@ class Order < ActiveRecord::Base
           meter
         end
       when "KIL"
-        quantity*4
+        ((quantity/(self.sheet_width_planned*((self.sheet_caliber.to_f/25.4)/1000)*0.072))*2)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
       when "MTR"
         quantity*5
     end
@@ -60,8 +60,8 @@ class Order < ActiveRecord::Base
     end
   end
   def set_date_offer
-    if self.subprocesses.any?
-      self.date_offer = self.subprocesses.order(:sequence_process).last.end_date+172800
+    if self.subprocesses.any? && self.subprocesses.order(:sequence_process).last.end_date
+        self.date_offer = self.subprocesses.order(:sequence_process).last.end_date+172800
     end
   end
   aasm column: "state" do

@@ -1,0 +1,17 @@
+<div ng-repeat="comment in order.comments">
+	<div class="comment">
+		<section class="top">
+			<h6 class="byline">
+				<a href="#"><i class="icon"></i>{{comment.user}}</a> 
+				<small> 
+					<span class="data">
+						{{comment.created_at | date :"medium"}}
+					</span>
+				</small>
+			</h6>
+		</section>
+		<section class="content">
+			<p>{{comment.body}}</p>
+		</section>
+	</div>
+</div>
