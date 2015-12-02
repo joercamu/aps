@@ -3,7 +3,7 @@ app.factory("apiKhronos",function(){
 	return "192.168.1.247";
 });
 // quite $routeParams en 'OrdersController' y 'ngRoute' en dependencias
-app.controller('OrdersController',function($scope,$resource,$http){
+app.controller('OrdersController',['$scope','$resource','$http',function($scope,$resource,$http){
 	$scope.errors = [];//array errors subprocesses
 
 	$scope.quantity_at_calculate = 0;//quantiyy of order - leftovers
@@ -250,8 +250,8 @@ app.controller('OrdersController',function($scope,$resource,$http){
 		$scope.getProcedures($scope.getOrder);
 	}
 	
-});
-app.controller("leftoversController", function($scope,$resource,apiKhronos){
+}]);
+app.controller("leftoversController",['$scope','$resource','apiKhronos',function($scope,$resource,apiKhronos){
 	$scope.leftover = {};
 	infoLeftovers = $resource('http://'+apiKhronos+'/api_khronos/index.php/orders/get_orders_sheet/:id',{id:"@id"});
 	$scope.get = function(){
@@ -267,8 +267,8 @@ app.controller("leftoversController", function($scope,$resource,apiKhronos){
 		});
 	};
 			
-});
-app.controller("machinesController",function($scope,$resource){
+}]);
+app.controller("machinesController",['$scope','$resource',function($scope,$resource){
 	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	// Days = $resource("/days/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 
@@ -309,5 +309,5 @@ app.controller("machinesController",function($scope,$resource){
 		};
 
 	};
-});
+}]);
 		
