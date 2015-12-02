@@ -49,7 +49,7 @@ class Order < ActiveRecord::Base
       when "KIL"
         ((quantity/(self.sheet_width_planned*((self.sheet_caliber.to_f/25.4)/1000)*0.072))*2)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
       when "MTR"
-        quantity*5
+        quantity
     end
   end
   def exists_order?
