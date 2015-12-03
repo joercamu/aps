@@ -1,5 +1,5 @@
 <p class="subtitle">Sobrantes</p>
-<%= link_to 'Nuevo sobrante', new_leftover_path, target:"_self" %>
+<%= link_to 'Nuevo sobrante', new_leftover_path, target:"_self",class:"button" %>
 <table class="scroll">
   <thead>
     <tr>
@@ -44,7 +44,7 @@
         <td><%= leftover.sheet_composite %></td>
         <td><%= leftover.place_origin %></td>
         <td><%= leftover.state %></td>
-        <td><%= link_to 'Edit', edit_leftover_path(leftover), target:"_self" %></td>
+        <td><%= link_to 'Editar', edit_leftover_path(leftover), target:"_self" %></td>
       </tr>
     <% end %>
   </tbody>

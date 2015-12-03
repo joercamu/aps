@@ -29,5 +29,8 @@ class Day < ActiveRecord::Base
     end
     self.update(busy:minutes,available:self.minutes-minutes)
   end
+  def start_time
+    self.day
+  end
 
 end

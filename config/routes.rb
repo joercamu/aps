@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :orders do
     resources :order_comments
+    # get 'change_state/:action' => 'orders#change_state', as: :change_state_order
+
   end
   # resources :orders do
   #   resources :subprocesses, only:[:index,:show,:create,:update]
@@ -39,7 +41,7 @@ Rails.application.routes.draw do
   #route for create subprocess of order
   get 'new_subprocesses/:id' => 'orders#new_subprocess', as: :new_order_subprocesses
   # route for change state of order by param
-  get 'orders/:id/change_state' => 'orders#change_state', as: :change_state_order
+  get 'orders/:id/change_state/:state' => 'orders#change_state', as: :change_state_order
   # route for approve order
   get 'approve_order/:id' => 'orders#approve_order'
 
@@ -51,6 +53,9 @@ Rails.application.routes.draw do
 
   #route delivery leftovers availables by sheet_id
   get 'leftovers/by_sheet/:sheet_id' => 'leftovers#by_sheet'
+
+  #route 
+  get 'schedule_days/:machine_id' => 'days#schedule', as: :schedule_days
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

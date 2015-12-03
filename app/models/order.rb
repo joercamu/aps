@@ -32,9 +32,19 @@ class Order < ActiveRecord::Base
     quantity = quantity.to_f
     case self.order_um
       when "UND"
+        if self.sheet_print == false && sheet_cut_type == "SELLADO"
+          temp_height = self.sheet_height + 10
+        elsif self.sheet_print && self.sheet_cut_type == "CORTADO" && self.sheet_guillotine > 0
+          temp_height = self.sheet_height_planned
+        elsif self.sheet_print && sheet_cut_type == "SELLADO"
+          temp_height = self.sheet_height_planned
+        else
+          temp_height = sheet_height
+        end
+        
         # self.outsourced_tolerance_up/100.to_f
-        meter = ((quantity/1000)*self.sheet_height)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
-        if self.sheet_spaces > 0
+        meter = ((quantity/1000)*temp_height.to_f)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
+        if self.sheet_spaces
           meter / self.sheet_spaces
         else
           meter
@@ -47,7 +57,12 @@ class Order < ActiveRecord::Base
           meter
         end
       when "KIL"
-        ((quantity/(self.sheet_width_planned*((self.sheet_caliber.to_f/25.4)/1000)*0.072))*2)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
+        if self.sheet_print
+          ((quantity/(self.sheet_width_planned*((self.sheet_caliber.to_f/25.4)/1000)*0.072))*2)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
+        else
+          ((quantity/(((self.sheet_width*2)+sheet_width_lap)*((self.sheet_caliber.to_f/25.4)/1000)*0.072))*2)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
+        end
+        
       when "MTR"
         quantity
     end
@@ -64,6 +79,10 @@ class Order < ActiveRecord::Base
         self.date_offer = self.subprocesses.order(:sequence_process).last.end_date+172800
     end
   end
+  def log_status_change
+    # puts "changing from #{aasm.from_state} to #{aasm.to_state} (event: #{aasm.current_event})"
+    OrderComment.create(user_id:1,order_id:self.id,body:"Cambio de estado, de #{aasm.from_state} a #{aasm.to_state}")
+  end
   aasm column: "state" do
     state :activo, initial: true
     state :aprobado
@@ -73,6 +92,8 @@ class Order < ActiveRecord::Base
     state :en_proceso
     state :suspendido
     state :terminado
+
+    after_all_transitions :log_status_change
 
     event :approve do
       transitions :from => :activo, :to => :aprobado
@@ -97,8 +118,7 @@ class Order < ActiveRecord::Base
       transitions :from => :en_proceso, :to => :suspendido
     end
     event :reschedule do
-      transitions :from => :programado, :to => :reprogramado
-      transitions :from => :suspendido, :to => :reprogramado
+      transitions :from => :terminado, :to => :reprogramado
     end
   end
 

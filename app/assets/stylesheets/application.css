@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  *= require foundation_and_overrides
-
+ *= require simple_calendar
  *= require jquery-ui/sortable
  *= require jquery-ui/datepicker
  */

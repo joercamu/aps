@@ -2,11 +2,32 @@
 	<input id="IdOrder" value="<%=@order.id%>" type="hidden">
 	<div ng-controller="OrdersController">
 		<%=render 'show'%>
-		<ul>
-		<li> <%=link_to "Programar", schedule_order_path(@order), target:"_self"%> </li>
-		</ul>
-		<ul>
-			<li><%= link_to "Aprobar", change_state_order_path(id:340,action:'approve')%></li>
+		<ul class="button-group round">
+			<%if @order.may_schedule?%>
+			  <li>
+			  	<%=link_to "Programar", schedule_order_path(@order), target:"_self", class:"button"%>
+			  </li>
+		  	<%end%>
+		  	<%if @order.may_approve?%>
+			  <li>
+			  	<%= link_to "Aprobar", change_state_order_path(@order,'approve'), class:"button"%>
+			  </li>
+		  	<%end%>
+		  	<%if @order.may_refuse?%>
+			  <li>
+			  	<%= link_to "Rechazar", change_state_order_path(@order,'refuse'), class:"button"%>
+			  </li>
+		  	<%end%>
+		  	<%if @order.may_suspend?%>
+			  <li>
+			  	<%= link_to "Suspender", change_state_order_path(@order,'suspend'), class:"button"%>
+			  </li>
+		  	<%end%>
+		  	<%if @order.may_end?%>
+			  <li>
+			  	<%= link_to "Terminar", change_state_order_path(@order,'end'), class:"button"%>
+			  </li>
+		  	<%end%>
 		</ul>
 		<%=render 'has_leftovers/list'%>
 		<%#render 'subprocesses/list'%>
@@ -15,4 +36,5 @@
 		<%= render 'order_comments/list'%>
 	</div>
 </div>
+<%= link_to "Volver", :back ,class:"button info"%>
 

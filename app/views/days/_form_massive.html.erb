@@ -1,0 +1,23 @@
+<%= form_for(@day) do |f| %>
+  <% if @day.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@day.errors.count, "error") %> prohibited this day from being saved:</h2>
+
+      <ul>
+      <% @day.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-new-day">
+      <%= f.text_field :machine_id, value:@machine.id, type:"hidden",required:"true"%>
+      <%= f.text_field :day, value:today, type:"hidden",required:"true" %>
+      <%= f.number_field :shifts, placeholder:"Turnos",autocomplete:"off",required:"true" %>
+      <%= f.number_field :hours, placeholder:"Horas por turno",autocomplete:"off",required:"true" %>
+      <%= f.time_field :start_time, placeholder:"Hora de inicio" %>
+      <%= f.submit "Guardar",class:"button expand tiny secondary",required:"true"%>
+  </div>
+
+<% end %>

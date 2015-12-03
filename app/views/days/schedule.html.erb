@@ -1,0 +1,14 @@
+<p class="subtitle"><%=@machine.name%></p>
+<div class="space-calendar">	
+	<%= month_calendar events: @days do |date, days| %>
+	  <span class="label-date"><%= DateTime.parse(date.to_s).strftime("%d") %></span>
+	  <%= render 'form_massive', today:date unless days.any?%>
+	  <% days.each do |day| %>
+	    <div class="info-day">
+	      <label>Turnos: <%=day.shifts%></label>
+	      <label>Hrs turno: <%=day.hours%></label>
+	      <label>Hora inicio: <%=day.start_time.strftime("%I:%M%p")%></label>
+	    </div>
+	  <% end %>
+	<% end %>
+</div>

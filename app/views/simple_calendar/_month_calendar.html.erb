@@ -1,0 +1,49 @@
+<div class="simple-calendar">
+  <div class="row control-calendar">
+    <div class="small-3 columns">
+      <i class="icon-chevron-left"></i>
+      <%= link_to "Anterior", start_date: date_range.first - 1.day  %>
+    </div>
+    <div class="small-6 columns">
+      <%months_spanish = {'January'=>'enero','February'=>'febrero','March'=>'marzo','April'=>'abril','May'=>'mayo','June'=>'junio','July'=>'julio','August'=>'agosto','September'=>'septiembre','October'=>'octubre','November'=>'noviembre','December'=>'diciembre'}%>
+      <label class="name_month"><%= months_spanish[I18n.t("date.month_names")[start_date.month]].to_s.upcase %> <%= start_date.year %></label>
+    </div>
+    <div class="small-3 columns">
+      <%= link_to "Proximo", start_date: date_range.last + 1.day  %>  
+      <i class="icon-chevron-right"></i>
+    </div>
+    
+    
+    
+  </div>
+  
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <%days_spanish = {'Mon'=>'Lunes', 'Tue'=>'Martes','Wed'=>'Miercoles','Thu'=>'Jueves','Fri'=>'Viernes','Sat'=>'Sabado','Sun'=>'Domingo'}%>
+        <% date_range.slice(0, 7).each do |day| %>
+          <th><%= days_spanish[I18n.t("date.abbr_day_names")[day.wday]] %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% date_range.each_slice(7) do |week| %>
+        <tr>
+          <% week.each do |day| %>
+            <%= content_tag :td, class: calendar.td_classes_for(day) do %>
+              <% if defined?(Haml) && block_is_haml?(block) %>
+                <% capture_haml do %>
+                  <% block.call day, sorted_events.fetch(day, []) %>
+                <% end %>
+              <% else %>
+                <% block.call day, sorted_events.fetch(day, []) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

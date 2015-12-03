@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+# calendar
+gem "simple_calendar", "~> 2.0"
 #logins and users
 gem 'devise'
 #admin states

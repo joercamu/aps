@@ -33,7 +33,7 @@ class DaysController < ApplicationController
 
     respond_to do |format|
       if @day.save
-        format.html { redirect_to @day, notice: 'Day was successfully created.' }
+        format.html { redirect_to schedule_days_path(@day.machine_id), notice: 'Day was successfully created.' }
         format.json { render :show, status: :created, location: @day }
       else
         format.html { render :new }
@@ -64,6 +64,11 @@ class DaysController < ApplicationController
       format.html { redirect_to days_url, notice: 'Day was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  def schedule
+    @machine = Machine.find(params[:machine_id])
+    @days = @machine.days
+    @day = Day.new
   end
 
   private

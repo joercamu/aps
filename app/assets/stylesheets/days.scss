@@ -1,0 +1,68 @@
+$color-main:#2196F3;
+.form-new-day{
+	input{
+		height: 22px !important;
+		padding: 0 !important;
+		margin:1px !important;
+		font-size: 13px !important;
+		border-radius: 15px !important;
+		padding-left: 10px !important;
+	}
+}
+.space-calendar{
+	.control-calendar{
+		.columns{
+			text-align: center
+		}
+	}
+	.info-day{
+		label{
+			font-size: 10px;
+			color: #gray !important;
+			font-style: italic;
+		}
+	}
+	.name_month{
+		font-size: 3rem;
+		color: darken($color-main,35);
+	}
+}
+.prev-month, .next-month{
+	.label-date{
+		color: #9E9E9E;
+	    font-size: 2rem;
+	    text-align: right;
+
+	}	
+}
+.current-month {
+	.label-date{
+		font-style: italic;
+		color: lighten($color-main, 25);
+	    font-size: 2rem;
+	    text-align: right;
+	}
+}
+.today{
+	background-color: lighten($color-main, 20) !important;
+	border-radius: 50%;
+	.label-date{
+		color:darken($color-main,20);
+	}
+
+}
+.table-striped{
+	th{
+		text-align: center !important;
+  		vertical-align: middle;
+		color:darken($color-main,20);
+		font-style: italic;
+		background-color: #fff !important;
+		border: 1px solid #fff !important;
+		border-bottom: 4px solid $color-main !important;
+
+	}
+	td, tr{
+		border: none !important;
+	}
+}

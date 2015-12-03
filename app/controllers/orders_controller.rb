@@ -112,10 +112,18 @@ class OrdersController < ApplicationController
   end
   #GET 
   def change_state
-    @action = params[:action]
-    respond_to do |format|
-      format.json {render json: @action}
+    @state = params[:state]
+    case @state
+      when "approve"
+        @order.approve! if @order.may_approve?
+      when "refuse"
+        @order.refuse! if @order.may_refuse?
+      when "suspend"
+        @order.suspend! if @order.may_suspend?
+      when "end"
+        @order.end! if @order.may_end?  
     end
+    redirect_to @order 
   end
   def approve_order
     count = 0
