@@ -1,36 +1,41 @@
 <div class="schedule" ng-app="apsApp">
 	<input id="IdOrder" value="<%=@order.id%>" type="hidden">
 	<div ng-controller="OrdersController">
+		<div class="row">
+			<div class="small-12 small-centered columns" style="text-align:center">
+				<ul class="button-group round">
+					<%if @order.may_schedule?%>
+					  <li>
+					  	<%=link_to "Programar", schedule_order_path(@order), target:"_self", class:"button"%>
+					  </li>
+				  	<%end%>
+				  	<%if @order.may_approve?%>
+					  <li>
+					  	<%= link_to "Aprobar", change_state_order_path(@order,'approve'), class:"button"%>
+					  </li>
+				  	<%end%>
+				  	<%if @order.may_refuse?%>
+					  <li>
+					  	<%= link_to "Rechazar", change_state_order_path(@order,'refuse'), class:"button"%>
+					  </li>
+				  	<%end%>
+				  	<%if @order.may_suspend?%>
+					  <li>
+					  	<%= link_to "Suspender", change_state_order_path(@order,'suspend'), class:"button"%>
+					  </li>
+				  	<%end%>
+				  	<%if @order.may_end?%>
+					  <li>
+					  	<%= link_to "Terminar", change_state_order_path(@order,'end'), class:"button"%>
+					  </li>
+				  	<%end%>
+				</ul>
+			</div>
+		</div>
 		<%=render 'show'%>
-		<ul class="button-group round">
-			<%if @order.may_schedule?%>
-			  <li>
-			  	<%=link_to "Programar", schedule_order_path(@order), target:"_self", class:"button"%>
-			  </li>
-		  	<%end%>
-		  	<%if @order.may_approve?%>
-			  <li>
-			  	<%= link_to "Aprobar", change_state_order_path(@order,'approve'), class:"button"%>
-			  </li>
-		  	<%end%>
-		  	<%if @order.may_refuse?%>
-			  <li>
-			  	<%= link_to "Rechazar", change_state_order_path(@order,'refuse'), class:"button"%>
-			  </li>
-		  	<%end%>
-		  	<%if @order.may_suspend?%>
-			  <li>
-			  	<%= link_to "Suspender", change_state_order_path(@order,'suspend'), class:"button"%>
-			  </li>
-		  	<%end%>
-		  	<%if @order.may_end?%>
-			  <li>
-			  	<%= link_to "Terminar", change_state_order_path(@order,'end'), class:"button"%>
-			  </li>
-		  	<%end%>
-		</ul>
+		<%=render 'subprocesses/tracking'%>
 		<%=render 'has_leftovers/list'%>
-		<%#render 'subprocesses/list'%>
+		<%=render 'subprocesses/list'%>
 		<p class="subtitle">Observaciones</p>
 		<%= render 'order_comments/form' if  user_signed_in? %>
 		<%= render 'order_comments/list'%>

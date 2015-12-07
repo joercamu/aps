@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="small-9 medium-5 small-centered columns">
+    <div class="weather">
+      <header class="header">
+        <h2>
+          Fecha ofrecida: <%# "#{@subprocesses.last.order.date_offer}" if @subprocesses.last.order.date_offer%>
+        </h2>
+        <div class="weather-icon-shadow">
+          <span class="icon-sun"></span>
+        </div>
+        <div class="weather-icon">
+          <span class="icon-sun"></span>
+        </div>
+      </header>
+      <article>
+        <ul>  
+          <% @subprocesses.order(:sequence_process).each do |subprocess| %>
+            <li class="day">
+              <span class="image">
+                <%if subprocess.state == "teminado"%>
+                  <i class="icon-check" style="color:green"></i>
+                <%else%>
+                  <i class="icon-circle-o-notch"></i>
+                <%end%>
+              </span>                
+              <span class="day-title"><%= subprocess.procedure.name %></span><br />
+              <span class="temp"><%= subprocess.standard.machine.name%></span>
+              <div class="day-icon">
+                <span class="icon-sun"></span>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </article>
+    </div>
+  </div>
+</div>
+
+

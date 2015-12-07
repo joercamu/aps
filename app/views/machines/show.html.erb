@@ -20,14 +20,12 @@
   		<th>Index</th>
   		<th>UM</th>
   		<th>Por Hora</th>
-  		<th>Desperdicio</th>
   	</tr>
   <%@machine.standards.each do |standard|%>
 	  <tr>
 	  	<th><%=link_to standard.index, standard%></th>
 	  	<th><%=standard.um%></th>
 	  	<th><%=standard.per_hour%></th>
-	  	<th><%=standard.waste*100%> %</th>
 	  </tr>
   <%end%>
 </table>

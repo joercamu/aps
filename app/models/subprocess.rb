@@ -22,9 +22,15 @@ class Subprocess < ActiveRecord::Base
           self.meter = self.order.scheduled_meters  * self.order.sheet_spaces
         when 5
           self.meter = self.order.scheduled_meters  * self.order.sheet_spaces
+        when 6
+          self.meter = self.order.scheduled_meters  * self.order.sheet_spaces
         when 7
           self.meter = self.order.scheduled_meters  * self.order.sheet_spaces
+        when 8
+          self.meter = self.order.scheduled_meters  * self.order.sheet_spaces
         when 9
+          self.meter = self.order.scheduled_meters  * self.order.sheet_spaces
+        when 11
           self.meter = self.order.scheduled_meters  * self.order.sheet_spaces
         else
           self.meter = self.order.scheduled_meters
@@ -62,7 +68,7 @@ class Subprocess < ActiveRecord::Base
       end 
       # convert date
       f = self.day.day.strftime("%F").to_s #DATE 
-      t = self.day.start_time.strftime("%T%:z").to_s #TIME INITIAL
+      t = self.day.init_time.strftime("%T%:z").to_s #TIME INITIAL
       dateTimeInitial = DateTime.parse("#{f} #{t}")
       count_minutes = 0
 
@@ -81,7 +87,7 @@ class Subprocess < ActiveRecord::Base
   aasm column: "state" do
     state :activo, initial:true
     state :programado
-    state :teminado
+    state :terminado
 
     event :approve do 
       transitions :from => :activo, :to => :programado

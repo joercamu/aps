@@ -22,7 +22,7 @@
   </thead>
 
   <tbody>
-    <% @subprocesses.order(:sequence).each do |subprocess| %>
+    <% @subprocesses.order(:sequence_process).each do |subprocess| %>
       <tr>
         <td><%= subprocess.id %></td>
         <td><%= link_to subprocess.order.order_number, subprocess.order%></td>
@@ -35,7 +35,7 @@
         <td><%= subprocess.day.day unless subprocess.day_id.nil? %></td>
         <td><%= subprocess.start_date.strftime("%F") if  subprocess.start_date%></td>
         <td><%= subprocess.end_date.strftime("%F") if subprocess.end_date%></td>
-        <td><%= subprocess.sequence %></td>
+        <td><%= subprocess.sequence_process %></td>
         <td><%= subprocess.meter %></td>
         
         <td><%= subprocess.state %></td>

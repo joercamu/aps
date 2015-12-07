@@ -33,7 +33,7 @@
 						<td><%=subprocess.order.outsourced_name%></td>
 						<td><%="#{subprocess.order.sheet_client}-#{subprocess.order.sheet_number}"%></td>
 						<td><%=subprocess.meter%> MTR</td>
-						<td><%=subprocess.minutes%>"</td>
+						<td><%=subprocess.minutes + subprocess.setup_time%>"</td>
 						<td><%="#{subprocess.order.sheet_film} #{subprocess.order.sheet_caliber}"%></td>
 						<td><%=subprocess.order.sheet_spaces%> Cab</td>
 						<td><%=subprocess.start_date.strftime("%F %I:%M%p")%></td>

@@ -79,6 +79,6 @@ class DaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def day_params
-      params.require(:day).permit(:machine_id, :day, :start_time,:shifts, :hours, :start_hour, :busy, :available)
+      params.require(:day).permit(:init_time, :machine_id, :day, :shifts, :hours, :busy, :available)
     end
 end

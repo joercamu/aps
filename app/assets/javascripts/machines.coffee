@@ -168,7 +168,7 @@ $ ->
       cancel:'.handle'
       stop:(event,ui)->
         clipboard.clear()
-        $('.ui-selected',this).each ->
+        $('.ui-selected:not(.ui-state-disabled)',this).each ->
           clipboard.add this
     .find( "li" )
       .addClass( "ui-corner-all" )

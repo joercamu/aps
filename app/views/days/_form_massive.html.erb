@@ -16,7 +16,7 @@
       <%= f.text_field :day, value:today, type:"hidden",required:"true" %>
       <%= f.number_field :shifts, placeholder:"Turnos",autocomplete:"off",required:"true" %>
       <%= f.number_field :hours, placeholder:"Horas por turno",autocomplete:"off",required:"true" %>
-      <%= f.time_field :start_time, placeholder:"Hora de inicio" %>
+      <%= f.time_field :init_time, placeholder:"Hora de inicio",required:"true" %>
       <%= f.submit "Guardar",class:"button expand tiny secondary",required:"true"%>
   </div>
 
