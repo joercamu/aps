@@ -2,6 +2,29 @@ var app = angular.module("apsApp", ["ngResource"])
 app.factory("apiKhronos",function(){
 	return "192.168.1.247";
 });
+app.controller('getOrdersController',['$scope','$resource','apiKhronos',function($scope,$resource,apiKhronos){
+	Orders = $resource("/orders/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+	OrdersKhronos = $resource("http://"+apiKhronos+"/api_khronos/index.php/orders/get",{id:"@id"},{update: {method: 'PUT'} });
+	$scope.orders = [];
+	$scope.getOrders = function(){
+		OrdersKhronos.query(function(response){
+			console.log(response);
+			$scope.orders = response;
+		});
+	};
+	$scope.createOrder = function(order){
+		console.log(order);
+		Orders.save(order,function(response){
+			$scope.orders = $scope.orders.filter(function(element){
+				return parseInt(element.order_number) != response.order_number
+			});
+			console.log(response);
+		},function(error){
+			console.log(error);
+			alert(error);
+		});
+	}
+}]);
 // quite $routeParams en 'OrdersController' y 'ngRoute' en dependencias
 app.controller('OrdersController',['$scope','$resource','$http',function($scope,$resource,$http){
 	$scope.errors = [];//array errors subprocesses
