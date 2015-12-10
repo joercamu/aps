@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#authenticate user
+gem 'cancancan', '~> 1.10'
 # calendar
 gem "simple_calendar", "~> 2.0"
 #logins and users

@@ -1,6 +1,7 @@
 class MachinesController < ApplicationController
   before_action :set_machine, only: [:show, :edit, :update, :destroy, :sorting, :todo]
-
+  load_and_authorize_resource
+  
   # GET /machines
   # GET /machines.json
   def index

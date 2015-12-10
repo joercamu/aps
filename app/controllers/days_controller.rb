@@ -1,6 +1,7 @@
 class DaysController < ApplicationController
   before_action :set_day, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
+  
   # GET /days
   # GET /days.json
   def index

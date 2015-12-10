@@ -1,6 +1,6 @@
 class StandardsController < ApplicationController
   before_action :set_standard, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /standards
   # GET /standards.json
   def index

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'orders#index'
+  root 'home#index'
 
   #route for create standard references one machine
   get 'standards/new/:ref' => 'standards#new', as: :new_standard_machine_ref

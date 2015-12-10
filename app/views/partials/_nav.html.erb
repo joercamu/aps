@@ -60,6 +60,7 @@
             <%= link_to current_user.email,"#"  %>
             <ul class="dropdown">
               <li><%=link_to "Editar mi cuenta", edit_user_registration_path, method:"GET"%></li>
+              <li><%=link_to current_user.role, "#"%></li>
             </ul>
           </li>
         <%end%>

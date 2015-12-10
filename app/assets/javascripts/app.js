@@ -6,8 +6,42 @@ app.controller('getOrdersController',['$scope','$resource','apiKhronos',function
 	Orders = $resource("/orders/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	OrdersKhronos = $resource("http://"+apiKhronos+"/api_khronos/index.php/orders/get",{id:"@id"},{update: {method: 'PUT'} });
 	$scope.orders = [];
+	var myspin = {
+      opts: {
+        lines: 13,
+        length: 28,
+        width: 14,
+        radius: 42,
+        scale: 1,
+        corners: 1,
+        color: '#000',
+        opacity: 0.25,
+        rotate: 42,
+        direction: 1,
+        speed: 1,
+        trail: 60,
+        fps: 20,
+        zIndex: 2e9,
+        className: 'spinner',
+        top: '50%',
+        left: '50%',
+        shadow: false,
+        hwaccel: false,
+        position: 'absolute'
+      },
+      create: function() {
+        var target;
+        target = document.getElementById('foo');
+        return this.spinner = new Spinner(this.opts).spin(target);
+      },
+      remove: function() {
+        return this.spinner.stop();
+      }
+    };
 	$scope.getOrders = function(){
+		myspin.create();
 		OrdersKhronos.query(function(response){
+			myspin.remove();
 			console.log(response);
 			$scope.orders = response;
 		});

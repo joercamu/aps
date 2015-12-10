@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204192516) do
+ActiveRecord::Schema.define(version: 20151209153510) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(version: 20151204192516) do
     t.string   "current_sign_in_ip",     limit: 255
     t.string   "last_sign_in_ip",        limit: 255
     t.string   "name",                   limit: 255
-    t.string   "rol",                    limit: 255
+    t.string   "role",                   limit: 255
     t.string   "state",                  limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false

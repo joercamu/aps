@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess,:calculate_meters,:change_state,:approve_order]
   before_action :set_subprocesses, only:[:show,:schedule]
   skip_before_action :verify_authenticity_token
-  before_action :authenticate_user!,except: [:index,:show]
+  load_and_authorize_resource
 
   # GET /orders
   # GET /orders.json
