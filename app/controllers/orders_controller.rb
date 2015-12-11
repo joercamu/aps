@@ -122,6 +122,8 @@ class OrdersController < ApplicationController
         @order.suspend! if @order.may_suspend?
       when "end"
         @order.end! if @order.may_end?  
+      when "activate"
+        @order.activate! if @order.may_activate?  
     end
     redirect_to @order 
   end

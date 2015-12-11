@@ -29,6 +29,11 @@
 					  	<%= link_to "Terminar", change_state_order_path(@order,'end'), class:"button"%>
 					  </li>
 				  	<%end%>
+				  	<%if @order.may_activate?%>
+					  <li>
+					  	<%= link_to "Activar", change_state_order_path(@order,'activate'), class:"button"%>
+					  </li>
+				  	<%end%>
 				</ul>
 			</div>
 		</div>

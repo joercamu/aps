@@ -94,10 +94,11 @@ class Order < ActiveRecord::Base
     state :terminado
 
     after_all_transitions :log_status_change
-
+    event :activate do
+      transitions :from => :rechazado, :to => :activo
+    end
     event :approve do
       transitions :from => :activo, :to => :aprobado
-      transitions :from => :rechazado, :to => :aprobado
     end
     event :schedule do
       transitions :from => :aprobado, :to => :programado
