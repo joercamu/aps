@@ -3,7 +3,7 @@
     <div class="weather">
       <header class="header">
         <h2>
-          Fecha ofrecida: <%# "#{@subprocesses.last.order.date_offer}" if @subprocesses.last.order.date_offer%>
+          Fecha ofrecida: <%=@order.date_offer%><%# "#{@subprocesses.last.order.date_offer}" if @subprocesses.last.order.date_offer%>
         </h2>
         <div class="weather-icon-shadow">
           <span class="icon-sun"></span>
@@ -17,7 +17,7 @@
           <% @subprocesses.order(:sequence_process).each do |subprocess| %>
             <li class="day">
               <span class="image">
-                <%if subprocess.state == "teminado"%>
+                <%if subprocess.state == "terminado"%>
                   <i class="icon-check" style="color:green"></i>
                 <%else%>
                   <i class="icon-circle-o-notch"></i>

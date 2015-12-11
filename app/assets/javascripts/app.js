@@ -354,7 +354,7 @@ app.controller("machinesController",['$scope','$resource',function($scope,$resou
 	$scope.endSubprocess = function(id_subprocess){
 		console.log(id_subprocess);
 		subprocess = {
-			state:"teminado"
+			state:"terminado"
 		};
 		if (confirm("Esta seguro de terminar el subproceso "+id_subprocess+" ?")) {
 			Subprocesses.update({id:id_subprocess},subprocess,function(data){
