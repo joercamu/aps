@@ -2,11 +2,8 @@ var app = angular.module("apsApp", ["ngResource"])
 app.factory("apiKhronos",function(){
 	return "192.168.1.247";
 });
-app.controller('getOrdersController',['$scope','$resource','apiKhronos',function($scope,$resource,apiKhronos){
-	Orders = $resource("/orders/:id.json",{id:"@id"},{update: {method: 'PUT'} });
-	OrdersKhronos = $resource("http://"+apiKhronos+"/api_khronos/index.php/orders/get",{id:"@id"},{update: {method: 'PUT'} });
-	$scope.orders = [];
-	var myspin = {
+app.factory("spin",function(){
+	return myspin = {
       opts: {
         lines: 13,
         length: 28,
@@ -38,22 +35,30 @@ app.controller('getOrdersController',['$scope','$resource','apiKhronos',function
         return this.spinner.stop();
       }
     };
+});
+app.controller('getOrdersController',['$scope','$resource','apiKhronos','spin',function($scope,$resource,apiKhronos,spin){
+	Orders = $resource("/orders/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+	OrdersKhronos = $resource("http://"+apiKhronos+"/api_khronos/index.php/orders/get",{id:"@id"},{update: {method: 'PUT'} });
+	$scope.orders = [];
 	$scope.getOrders = function(){
-		myspin.create();
+		spin.create();
 		OrdersKhronos.query(function(response){
-			myspin.remove();
+			spin.remove();
 			console.log(response);
 			$scope.orders = response;
 		});
 	};
 	$scope.createOrder = function(order){
+		spin.create();
 		console.log(order);
 		Orders.save(order,function(response){
+			spin.remove();
 			$scope.orders = $scope.orders.filter(function(element){
 				return parseInt(element.order_number) != response.order_number
 			});
 			console.log(response);
 		},function(error){
+			spin.remove();
 			console.log(error);
 			alert(error);
 		});
@@ -308,16 +313,20 @@ app.controller('OrdersController',['$scope','$resource','$http',function($scope,
 	}
 	
 }]);
-app.controller("leftoversController",['$scope','$resource','apiKhronos',function($scope,$resource,apiKhronos){
+app.controller("leftoversController",['$scope','$resource','apiKhronos','spin',function($scope,$resource,apiKhronos,spin){
 	$scope.leftover = {};
 	infoLeftovers = $resource('http://'+apiKhronos+'/api_khronos/index.php/orders/get_orders_sheet/:id',{id:"@id"});
 	$scope.get = function(){
+		spin.create();
 		console.log("Consultando...");
 		$scope.leftover = infoLeftovers.get({id:$scope.leftover.order_origin},function(){
 			if (typeof $scope.leftover.order_origin != "undefined"){
 				$('#leftover_order_origin').attr('readonly',true);
+				spin.remove();
 				$('#leftover_quantity').focus();
+				
 			}else{
+				spin.remove();
 				alert("Parece que hay un error, llama al admin! :)");
 			}
 				
@@ -325,11 +334,30 @@ app.controller("leftoversController",['$scope','$resource','apiKhronos',function
 	};
 			
 }]);
-app.controller("machinesController",['$scope','$resource',function($scope,$resource){
+app.controller("machinesController",['$scope','$resource','spin',function($scope,$resource,spin){
 	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	// Days = $resource("/days/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+	$scope.getSubprocesses = function () {
+		$scope.subprocesses = Subprocesses.query(function(){
+			$scope.subprocesses = $scope.subprocesses.filter(function(element){
+				return element.machine_id == parseInt($('#id_machine').val()) && element.state == "programado";
+			});
+		});
+	};
 
-	$scope.saveChanges = function(){
+	$scope.saveQuantityFinished = function (subprocess){
+		spin.create();//show loading....
+		Subprocesses.update({id:subprocess.id},subprocess,function(response){
+						console.log(response);
+						subprocess.sw = true;
+						spin.remove();//hide loading....
+					},function(error){
+						alert(error.statusText);
+						spin.remove();//hide loading....
+					});
+	};
+	$scope.saveChanges = function(){//function of "sorting" 2 clicks
+	
 		// var arrs = $('#sortable12').sortable('toArray');
 		// console.log(arrs.length);
 		$('.sortable:not(#clipboard)').each(function(){//cada dia
@@ -359,12 +387,13 @@ app.controller("machinesController",['$scope','$resource',function($scope,$resou
 		if (confirm("Esta seguro de terminar el subproceso "+id_subprocess+" ?")) {
 			Subprocesses.update({id:id_subprocess},subprocess,function(data){
 				alert("Terminado correctamente!");
-				$('#subprocess'+id_subprocess).fadeOut();
+				$scope.getSubprocesses();
 			},function(error){
 				alert(error);
 			});
 		};
 
 	};
+	$scope.getSubprocesses();
 }]);
 		

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :modifications
   devise_for :users
   resources :leftovers
   resources :days
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :orders do
     resources :order_comments
+    resources :modifications
     # get 'change_state/:action' => 'orders#change_state', as: :change_state_order
 
   end
@@ -57,6 +59,8 @@ Rails.application.routes.draw do
   #route 
   get 'schedule_days/:machine_id' => 'days#schedule', as: :schedule_days
 
+  put 'modifications/:id/approve'=> 'modifications#m_approve', as: :approve_modification
+  put 'modifications/:id/refuse'=> 'modifications#m_refuse', as: :refuse_modification
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

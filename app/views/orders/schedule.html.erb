@@ -32,7 +32,13 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 		</div>
 <!-- modules -->
 		<ul class="accordion" data-accordion>
-			<li class="accordion-navigation active">
+			<li class="accordion-navigation">
+				<a href="#space_modifications">Modificaciones</a>
+				<div id="space_modifications" class="content">
+					<%= render 'modifications/list'%>
+				</div>
+			</li>
+			<li class="accordion-navigation">
 				<a href="#space_comments">Observaciones</a>
 				<div id="space_comments"class="content">
 					<%=render 'order_comments/list'%>

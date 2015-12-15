@@ -31,7 +31,7 @@ class LeftoversController < ApplicationController
   # POST /leftovers
   # POST /leftovers.json
   def create
-    @leftover = Leftover.new(leftover_params)
+    @leftover = current_user.leftovers.new(leftover_params)
 
     respond_to do |format|
       if @leftover.save

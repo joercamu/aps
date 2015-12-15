@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @modification.order %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @modification.priority %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @modification.type %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @modification.body %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @modification.user %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @modification.state %>
+</p>
+
+<%= link_to 'Edit', edit_modification_path(@modification) %> |
+<%= link_to 'Back', modifications_path %>

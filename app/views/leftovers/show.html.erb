@@ -47,6 +47,7 @@
       <th>Ficha composicion:</th>
       <th>Lugar de origen:</th>
       <th>Estado:</th>
+      <th>Usuario:</th>
     </tr>
   </thead>
   <tbody>
@@ -72,6 +73,9 @@
       </td>
       <td>        
         <%= @leftover.state %>
+      </td>
+      <td>        
+        <%= @leftover.user.email %>
       </td>
     </tr>
   </tbody>

@@ -31,9 +31,9 @@
                       <li class="has-dropdown">
                         <%= link_to machine.name, machine %>
                         <ul class="dropdown">
-                          <li><%= link_to "ORDENAR", sort_subprocess_path(machine), target:"_self"%></li>
-                          <li><%= link_to "QUE HACER",todo_subprocess_path(machine),target:"_self"%></li>
-                          <li><%= link_to "HORARIOS",schedule_days_path(machine),target:"_self"%></li>
+                          <li><%= link_to " ORDENAR", sort_subprocess_path(machine), target:"_self",class:"icon-sort"%></li>
+                          <li><%= link_to " QUE HACER",todo_subprocess_path(machine),target:"_self",class:"icon-list-alt"%></li>
+                          <li><%= link_to " HORARIOS",schedule_days_path(machine),target:"_self",class:"icon-calendar"%></li>
                         </ul>
                       </li>
                       <% end%>
@@ -46,6 +46,7 @@
             <li> <%= link_to "SOBRANTES", leftovers_path %> </li>
             <li> <%= link_to "PROCESOS", procedures_path %> </li>
             <li> <%= link_to "RUTAS", routes_path %> </li>
+            <li> <%= link_to "MODIFICACIONES", modifications_path %> </li>
           </ul>
         </li>
       </ul>

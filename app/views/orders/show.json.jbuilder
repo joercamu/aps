@@ -18,5 +18,6 @@ json.leftovers @order.has_leftovers do |leftover|
 end
 json.comments @order.order_comments do |comment|
 	json.extract! comment, :id, :body, :created_at
-	json.user comment.user.email
+	json.username comment.user.email.split('@').first
+	json.user comment.user
 end

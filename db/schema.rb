@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209153510) do
+ActiveRecord::Schema.define(version: 20151215160124) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -66,7 +66,10 @@ ActiveRecord::Schema.define(version: 20151209153510) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "sheet_code",         limit: 255
+    t.integer  "user_id",            limit: 4
   end
+
+  add_index "leftovers", ["user_id"], name: "index_leftovers_on_user_id", using: :btree
 
   create_table "machines", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -81,6 +84,20 @@ ActiveRecord::Schema.define(version: 20151209153510) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "modifications", force: :cascade do |t|
+    t.integer  "order_id",          limit: 4
+    t.string   "priority",          limit: 255
+    t.string   "modification_type", limit: 255
+    t.text     "body",              limit: 65535
+    t.integer  "user_id",           limit: 4
+    t.string   "state",             limit: 255,   default: "activo"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
+
+  add_index "modifications", ["order_id"], name: "index_modifications_on_order_id", using: :btree
+  add_index "modifications", ["user_id"], name: "index_modifications_on_user_id", using: :btree
 
   create_table "order_comments", force: :cascade do |t|
     t.integer  "order_id",   limit: 4
@@ -133,9 +150,11 @@ ActiveRecord::Schema.define(version: 20151209153510) do
     t.string   "sheet_roller",              limit: 255
     t.float    "sheet_width_lap",           limit: 24
     t.string   "presses",                   limit: 255
+    t.integer  "user_id",                   limit: 4
   end
 
   add_index "orders", ["route_id"], name: "index_orders_on_route_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "procedures", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -163,20 +182,21 @@ ActiveRecord::Schema.define(version: 20151209153510) do
   add_index "standards", ["machine_id"], name: "index_standards_on_machine_id", using: :btree
 
   create_table "subprocesses", force: :cascade do |t|
-    t.integer  "order_id",         limit: 4
-    t.integer  "procedure_id",     limit: 4
-    t.integer  "standard_id",      limit: 4
-    t.integer  "minutes",          limit: 4
+    t.integer  "order_id",          limit: 4
+    t.integer  "procedure_id",      limit: 4
+    t.integer  "standard_id",       limit: 4
+    t.integer  "minutes",           limit: 4
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer  "meter",            limit: 4
-    t.integer  "sequence",         limit: 4
-    t.string   "state",            limit: 255, default: "activo"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.integer  "day_id",           limit: 4
-    t.integer  "setup_time",       limit: 4,   default: 0
-    t.integer  "sequence_process", limit: 4,   default: 0
+    t.integer  "meter",             limit: 4
+    t.integer  "sequence",          limit: 4
+    t.string   "state",             limit: 255, default: "activo"
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.integer  "day_id",            limit: 4
+    t.integer  "setup_time",        limit: 4,   default: 0
+    t.integer  "sequence_process",  limit: 4,   default: 0
+    t.float    "quantity_finished", limit: 24,  default: 0.0
   end
 
   add_index "subprocesses", ["day_id"], name: "index_subprocesses_on_day_id", using: :btree
@@ -210,9 +230,13 @@ ActiveRecord::Schema.define(version: 20151209153510) do
   add_foreign_key "has_leftovers", "orders"
   add_foreign_key "has_procedures", "machines"
   add_foreign_key "has_procedures", "procedures"
+  add_foreign_key "leftovers", "users"
+  add_foreign_key "modifications", "orders"
+  add_foreign_key "modifications", "users"
   add_foreign_key "order_comments", "orders"
   add_foreign_key "order_comments", "users"
   add_foreign_key "orders", "routes"
+  add_foreign_key "orders", "users"
   add_foreign_key "standards", "machines"
   add_foreign_key "subprocesses", "days"
   add_foreign_key "subprocesses", "orders"

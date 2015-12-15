@@ -12,10 +12,15 @@ class Ability
         can :read, :all
         can [:create], [Standard,Day]
         can :sorting, Machine
-        can :schedule, Day    
+        can :schedule, Day
+        can [:m_approve,:m_refuse], [Modification]    
+    elsif user.role == "vendedor"
+        can :read, :all
+        can [:create,:update], [Modification]
     else
         can :todo, Machine
         can :read, :all
+        cannot :read, Modification
     end
     #
     # The first argument to `can` is the action you are giving the user

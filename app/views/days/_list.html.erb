@@ -10,6 +10,7 @@
       <th>" Minutos totales</th>
       <th>" Ocupados</th>
       <th>" Disponibles</th>
+      <th>Editar</th>
     </tr>
   </thead>
 
@@ -25,6 +26,7 @@
         <td><%= day.minutes %></td>
         <td><%= day.busy %></td>
         <td><%= day.available %></td>
+        <td><%= link_to '', edit_day_path(day), class:"icon-pencil" %></td>
       </tr>
     <% end %>
   </tbody>

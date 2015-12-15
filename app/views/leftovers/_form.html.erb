@@ -1,5 +1,6 @@
 <div ng-app="apsApp">
-  <div ng-controller="leftoversController">    
+  <div ng-controller="leftoversController">
+  <div id="foo"></div>    
     <%= form_for(@leftover) do |f| %>
       <% if @leftover.errors.any? %>
         <div id="error_explanation">

@@ -2,7 +2,13 @@
 	<div class="comment panel">
 		<section class="top">
 			<h6 class="byline">
-				<a href="#"><i class="icon"></i>{{comment.user}}</a> 
+				<div ng-if="comment.user.id == 1">
+					<a href="#"><i class="icon"></i>Sistema</a> 	
+				</div>
+				<div ng-if="comment.user.id != 1">
+					<a href="#"><i class="icon"></i>{{comment.username}}</a>
+				</div>
+				
 				<small> 
 					<span class="data">
 						{{comment.created_at | date :"medium"}}

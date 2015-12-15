@@ -1,0 +1,29 @@
+<%= form_for([@order,@modification]) do |f| %>
+  <% if @modification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@modification.errors.count, "error") %> prohibited this modification from being saved:</h2>
+
+      <ul>
+      <% @modification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :priority, "Prioridad"%>
+    <%= f.select :priority, options_for_select(['baja','media','alta']) %>
+  </div>
+  <div class="field">
+    <%= f.label :modification_type, "Tipo"%>
+    <%= f.select :modification_type,options_for_select(['Anulacion','Modificacion']) %>
+  </div>
+  <br>
+  <div class="field">
+    <%= f.text_area :body, placeholder:"Describa aqui la modificacion a realizar" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Guardar Modificacion",class:"button alert expand" %>
+  </div>
+<% end %>

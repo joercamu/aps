@@ -21,6 +21,8 @@ class OrdersController < ApplicationController
     @subprocesses = @order.subprocesses
     @has_leftovers = @order.has_leftovers
     @comment = OrderComment.new
+    @modification = Modification.new
+    @modifications = @order.modifications
   end
 
   # GET /orders/new
@@ -35,7 +37,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = current_user.orders.new(order_params)
 
     respond_to do |format|
       if @order.save
@@ -77,6 +79,7 @@ class OrdersController < ApplicationController
   #GET /orders/:id/schedule
   def schedule
     # @meters = @order.calculate_meters
+    @modifications = @order.modifications
   end
 
   def calculate_meters

@@ -5,10 +5,10 @@
 			<strong style="color:#008CBA"><%=@machine.name%></strong>
 		</p>
 		<p id="dateTimeNow"></p>
+		<input id="id_machine" value="<%=@machine.id%>" type="hidden">
 		<table>
 			<tr>
 				<th>ID</th>
-				<th>#</th>
 				<th>PEDIDO</th>
 				<th>TIPO</th>
 				<th>CLIENTE</th>
@@ -16,33 +16,47 @@
 				<th>METROS</th>
 				<th>MINUTES</th>
 				<th>PELICULA</th>
+				<th>RODILLO</th>
 				<th>CABIDAS</th>
 				<th>FECHA I</th>
 				<th>FECHA F</th>
 				<th>ESTADO</th>
+				<th>PARCIAL</th>
 				<th>TERMINAR</th>
 			</tr>
-			<%@count = 0%>
-			<%@machine.days.order(:day).each do |day|%>
-				<%day.subprocesses.scheduled.order(:sequence).each do |subprocess|%>
-					<tr id="subprocess<%=subprocess.id%>">
-						<td><%=link_to subprocess.id, subprocess%></td>
-						<td><%= @count += 1 %></td>
-						<td>K<%=subprocess.order.order_number%></td>
-						<td><%=subprocess.order.order_type%></td>
-						<td><%=subprocess.order.outsourced_name%></td>
-						<td><%="#{subprocess.order.sheet_client}-#{subprocess.order.sheet_number}"%></td>
-						<td><%=subprocess.meter%> MTR</td>
-						<td><%=subprocess.minutes + subprocess.setup_time%>"</td>
-						<td><%="#{subprocess.order.sheet_film} #{subprocess.order.sheet_caliber}"%></td>
-						<td><%=subprocess.order.sheet_spaces%> Cab</td>
-						<td><%=subprocess.start_date.strftime("%F %I:%M%p")%></td>
-						<td><%=subprocess.end_date.strftime("%F %I:%M%p")%></td>
-						<td><%=subprocess.state%></td>
-						<td><button ng-click="endSubprocess(<%=subprocess.id%>)" class="button success tiny">TERMINAR</button></td>
-					</tr>
-				<%end%>
-			<%end%>
+			<tr ng-repeat="subprocess in subprocesses">
+				<td>{{ subprocess.id }}</td>
+				<td>{{ subprocess.order.order_number }}</td>
+				<td>{{ subprocess.order.order_type }}</td>
+				<td>{{ subprocess.order.outsourced_name }}</td>
+				<td>{{ subprocess.order.sheet_client }}-{{ subprocess.order.sheet_number }}</td>
+
+				<td>{{ subprocess.meter }}</td>
+				<td>{{ subprocess.minutes }}"</td>
+
+				<td>{{ subprocess.order.sheet_film }}-{{subprocess.order.sheet_caliber}}</td>
+				<td>{{ subprocess.order.sheet_roller }}</td>
+				<td>{{ subprocess.order.sheet_spaces }} Cab</td>
+
+				
+
+				<td>{{ subprocess.start_date | date :'short'}}</td>
+				<td>{{ subprocess.end_date | date :'short'}}</td>
+				<td>{{ subprocess.state }}</td>
+				<td>
+					<div class="row collapse postfix-round" ng-init="subprocess.sw = true">
+				        <div class="small-9 columns">
+				          <input ng-model="subprocess.quantity_finished" ng-readonly="subprocess.sw" ng-click="subprocess.sw = false" type="number">
+				        </div>
+				        <div class="small-3 columns">
+				          <button ng-click="saveQuantityFinished(subprocess)" class="button postfix"><i class="icon-floppy-o"></i></button>
+				        </div>
+				    </div>
+			  </td>
+       
+				<td><button ng-click="endSubprocess(subprocess.id)" class="button success tiny">TERMINAR</button></td>
+				
+			</tr>
 		</table>
 	</div>
 </div>

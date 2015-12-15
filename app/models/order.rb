@@ -1,10 +1,12 @@
 class Order < ActiveRecord::Base
   include AASM
   belongs_to :route
+  belongs_to :user
   has_many :subprocesses
   has_many :has_leftovers
   has_many :leftovers, through: :has_leftovers
   has_many :order_comments
+  has_many :modifications
 
   before_create :set_repeat
   before_save :set_date_offer

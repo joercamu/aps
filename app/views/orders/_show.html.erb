@@ -157,13 +157,17 @@
       <strong>Cabidas:</strong><br>
       <%= @order.sheet_spaces %>
     </td>
-    <td colspan="7">
+    <td colspan="6">
       <strong>Ruta de proceso:</strong><br>
       <%= @order.sheet_route.gsub(',','<br>').html_safe%>
     </td>
     <td colspan="2">
       <strong>Fecha Creacion</strong><br>
       <%=@order.created_at.strftime("%F %I:%M%p")%>
+    </td>
+     <td>
+      <strong>Por: </strong><br>
+      <%=@order.user.email.split('@').first%>
     </td>
   </tr>
 </table>

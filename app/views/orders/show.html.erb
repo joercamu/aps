@@ -41,6 +41,13 @@
 		<%=render 'subprocesses/tracking'%>
 		<%=render 'has_leftovers/list'%>
 		<%=render 'subprocesses/list'%>
+
+		<p class="subtitle" ng-init="show_form_modification = false">Modificaciones</p>
+		<button ng-click="show_form_modification = !show_form_modification" class="button">Nueva modificación</button>
+		<div ng-show="show_form_modification">
+			<%= render 'modifications/form' if  user_signed_in? %>	
+		</div>
+		<%= render 'modifications/list'%>
 		<p class="subtitle">Observaciones</p>
 		<%= render 'order_comments/form' if  user_signed_in? %>
 		<%= render 'order_comments/list'%>

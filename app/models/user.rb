@@ -4,4 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :order_comments
+  has_many :leftovers
+  has_many :orders
+  has_many :modifications
+  def name_email
+  	self.email.split('@').first
+  end
 end

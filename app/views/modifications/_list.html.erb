@@ -1,0 +1,67 @@
+
+<table id="table_modifications" class="scroll">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Pedido</th>
+      <th>Prioridad</th>
+      <th>Tipo</th>
+      <th>Solicitud</th>
+      <th>Usuario</th>
+      <th>Estado</th>
+      <th>Fecha</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @modifications.each do |modification| %>
+      <tr>
+        <td><%= modification.id %></td>
+        <td>K<%= modification.order.order_number %></td>
+        <td><%= modification.priority %></td>
+        <td><%= modification.modification_type %></td>
+        <td><%= modification.body %></td>
+        <td><%= modification.user.name_email %></td>
+        <td><%= modification.state %></td>
+        <td><%= modification.created_at.strftime("%F %I:%M%p") %></td>
+        <td><%= link_to '', edit_modification_path(modification), class:"icon-pencil" %></td>
+        <td>
+          <%= link_to '', modification, method: :delete, data: { confirm: 'Are you sure?' } , class:"icon-trash-o"%>
+        </td>
+          <td>
+            <ul>
+              <% if modification.may_approve?%>
+                <li><%= link_to "Aprobar", approve_modification_path(modification), method:"PUT" %></li>
+              <% end%>
+              <% if modification.may_refuse?%>
+                <li><%= link_to "Rechazar", refuse_modification_path(modification), method:"PUT" %></li>
+              <% end%>
+            </ul>
+          </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('#table_modifications').DataTable({
+        "language": {
+          "lengthMenu":     "Mostrar _MENU_ modificaciones",
+          "info": "Mostrando _START_ hasta _END_ de _TOTAL_ modificaciones",
+          "search":         "Buscar:",
+          "zeroRecords":    "Modificacion no encontrada",
+          "loadingRecords": "Cargando...",
+        "processing":     "Procesando...",
+           "paginate": {
+            "first":      "Primero",
+            "last":       "Ultimo",
+            "next":       "Siguiente",
+            "previous":   "Anterior"
+        }
+        }
+      });
+  } );
+</script>

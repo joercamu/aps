@@ -93,6 +93,9 @@ class Subprocess < ActiveRecord::Base
     end
     event :end do 
       transitions :from => :programado, :to => :terminado
+      before do
+        self.order.start! if self.order.may_start?
+      end
     end
   end
 end
