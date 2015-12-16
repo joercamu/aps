@@ -17,6 +17,9 @@ class Ability
     elsif user.role == "vendedor"
         can :read, :all
         can [:create,:update], [Modification]
+    elsif user.role == "analistapedidos"
+        can :read, :all
+        can [:create,:get], [Order]
     else
         can :todo, Machine
         can :read, :all

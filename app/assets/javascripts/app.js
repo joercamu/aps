@@ -38,14 +38,29 @@ app.factory("spin",function(){
 });
 app.controller('getOrdersController',['$scope','$resource','apiKhronos','spin',function($scope,$resource,apiKhronos,spin){
 	Orders = $resource("/orders/:id.json",{id:"@id"},{update: {method: 'PUT'} });
-	OrdersKhronos = $resource("http://"+apiKhronos+"/api_khronos/index.php/orders/get",{id:"@id"},{update: {method: 'PUT'} });
+	OrdersKhronos = $resource("http://"+apiKhronos+"/api_khronos/index.php/orders/get/:id",{id:"@id"},{update: {method: 'PUT'} });
 	$scope.orders = [];
+	$scope.order_number;
 	$scope.getOrders = function(){
 		spin.create();
 		OrdersKhronos.query(function(response){
 			spin.remove();
 			console.log(response);
 			$scope.orders = response;
+			if ($scope.orders.length == 0){
+				alert("No se encontraron resultados");
+			}
+		});
+	};
+	$scope.getOrder = function(){
+		spin.create();
+		OrdersKhronos.query({id:$scope.order_number},function(response){
+			spin.remove();
+			console.log(response);
+			$scope.orders = response;
+			if ($scope.orders.length == 0){
+				alert("No se encontraron resultados");
+			}
 		});
 	};
 	$scope.createOrder = function(order){
