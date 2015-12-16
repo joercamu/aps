@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215160124) do
+ActiveRecord::Schema.define(version: 20151216143410) do
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20151215160124) do
     t.integer  "repeat",                    limit: 4
     t.integer  "scheduled_meters",          limit: 4
     t.date     "date_offer"
-    t.integer  "outsourced_id",             limit: 4
+    t.integer  "outsourced_id",             limit: 8
     t.string   "outsourced_name",           limit: 255
     t.integer  "outsourced_tolerance_down", limit: 4
     t.integer  "outsourced_tolerance_up",   limit: 4
