@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216143410) do
+ActiveRecord::Schema.define(version: 20151217132928) do
+
+  create_table "app_settings", force: :cascade do |t|
+    t.integer  "blocked_days", limit: 4, default: 3
+    t.integer  "days_back",    limit: 4, default: 1
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
 
   create_table "days", force: :cascade do |t|
     t.integer  "machine_id", limit: 4

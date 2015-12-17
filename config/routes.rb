@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :app_settings
   resources :modifications
   devise_for :users
   resources :leftovers

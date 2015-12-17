@@ -1,0 +1,25 @@
+<%= form_for(@app_setting) do |f| %>
+  <% if @app_setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@app_setting.errors.count, "error") %> prohibited this app_setting from being saved:</h2>
+
+      <ul>
+      <% @app_setting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :blocked_days,"Dias bloqueados" %><br>
+    <%= f.number_field :blocked_days %>
+  </div>
+  <div class="field">
+    <%= f.label :days_back, "Dias hacia atras (1 por defecto)" %><br>
+    <%= f.number_field :days_back %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

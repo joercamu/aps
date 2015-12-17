@@ -60,8 +60,9 @@
           <li class="has-dropdown">
             <%= link_to current_user.email,"#", class:"icon-user"  %>
             <ul class="dropdown">
-              <li><%=link_to "Editar mi cuenta", edit_user_registration_path, method:"GET"%></li>
-              <li><%=link_to current_user.role, "#", class:"icon-ios-body"%></li>
+              <li><%=link_to "Editar mi cuenta", edit_user_registration_path, method:"GET" %></li>
+              <li><%=link_to current_user.role, "#", class:"icon-ios-body" %></li>
+              <li><%=link_to "Configuraciones", edit_app_setting_path(1) %></li>
             </ul>
           </li>
         <%end%>

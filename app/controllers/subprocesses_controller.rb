@@ -6,7 +6,7 @@ class SubprocessesController < ApplicationController
   # GET /subprocesses
   # GET /subprocesses.json
   def index
-    @subprocesses = Subprocess.all.order(:order_id)
+    @subprocesses = Subprocess.all.order(:start_date)
   end
 
   # GET /subprocesses/1

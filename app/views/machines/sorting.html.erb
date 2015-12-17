@@ -28,13 +28,14 @@
 						<th>CABIDAS</th>
 						<th>FECHA I</th>
 						<th>FECHA F</th>
+						<th>FECHA PRO ANT</th>
 					</tr>
 				</table>
 			</div>
 
 			<div class="days">
-				<%days_disabled = 1%>
-				<%@machine.days.order(:day).where('day > ?',DateTime.now-1).each_with_index do |day,index|%>
+				<%days_disabled = AppSetting.first.blocked_days%>
+				<%@machine.days.order(:day).where('day > ?',DateTime.now-AppSetting.first.days_back).each_with_index do |day,index|%>
 					<ul id="sortable<%=day.id%>" class="sortable connectedSortable" minutes="<%=day.minutes%>" minutes-available="" minutes-occupied="" day="<%=day.day%>" start-time="<%=day.init_time%>" id-day="<%=day.id%>">
 						<div class="row">
 							<div class="small-4 columns">
@@ -53,13 +54,13 @@
 						</div>
 						<%day.subprocesses.order(:sequence).each do |subprocess|%>
 							<!-- ui-state-disabled #for bloqueados -->
-					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes%>" class="ui-state-default <%="ui-state-disabled" if index < days_disabled%>">
+					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes%>" class="ui-state-default <%="ui-state-disabled" if index < days_disabled%>" style="<%="border-left: 5px solid #43AC6A;" if subprocess.state == "terminado"%>">
 					  			<table class="table-record-subprocess">
 				  					<tr>
 				  						<td><%=subprocess.sequence%></td>
 				  						<td>K<%=subprocess.order.order_number%></td>
 				  						<td><%=subprocess.order.order_type%></td>
-				  						<td><%=subprocess.order.outsourced_name%></td>
+				  						<td><%=subprocess.order.outsourced_name[0..15]%></td>
 				  						<td><%="#{subprocess.order.sheet_client}-#{subprocess.order.sheet_number}"%></td>
 				  						<td><%=subprocess.meter%> MTR</td>
 				  						<td><%=subprocess.minutes + subprocess.setup_time%> "</td>
@@ -67,6 +68,13 @@
 				  						<td><%=subprocess.order.sheet_spaces%> Cab</td>
 				  						<td><%=subprocess.start_date.strftime("%F %I:%M%p")%></td>
 				  						<td><%=subprocess.end_date.strftime("%F %I:%M%p")%></td>
+
+				  						<td style="color:#f04124">
+				  							<!-- validar si tiene un proceso anterior -->
+				  							<%if subprocess.order.subprocesses.find_by(sequence_process:subprocess.sequence_process-1)%>
+				  								<%=subprocess.order.subprocesses.find_by(sequence_process:subprocess.sequence_process-1).end_date.strftime("%F %I:%M%p") if subprocess.order.subprocesses.find_by(sequence_process:subprocess.sequence_process-1).end_date%>
+				  							<%end%>
+				  						</td>
 				  					</tr>
 			  					</table>
 					  		</li>

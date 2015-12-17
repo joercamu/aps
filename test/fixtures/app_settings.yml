@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  blocked_days: 1
+  days_back: 1
+
+two:
+  blocked_days: 1
+  days_back: 1

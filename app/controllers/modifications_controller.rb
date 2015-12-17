@@ -25,6 +25,7 @@ class ModificationsController < ApplicationController
 
   # GET /modifications/1/edit
   def edit
+    redirect_to @modification.order, notice: 'No se puede editar, debido a que ha cambiado de estado.' if @modification.state != "activo" 
   end
 
   # POST /modifications
@@ -61,10 +62,14 @@ class ModificationsController < ApplicationController
   # DELETE /modifications/1
   # DELETE /modifications/1.json
   def destroy
-    @modification.destroy
-    respond_to do |format|
-      format.html { redirect_to modifications_url, notice: 'Modification was successfully destroyed.' }
-      format.json { head :no_content }
+    if @modification.state != "activo" 
+      redirect_to @modification.order, notice: 'No se puede eliminar, debido a que ha cambiado de estado.' 
+    else
+      @modification.destroy
+      respond_to do |format|
+        format.html { redirect_to modifications_url, notice: 'Modification was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
   def m_approve

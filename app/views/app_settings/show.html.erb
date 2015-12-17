@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Blocked days:</strong>
+  <%= @app_setting.blocked_days %>
+</p>
+
+<p>
+  <strong>Days back:</strong>
+  <%= @app_setting.days_back %>
+</p>
+
+<%= link_to 'Edit', edit_app_setting_path(@app_setting) %> |
+<%= link_to 'Back', app_settings_path %>

@@ -10,16 +10,21 @@ class Ability
     #     can :manage, :all
     elsif user.role == "programador"
         can :read, :all
+        can :change_state, Order
         can [:create,:update], [Standard,Day]
         can :sorting, Machine
         can :schedule, Day
-        can [:m_approve,:m_refuse], [Modification]    
+        can [:m_approve,:m_refuse], [Modification]   
+        can :update, AppSetting
     elsif user.role == "vendedor"
         can :read, :all
         can [:create,:update], [Modification]
     elsif user.role == "analistapedidos"
         can :read, :all
         can [:create,:get], [Order]
+    elsif user.role == "supervisor"
+        can :read, :all
+        can :update, Subprocess
     else
         can :todo, Machine
         can :read, :all
