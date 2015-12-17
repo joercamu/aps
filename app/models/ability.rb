@@ -15,7 +15,7 @@ class Ability
         can :sorting, Machine
         can :schedule, Day
         can [:m_approve,:m_refuse], [Modification]   
-        can :update, AppSetting
+        can [:update], [AppSetting,Subprocess]
         can :by_sheet, Leftover
 
     elsif user.role == "vendedor"
