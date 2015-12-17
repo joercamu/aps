@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :blocked_days,"Dias bloqueados" %><br>
     <%= f.number_field :blocked_days %>
@@ -20,6 +19,6 @@
     <%= f.number_field :days_back %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Guardar cambios", class:"button alert expand" %>
   </div>
 <% end %>

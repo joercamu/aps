@@ -34,7 +34,7 @@ class DaysController < ApplicationController
 
     respond_to do |format|
       if @day.save
-        format.html { redirect_to schedule_days_path(@day.machine_id), notice: 'Day was successfully created.' }
+        format.html { redirect_to schedule_days_path(@day.machine_id,start_date:@day.day) ,notice: 'Day was successfully created.' }
         format.json { render :show, status: :created, location: @day }
       else
         format.html { render :new }
