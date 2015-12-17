@@ -16,6 +16,8 @@ class Ability
         can :schedule, Day
         can [:m_approve,:m_refuse], [Modification]   
         can :update, AppSetting
+        can :by_sheet, Leftover
+
     elsif user.role == "vendedor"
         can :read, :all
         can [:create,:update], [Modification]
