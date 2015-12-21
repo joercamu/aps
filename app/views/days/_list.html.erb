@@ -11,6 +11,7 @@
       <th>" Ocupados</th>
       <th>" Disponibles</th>
       <th>Editar</th>
+      <th>Eliminar</th>
     </tr>
   </thead>
 
@@ -27,6 +28,7 @@
         <td><%= day.busy %></td>
         <td><%= day.available %></td>
         <td><%= link_to '', edit_day_path(day), class:"icon-pencil" %></td>
+        <td><%= link_to '', day, method: :delete, data: { confirm: 'Esta seguro?' } , class:"icon-trash-o"%></td>
       </tr>
     <% end %>
   </tbody>

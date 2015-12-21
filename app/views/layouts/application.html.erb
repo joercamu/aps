@@ -26,9 +26,22 @@
     <%= render 'partials/nav'%>
     <div id="contentMain" class="row content-main" >
       <div class="small-12 columns">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <!-- alerts -->
+        <%if notice %>
+          <div data-alert class="alert-box">
+            <%= notice %>
+            <a href="#" class="close">&times;</a>
+          </div>
+        <%end%>
+        <%if alert %>
+          <div data-alert class="alert-box alert">
+            <%= alert %>
+            <a href="#" class="close">&times;</a>
+          </div>
+        <%end%>
+        <!-- loading -->
         <div id="foo"></div>
+
         <%= yield %>    
       </div>
       

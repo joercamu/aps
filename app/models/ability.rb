@@ -10,8 +10,7 @@ class Ability
     #     can :manage, :all
     elsif user.role == "programador"
         can :read, :all
-        can :manage, Order
-        can [:create,:update], [Standard,Day]
+        can [:manage], [Standard,Day,Order]
         can :sorting, Machine
         can :schedule, Day
         can [:m_approve,:m_refuse], [Modification]   

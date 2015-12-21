@@ -34,7 +34,7 @@ class DaysController < ApplicationController
 
     respond_to do |format|
       if @day.save
-        format.html { redirect_to schedule_days_path(@day.machine_id,start_date:@day.day) ,notice: 'Day was successfully created.' }
+        format.html { redirect_to schedule_days_path(@day.machine_id,start_date:@day.day) ,notice: 'Dia habilitado correctamente.' }
         format.json { render :show, status: :created, location: @day }
       else
         format.html { render :new }
@@ -62,7 +62,7 @@ class DaysController < ApplicationController
   def destroy
     @day.destroy
     respond_to do |format|
-      format.html { redirect_to days_url, notice: 'Day was successfully destroyed.' }
+      format.html { redirect_to @day.machine, notice: 'Dia correctamente eliminado' }
       format.json { head :no_content }
     end
   end

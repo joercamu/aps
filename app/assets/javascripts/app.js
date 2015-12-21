@@ -80,7 +80,7 @@ app.controller('getOrdersController',['$scope','$resource','apiKhronos','spin',f
 	}
 }]);
 // quite $routeParams en 'OrdersController' y 'ngRoute' en dependencias
-app.controller('OrdersController',['$scope','$resource','$http',function($scope,$resource,$http){
+app.controller('OrdersController',['$scope','$resource','$http','spin','apiKhronos',function($scope,$resource,$http,spin,apiKhronos){
 	$scope.errors = [];//array errors subprocesses
 
 	$scope.quantity_at_calculate = 0;//quantiyy of order - leftovers
@@ -109,7 +109,6 @@ app.controller('OrdersController',['$scope','$resource','$http',function($scope,
 
 	});
 
-
 	$scope.validateReady = function(){
 		if ($scope.state_programmed && $scope.state_route && $scope.state_leftovers && $scope.state_subprocesses){
 			return true;
@@ -128,9 +127,25 @@ app.controller('OrdersController',['$scope','$resource','$http',function($scope,
 	Procedures = $resource('/procedures.json');
 	// Subprocesses
 	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+	// API khronos
+	OrdersKhronos = $resource("http://"+apiKhronos+"/api_khronos/index.php/orders/get/:id",{id:"@id"},{update: {method: 'PUT'} });
 	
 	$scope.orders = Orders.query();
 
+	//
+	$scope.updateOrderOrigin = function(){
+		orderOriginal = {};
+		console.log($scope.order.order_number);
+		spin.create();
+		OrdersKhronos.query({id:$scope.order.order_number},function(response){
+			spin.remove();
+			console.log();
+			Orders.update({id:$scope.order.id},response[0],function(){
+				console.log(response);
+				window.location.href = '/orders/'+$scope.order.id+'/reapprove';
+			});
+		});	
+	};
 	//consult procesos and machines references
 	$scope.getProcedures = function(callback){
 		$scope.procedures = Procedures.query(function(response){

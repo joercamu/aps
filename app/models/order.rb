@@ -123,6 +123,9 @@ class Order < ActiveRecord::Base
     event :reschedule do
       transitions :from => :terminado, :to => :reprogramado
     end
+    event :reapprove do
+      transitions :from => :programado, :to => :aprobado
+    end
   end
 
 end

@@ -47,6 +47,11 @@ Rails.application.routes.draw do
   get 'orders/:id/change_state/:state' => 'orders#change_state', as: :change_state_order
   # route for approve order
   get 'approve_order/:id' => 'orders#approve_order'
+  # route for remove subprocesses of order
+  delete 'orders/:id/remove_subprocesses' => 'orders#remove_subprocesses', as: :remove_subprocesses
+  # route for rereapprove one order
+  get 'orders/:id/reapprove' => 'orders#m_reapprove'
+
 
   #route where it's do order "drag on drop"
   get 'machines/:id/sorting' => 'machines#sorting', as: :sort_subprocess

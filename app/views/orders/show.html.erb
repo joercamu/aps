@@ -38,9 +38,18 @@
 			</div>
 		</div>
 		<%=render 'show'%>
+		<%if @order.state == "rechazado"%>
+		<button ng-click="updateOrderOrigin()" class="button alert">Actualizar pedido</button>
+		<%end%>
 		<%=render 'subprocesses/tracking'%>
 		<%=render 'has_leftovers/list'%>
-		<%=render 'subprocesses/list'%>
+		<!--  -->
+		<%if @order.subprocesses.any? && @order.state != "en_proceso"%>
+			<%=link_to "Eliminar subprocesos",remove_subprocesses_path(@order) ,method: :delete, data: { confirm: 'Esta seguro? tenga en cuenta que tendra que volver a programar cada subproceso.' } , class:"button alert expand" %>
+		<%end%>
+		<%if can? :update, @subprocesses%>
+			<%=render 'subprocesses/list'%>
+		<%end%>
 
 		<p class="subtitle" ng-init="show_form_modification = false">Modificaciones</p>
 		<button ng-click="show_form_modification = !show_form_modification" class="button">Nueva modificación</button>
