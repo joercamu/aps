@@ -24,7 +24,7 @@
 						<th>FICHA</th>
 						<th>METROS</th>
 						<th>MINUTES</th>
-						<th>PELICULA</th>
+						<th>F SOLICITADA</th>
 						<th>CABIDAS</th>
 						<th>FECHA I</th>
 						<th>FECHA F</th>
@@ -56,7 +56,7 @@
 							<!-- ui-state-disabled #for bloqueados -->
 					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes%>" class="ui-state-default <%="ui-state-disabled" if index < days_disabled%>" style="<%=status_subprocess(subprocess.state,subprocess.quantity_finished)%>">
 					  			<table class="table-record-subprocess">
-				  					<tr style="<%="border-left:3px solid #663399" if subprocess.order.sheet_print%>">
+				  					<tr style="<%="border-left:3px solid #663399" unless subprocess.order.sheet_print%>">
 				  						<td><%=subprocess.sequence%></td>
 				  						<td >
 				  							K<%=subprocess.order.order_number%>
