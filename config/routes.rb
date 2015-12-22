@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   # route for remove subprocesses of order
   delete 'orders/:id/remove_subprocesses' => 'orders#remove_subprocesses', as: :remove_subprocesses
   # route for rereapprove one order
-  get 'orders/:id/reapprove' => 'orders#m_reapprove'
+  get 'orders/:id/reactivate' => 'orders#m_reactivate'
 
 
   #route where it's do order "drag on drop"

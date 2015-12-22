@@ -63,7 +63,7 @@ clipboard = {
     @items = []#clear
   updateItemHelper:->
     item = $('#item-helper-clipboard')
-    $('#labelItemClipboard').text "minutes #{$(item).attr('minutes')}"+'"'
+    $('#labelItemClipboard').text "minutos #{$(item).attr('minutes')}"+'"'
 }
 #––––––––––––––––––––––––––––---------------------------------------------------------------------------
 sort = { 

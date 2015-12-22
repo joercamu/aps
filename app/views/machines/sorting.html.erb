@@ -54,7 +54,7 @@
 						</div>
 						<%day.subprocesses.order(:sequence).each do |subprocess|%>
 							<!-- ui-state-disabled #for bloqueados -->
-					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes%>" class="ui-state-default <%="ui-state-disabled" if index < days_disabled%>" style="<%="border-left: 5px solid #43AC6A;" if subprocess.state == "terminado"%>">
+					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes%>" class="ui-state-default <%="ui-state-disabled" if index < days_disabled%>" style="<%=status_subprocess(subprocess.state,subprocess.quantity_finished)%>">
 					  			<table class="table-record-subprocess">
 				  					<tr>
 				  						<td><%=subprocess.sequence%></td>
@@ -83,6 +83,12 @@
 				<%end%>
 			</div>
 		</div>
+	</div>
+</div>
+<div id="ModalProgressUpdatingSubprocesses" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+	<h2 id="modalTitle">Actualizando...</h2>
+	<div id="progressUpdateSubprocesses" class="progress">
+	  <span class="meter"></span>
 	</div>
 </div>
 <script type="text/javascript">

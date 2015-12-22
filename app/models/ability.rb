@@ -9,13 +9,13 @@ class Ability
         can :manage, :all
     #     can :manage, :all
     elsif user.role == "programador"
-        can :read, :all
         can [:manage], [Standard,Day,Order]
-        can :sorting, Machine
+        can [:sorting,:todo], Machine
         can :schedule, Day
         can [:m_approve,:m_refuse], [Modification]   
         can [:update], [AppSetting,Subprocess]
         can :by_sheet, Leftover
+        can :read, :all
 
     elsif user.role == "vendedor"
         can :read, :all

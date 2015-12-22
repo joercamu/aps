@@ -138,12 +138,17 @@ app.controller('OrdersController',['$scope','$resource','$http','spin','apiKhron
 		console.log($scope.order.order_number);
 		spin.create();
 		OrdersKhronos.query({id:$scope.order.order_number},function(response){
-			spin.remove();
-			console.log();
-			Orders.update({id:$scope.order.id},response[0],function(){
-				console.log(response);
-				window.location.href = '/orders/'+$scope.order.id+'/reapprove';
-			});
+			if (response[0]){
+				Orders.update({id:$scope.order.id},response[0],function(){
+					spin.remove();
+					console.log(response);
+					window.location.href = '/orders/'+$scope.order.id+'/reactivate';
+				});	
+			}else{
+				spin.remove();
+				alert("No se encontro el pedido...");
+			}
+			
 		});	
 	};
 	//consult procesos and machines references
@@ -390,8 +395,13 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 	
 		// var arrs = $('#sortable12').sortable('toArray');
 		// console.log(arrs.length);
+		spin.create();
+		countSubprocesses = 0;
+		countSubprocessesUpdated = 0;
+		$('#ModalProgressUpdatingSubprocesses').foundation('reveal', 'open');
 		$('.sortable:not(#clipboard)').each(function(){//cada dia
 			day = $(this).sortable('toArray');
+			countSubprocesses += day.length;
 			if (day.length > 0){
 				dayElement = this;
 				day.forEach(function(element, index, array){
@@ -400,14 +410,19 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 					subprocess.sequence = index+1;
 					subprocess.id = parseInt(element.replace('item_',''));
 					Subprocesses.update({id:subprocess.id},subprocess,function(response){
+						countSubprocessesUpdated += 1;
 						console.log(response);
+						$('#progressUpdateSubprocesses span').css('width',countSubprocessesUpdated/countSubprocesses*100+"%");
+						if(countSubprocesses===countSubprocessesUpdated){
+							$('#ModalProgressUpdatingSubprocesses').foundation('reveal', 'close');
+						}
 					},function(error){
 						alert(error.statusText);
 					});
 				});
 			}
-			
 		});
+		spin.remove();
 	};
 	$scope.endSubprocess = function(id_subprocess){
 		console.log(id_subprocess);

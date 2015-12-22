@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess,:calculate_meters,:change_state,:approve_order,:remove_subprocesses,:m_reapprove]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess,:calculate_meters,:change_state,:approve_order,:remove_subprocesses,:m_reactivate]
   before_action :set_subprocesses, only:[:show,:schedule]
   skip_before_action :verify_authenticity_token
   load_and_authorize_resource
@@ -158,7 +158,7 @@ class OrdersController < ApplicationController
     @order.reapprove! if @order.may_reapprove?
     redirect_to @order, notice:"Procesos eliminados correctamente"
   end
-  def m_reapprove
+  def m_reactivate
     @order.activate! if @order.may_activate?
     redirect_to @order
   end
