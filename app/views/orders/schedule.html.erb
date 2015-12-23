@@ -167,9 +167,10 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 					      <th>UM Estandar</th>
 					      <th>Alistamiento"</th>
 					      <th>Tiempo"</th>
-					      <th>Dia(yyyy-mm-dd)</th>
-					      <th>Fecha de inicio</th>
-					      <th>Fecha de fin</th>
+					      <th>Dia Disponibles</th>
+					      <th>Dia Asignado</th>
+					      <th>ID dia</th>
+					      <th>Posicion</th>
 					      <th>Metros</th>      
 					      <th>Estado</th>
 					    </tr>
@@ -184,11 +185,12 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 					        <td><input ng-model="subprocess.setup_time" type="number"></td>
 					        <td><input ng-model="subprocess.minutes" type="number" style="width:80px"></td>
 					        <td>
-					        	<select style="width:100px" ng-model="subprocess.day_id" ng-options="day.id as day.day for day in subprocess.days">
+					        	<select style="width:100px" ng-model="subprocess.day_selected" ng-options="day as day.day for day in subprocess.days">
 					        	</select>
 					        </td>
-					        <td>{{ subprocess.start_date | date:'short'}}</td>
-					        <td>{{ subprocess.end_date | date:'short'}}</td>
+					        <td>{{ subprocess.day_date}}</td>
+					        <td>{{ subprocess.day_id = subprocess.day_selected.id }}</td>
+					        <td>{{ subprocess.sequence = subprocess.day_selected.last_position }}</td>
 					        <td>{{ subprocess.meter }}</td>
 					        <td>{{ subprocess.state }}</td>
 					      </tr>
