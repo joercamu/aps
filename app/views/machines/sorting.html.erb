@@ -54,7 +54,7 @@
 						</div>
 						<%day.subprocesses.order(:sequence).each do |subprocess|%>
 							<!-- ui-state-disabled #for bloqueados -->
-					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes%>" class="ui-state-default <%="ui-state-disabled" if index < days_disabled%>" style="<%=status_subprocess(subprocess.state,subprocess.quantity_finished)%>">
+					  		<li id="item_<%=subprocess.id%>" minutes="<%=subprocess.minutes+subprocess.setup_time%>" class="ui-state-default <%="ui-state-disabled" if index < days_disabled%>" style="<%=status_subprocess(subprocess.state,subprocess.quantity_finished)%>">
 					  			<table class="table-record-subprocess">
 				  					<tr style="<%="border-left:3px solid #663399" unless subprocess.order.sheet_print%>">
 				  						<td><%=subprocess.sequence%></td>
