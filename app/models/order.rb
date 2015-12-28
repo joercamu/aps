@@ -53,7 +53,7 @@ class Order < ActiveRecord::Base
         end
       when "ROL"
         meter = (quantity*sheet_meters_roll)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
-        if self.sheet_spaces > 0
+        if self.sheet_spaces
           meter / self.sheet_spaces
         else
           meter

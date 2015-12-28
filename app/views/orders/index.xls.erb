@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        
+        <Cell><Data ss:Type="String">   state </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_client-  sheet_number </Data></Cell>
+        <Cell><Data ss:Type="String">  order_number </Data></Cell>
+        <Cell><Data ss:Type="String">   order_type </Data></Cell>
+        <Cell><Data ss:Type="String">   order_um </Data></Cell>
+
+        <Cell><Data ss:Type="String">    order_quantity </Data></Cell>
+        <Cell><Data ss:Type="String">    order_unit_value </Data></Cell>
+
+        <Cell><Data ss:Type="String">   repeat </Data></Cell>
+        <Cell><Data ss:Type="String">   scheduled_meters </Data></Cell>
+        <Cell><Data ss:Type="String">   date_offer </Data></Cell>
+        <Cell><Data ss:Type="String">   outsourced_id </Data></Cell>
+        <Cell><Data ss:Type="String">   outsourced_name </Data></Cell>
+        <Cell><Data ss:Type="String">   order_date_request </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_caliber </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_composite </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_cut_type </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_film </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_guillotine </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_height </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_height_planned </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_meters_roll </Data></Cell>
+        
+        <Cell><Data ss:Type="String">   sheet_print </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_product_type </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_route </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_spaces </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_version </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_width </Data></Cell>
+        <Cell><Data ss:Type="String">   created_at </Data></Cell>
+        <Cell><Data ss:Type="String">   updated_at </Data></Cell>
+        <Cell><Data ss:Type="String">   route_id </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_width_planned </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_roller </Data></Cell>
+        <Cell><Data ss:Type="String">   sheet_width_lap </Data></Cell>
+        <Cell><Data ss:Type="String">   presses </Data></Cell>
+        <Cell><Data ss:Type="String">  user_id </Data></Cell>
+
+      </Row>
+    <% @orders.each do |order| %>
+      <Row>
+        
+        <Cell><Data ss:Type="String"><%=   order.state%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_client%>-<%=  order.sheet_number%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=  order.order_number%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.order_type%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.order_um%> </Data></Cell>
+
+        <Cell><Data ss:Type="String"><%=    order.order_quantity%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=    order.order_unit_value%> </Data></Cell>
+
+        <Cell><Data ss:Type="String">R<%=  order.repeat%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.scheduled_meters%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.date_offer%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.outsourced_id%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.outsourced_name%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.order_date_request%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_caliber%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_composite%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_cut_type%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_film%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_guillotine%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_height%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_height_planned%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_meters_roll%> </Data></Cell>
+        
+        <Cell><Data ss:Type="String"><%=   order.sheet_print%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_product_type%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_route%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_spaces%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_version%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_width%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.created_at%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.updated_at%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.route_id%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_width_planned%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_roller%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.sheet_width_lap%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=   order.presses%> </Data></Cell>
+        <Cell><Data ss:Type="String"><%=  order.user_id%> </Data></Cell>
+
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

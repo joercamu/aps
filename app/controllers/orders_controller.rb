@@ -13,6 +13,10 @@ class OrdersController < ApplicationController
     else
       @orders = Order.all
     end
+    respond_to do |format|
+      format.html{}
+      format.xls{}
+    end
   end
 
   # GET /orders/1

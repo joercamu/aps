@@ -1,5 +1,6 @@
 <div ng-app="apsApp">
-	<p class="subtitle">Pedidos en programacion</h1>
+	<p class="subtitle">Pedidos en programacion</p>
+	<%=link_to "Descargar excel", orders_path(format:"xls",state:params[:state]),class:"label success"%>
 	<div ng-controller="OrdersController">
 		<%= render 'list'%>
 	</div>

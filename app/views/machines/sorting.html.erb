@@ -1,4 +1,8 @@
-<p class="subtitle"><%=@machine.name%></p>
+<p class="subtitle"><%=@machine.name%>
+<%@machine.procedures.first.machines.each do |machine|%>
+	<%= link_to machine.name, sort_subprocess_path(machine), target:"_self",class:"label"%>
+<%end%>
+</p>
 <div id="foo"></div>
 <div ng-app="apsApp">
 	<div class="row" ng-controller="machinesController">
