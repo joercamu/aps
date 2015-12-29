@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217132928) do
+ActiveRecord::Schema.define(version: 20151229134225) do
 
   create_table "app_settings", force: :cascade do |t|
     t.integer  "blocked_days", limit: 4, default: 3
@@ -201,7 +201,7 @@ ActiveRecord::Schema.define(version: 20151217132928) do
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
     t.integer  "day_id",            limit: 4
-    t.integer  "setup_time",        limit: 4,   default: 0
+    t.integer  "setup_time",        limit: 4,   default: 15
     t.integer  "sequence_process",  limit: 4,   default: 0
     t.float    "quantity_finished", limit: 24,  default: 0.0
   end
