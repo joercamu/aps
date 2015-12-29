@@ -44,7 +44,7 @@
 		<%=render 'subprocesses/tracking'%>
 		<%=render 'has_leftovers/list'%>
 
-		<%if can? :update, @subprocesses%>
+		<%if can? :update, Subprocess%>
 			<%=render 'subprocesses/list'%>
 			<!--  -->
 			<%if @order.subprocesses.any? && @order.state != "en_proceso"%>
