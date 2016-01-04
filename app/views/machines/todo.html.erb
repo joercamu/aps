@@ -14,6 +14,7 @@
 				<th>CLIENTE</th>
 				<th>FICHA</th>
 				<th>METROS</th>
+				<th>CANTIDAD</th>
 				<th>MINUTES</th>
 				<th>PELICULA</th>
 				<th>RODILLO</th>
@@ -32,6 +33,7 @@
 				<td>{{ subprocess.order.sheet_client }}-{{ subprocess.order.sheet_number }}</td>
 
 				<td>{{ subprocess.meter }}</td>
+				<td>{{ subprocess.order.order_quantity}} {{subprocess.order.order_um}}</td>
 				<td>{{ subprocess.minutes }}"</td>
 
 				<td>{{ subprocess.order.sheet_film }}-{{subprocess.order.sheet_caliber}}</td>
