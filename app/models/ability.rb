@@ -26,6 +26,12 @@ class Ability
     elsif user.role == "supervisor"
         can :read, :all
         can :update, Subprocess
+    elsif user.role == "sobrantes"
+        can :read, :all
+        can :create, Leftover
+    elsif user.role == "adminsobrantes"
+        can :read, :all
+        can :manage, Leftover
     else
         can :todo, Machine
         can :read, :all

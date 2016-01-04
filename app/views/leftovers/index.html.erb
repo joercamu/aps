@@ -22,6 +22,7 @@
       <th>Estado</th>
       <th>usuario</th>
       <th>Editar</th>
+      <th>Eliminar</th>
     </tr>
   </thead>
 
@@ -47,6 +48,9 @@
         <td><%= leftover.state %></td>
         <td><%= leftover.user.email.split('@').first %></td>
         <td><%= link_to 'Editar', edit_leftover_path(leftover), target:"_self" %></td>
+        <td>
+          <%= link_to '', leftover, method: :delete, data: { confirm: 'Estas seguro?' } , class:"icon-trash-o"%>
+        </td>
       </tr>
     <% end %>
   </tbody>
