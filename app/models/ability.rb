@@ -25,10 +25,10 @@ class Ability
         can [:create,:get], [Order]
     elsif user.role == "supervisor"
         can :read, :all
+        can :todo, Machine
         can :update, Subprocess
     elsif user.role == "sobrantes"
         can :read, :all
-        can :todo, Machine
         can :create, Leftover
     elsif user.role == "adminsobrantes"
         can :read, :all
