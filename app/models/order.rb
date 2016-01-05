@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
   has_many :modifications
 
   before_create :set_repeat
-  before_save :set_date_offer
+  # before_save :set_date_offer
   validates :order_number, uniqueness: true, if: :exists_order?
     # Campo que se tiene que editar aqui! 
     # t.string   "state",                     limit: 255
@@ -76,11 +76,17 @@ class Order < ActiveRecord::Base
       false
     end
   end
-  def set_date_offer
+  def date_offer
     if self.subprocesses.any? && self.subprocesses.order(:sequence_process).last.end_date
-        self.date_offer = self.subprocesses.order(:sequence_process).last.end_date+172800
+        myDate = self.subprocesses.order(:sequence_process).last.end_date+172800
+        myDate.strftime("%F")
     end
   end
+  # def set_date_offer
+  #   if self.subprocesses.any? && self.subprocesses.order(:sequence_process).last.end_date
+  #       self.date_offer = self.subprocesses.order(:sequence_process).last.end_date+172800
+  #   end
+  # end
   def log_status_change
     # puts "changing from #{aasm.from_state} to #{aasm.to_state} (event: #{aasm.current_event})"
     OrderComment.create(user_id:1,order_id:self.id,body:"Cambio de estado, de #{aasm.from_state} a #{aasm.to_state}")
