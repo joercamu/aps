@@ -20,6 +20,7 @@
         <Cell><Data ss:Type="String">   repeat </Data></Cell>
         <Cell><Data ss:Type="String">   scheduled_meters </Data></Cell>
         <Cell><Data ss:Type="String">   date_offer </Data></Cell>
+        <Cell><Data ss:Type="String">   date_schedule </Data></Cell>
         <Cell><Data ss:Type="String">   outsourced_id </Data></Cell>
         <Cell><Data ss:Type="String">   outsourced_name </Data></Cell>
         <Cell><Data ss:Type="String">   order_date_request </Data></Cell>
@@ -63,6 +64,17 @@
         <Cell><Data ss:Type="String">R<%=  order.repeat%> </Data></Cell>
         <Cell><Data ss:Type="String"><%=   order.scheduled_meters%> </Data></Cell>
         <Cell><Data ss:Type="String"><%=   order.date_offer%> </Data></Cell>
+        <%if order.subprocesses.any?%>
+            <%if order.sheet_print%>
+                <Cell><Data ss:Type="String"><%=order.subprocesses.find_by(procedure_id:3).start_date.strftime("%F") if order.subprocesses.first.start_date%> </Data></Cell>
+            <%else%>
+                <Cell><Data ss:Type="String"><%=order.subprocesses.first.start_date.strftime("%F") if order.subprocesses.first.start_date%> </Data></Cell>
+            <%end%>
+        <%else%>
+            <Cell><Data ss:Type="String"></Data></Cell>
+        <%end%>
+
+        
         <Cell><Data ss:Type="String"><%=   order.outsourced_id%> </Data></Cell>
         <Cell><Data ss:Type="String"><%=   order.outsourced_name%> </Data></Cell>
         <Cell><Data ss:Type="String"><%=   order.order_date_request%> </Data></Cell>
