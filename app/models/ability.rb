@@ -28,6 +28,7 @@ class Ability
         can :update, Subprocess
     elsif user.role == "sobrantes"
         can :read, :all
+        can :todo, Machine
         can :create, Leftover
     elsif user.role == "adminsobrantes"
         can :read, :all
