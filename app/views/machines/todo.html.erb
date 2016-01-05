@@ -1,8 +1,10 @@
 <div ng-app="apsApp">
 	<div ng-controller="machinesController">
 		<p class="subtitle">
-			PEDIDOS POR HACER EN: 
 			<strong style="color:#008CBA"><%=@machine.name%></strong>
+			<%@machine.procedures.first.machines.each do |machine|%>
+				<%= link_to machine.name, todo_subprocess_path(machine), target:"_self",class:"label"%>
+			<%end%>
 		</p>
 		<p id="dateTimeNow"></p>
 		<input id="id_machine" value="<%=@machine.id%>" type="hidden">

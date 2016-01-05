@@ -8,6 +8,12 @@ class SubprocessesController < ApplicationController
   def index
     @subprocesses = Subprocess.all.order(:start_date)
   end
+  # GET /subprocesses_machine
+  # GET /subprocesses_machine.json
+  def by_machine
+    @subprocesses = Machine.find(params[:machine_id]).subprocesses.scheduled.order(:start_date)
+    render 'index'
+  end
 
   # GET /subprocesses/1
   # GET /subprocesses/1.json

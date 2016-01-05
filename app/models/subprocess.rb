@@ -83,8 +83,8 @@ class Subprocess < ActiveRecord::Base
       end
     end
   end
+  # cuando se termina un subproceso, cambia el estado a en_proceso y si es el ultimo lo coloca en terminado
   def change_state_order
-
     if self.state == "terminado"
       if self.order.subprocesses.last.id == self.id
         self.order.end! if self.order.may_end?

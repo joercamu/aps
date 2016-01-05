@@ -374,11 +374,12 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 	// Days = $resource("/days/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	$scope.getSubprocesses = function () {
 		spin.create();
-		$scope.subprocesses = Subprocesses.query(function(){
+		Subprocesses_by_machine = $resource("/subprocesses_machine/:id.json",{id:"@id"},{update: {method: 'PUT'} });
+		$scope.subprocesses = Subprocesses_by_machine.query({id:parseInt($('#id_machine').val())},function(){
 			spin.remove();
-			$scope.subprocesses = $scope.subprocesses.filter(function(element){
-				return element.machine_id == parseInt($('#id_machine').val()) && element.state == "programado";
-			});
+			// $scope.subprocesses = $scope.subprocesses.filter(function(element){
+			// 	return element.machine_id == parseInt($('#id_machine').val()) && element.state == "programado";
+			// });
 		});
 	};
 
