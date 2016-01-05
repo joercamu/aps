@@ -7,7 +7,7 @@ class Subprocess < ActiveRecord::Base
   
   before_create :set_meter, :set_minutes, :set_day
 
-  before_save :set_start_date
+  before_save :set_start_date,:change_state_order
 
   after_create :validate_day
   after_update :validate_day
@@ -81,6 +81,17 @@ class Subprocess < ActiveRecord::Base
           count_minutes = count_minutes + (subprocess.minutes+subprocess.setup_time)
         end
       end
+    end
+  end
+  def change_state_order
+
+    if self.state == "terminado"
+      if self.order.subprocesses.last.id == self.id
+        self.order.end! if self.order.may_end?
+      else
+        self.order.start! if self.order.may_start?
+      end
+      
     end
   end
   aasm column: "state" do

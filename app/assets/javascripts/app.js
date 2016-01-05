@@ -373,7 +373,9 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	// Days = $resource("/days/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	$scope.getSubprocesses = function () {
+		spin.create();
 		$scope.subprocesses = Subprocesses.query(function(){
+			spin.remove();
 			$scope.subprocesses = $scope.subprocesses.filter(function(element){
 				return element.machine_id == parseInt($('#id_machine').val()) && element.state == "programado";
 			});
