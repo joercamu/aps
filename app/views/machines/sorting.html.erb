@@ -72,7 +72,17 @@
 				  						<td><%=subprocess.minutes + subprocess.setup_time%> "</td>
 				  						<td><%=subprocess.order.order_date_request%></td>
 				  						<td><%=subprocess.order.sheet_spaces%> Cab</td>
-				  						<td><%=subprocess.start_date.strftime("%F %I:%M%p")%></td>
+				  						<td>
+				  							<%order_sheet_route = ""%>
+				  							<%subprocess.order.subprocesses.each do |order_subprocess|%>
+				  								<%order_sheet_route = order_sheet_route + order_subprocess.procedure.name+":"%>
+				  								<%order_sheet_route = order_sheet_route + order_subprocess.day.day.to_s+" " unless order_subprocess.day_id.nil?%>
+				  							<%end%>
+				  							<span data-tooltip aria-haspopup="true" class="has-tip" title="<%=order_sheet_route%>">
+				  								<%=subprocess.start_date.strftime("%F %I:%M%p")%>
+				  							</span>
+				  							
+				  						</td>
 				  					
 
 				  						<td style="color:#f04124">

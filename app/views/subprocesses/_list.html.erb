@@ -4,6 +4,7 @@
     <tr>
       <th>ID</th>
       <th>Pedido</th>
+      <th>Cantidad</th>
       <th>Proceso</th>
       <th>Maquina</th>
       <th>Estandar</th>
@@ -15,8 +16,8 @@
       <th>Fecha de fin</th>
       <th>Secuencia</th>
       <th>Metros</th>
-      
       <th>Estado</th>
+      <th>Cantidad Finalizada</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,7 +26,8 @@
     <% @subprocesses.order(:sequence_process).each do |subprocess| %>
       <tr>
         <td><%= subprocess.id %></td>
-        <td><%= link_to subprocess.order.order_number, subprocess.order%></td>
+        <td><%= link_to "K#{subprocess.order.order_number}", subprocess.order%></td>
+        <td><%= subprocess.order.order_quantity%> <%= subprocess.order.order_um%></td>
         <td><%= subprocess.procedure.name %></td>
         <td><%= link_to subprocess.standard.machine.name,  subprocess.standard.machine%></td>
         <td><%= subprocess.standard.index %></td>
@@ -39,6 +41,7 @@
         <td><%= subprocess.meter %></td>
         
         <td><%= subprocess.state %></td>
+        <td><%= subprocess.quantity_finished %></td>
         <td><% link_to 'Show', subprocess %></td>
         <td><% link_to 'Edit', edit_subprocess_path(subprocess) %></td>
         <td><% link_to 'Destroy', subprocess, method: :delete, data: { confirm: 'Are you sure?' } %></td>
