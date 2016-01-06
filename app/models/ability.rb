@@ -26,7 +26,7 @@ class Ability
     elsif user.role == "supervisor"
         can :read, :all
         can :todo, Machine
-        can :update, Subprocess
+        can [:update,:by_machine], Subprocess
     elsif user.role == "sobrantes"
         can :read, :all
         can :create, Leftover
@@ -36,6 +36,7 @@ class Ability
     else
         can :todo, Machine
         can :read, :all
+        can :by_machine, Subprocess
         cannot :read, Modification
     end
     #
