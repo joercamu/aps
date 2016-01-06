@@ -23,13 +23,12 @@
 				<th>CABIDAS</th>
 				<th>FECHA I</th>
 				<th>FECHA F</th>
-				<th>ESTADO</th>
 				<th>PARCIAL</th>
 				<th>TERMINAR</th>
 			</tr>
 			<tr ng-repeat="subprocess in subprocesses">
 				<td>{{ subprocess.id }}</td>
-				<td>K{{ subprocess.order.order_number }}</td>
+				<td>K{{ subprocess.order.order_number }} {{validate_quantiry_missing(subprocess.order.repeat)}}</td>
 				<td>{{ subprocess.order.order_type }}</td>
 				<td>{{ subprocess.order.outsourced_name }}</td>
 				<td>{{ subprocess.order.sheet_client }}-{{ subprocess.order.sheet_number }}</td>
@@ -46,7 +45,7 @@
 
 				<td>{{ subprocess.start_date | date :'short'}}</td>
 				<td>{{ subprocess.end_date | date :'short'}}</td>
-				<td>{{ subprocess.state }}</td>
+				
 				<td>
 					<div class="row collapse postfix-round" ng-init="subprocess.sw = true">
 				        <div class="small-9 columns">

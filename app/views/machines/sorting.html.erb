@@ -63,6 +63,7 @@
 				  						<td><%=subprocess.sequence%></td>
 				  						<td >
 				  							K<%=subprocess.order.order_number%>
+				  							<%="(SALDO #{subprocess.order.repeat-1})" if subprocess.order.repeat > 1%>
 				  						</td>
 				  						<td><%=subprocess.order.order_type%></td>
 				  						<td><%=subprocess.order.outsourced_name[0..15]%></td>

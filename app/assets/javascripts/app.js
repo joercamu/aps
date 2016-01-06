@@ -380,9 +380,16 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 			// $scope.subprocesses = $scope.subprocesses.filter(function(element){
 			// 	return element.machine_id == parseInt($('#id_machine').val()) && element.state == "programado";
 			// });
+		},function(error){
+			spin.remove();
+			console.log(error);
 		});
 	};
-
+	$scope.validate_quantiry_missing = function(repeat) {
+		if(repeat > 1){
+			return "(SALDO "+(repeat-1)+")";
+		}
+	};
 	$scope.saveQuantityFinished = function (subprocess){
 		spin.create();//show loading....
 		Subprocesses.update({id:subprocess.id},subprocess,function(response){
