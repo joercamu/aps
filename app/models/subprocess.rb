@@ -41,7 +41,7 @@ class Subprocess < ActiveRecord::Base
   end
   def set_day
     #assign day available to subprocess
-    if self.standard.machine.days.availables.where('available >= ?',self.minutes).any?
+    if self.standard.machine.days.availables.where('available >= ?',self.minutes+self.setup_time).any?
       temp_day = self.standard.machine.days.availables.where('available >= ?',self.minutes).take!.id
       self.day_id = temp_day
       self.sequence = Day.find(temp_day).subprocesses.count+1
