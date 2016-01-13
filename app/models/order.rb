@@ -77,8 +77,9 @@ class Order < ActiveRecord::Base
     end
   end
   def date_offer
-    if self.subprocesses.any? && self.subprocesses.order(:sequence_process).last.end_date
-        myDate = self.subprocesses.order(:sequence_process).last.end_date+172800
+    if self.subprocesses.any? && self.subprocesses.order(:sequence_process).last.day
+        # 2d = 172800 sg
+        myDate = self.subprocesses.order(:sequence_process).last.day.day+2
         myDate.strftime("%F")
     end
   end
