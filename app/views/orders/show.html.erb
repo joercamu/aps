@@ -64,4 +64,11 @@
 	</div>
 </div>
 <%= link_to "Volver", :back ,class:"button info"%>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#contentMain').addClass('full-width');
+		$('#dateTimeNow').text(moment().format('LL'));
+		
+	});
+</script>
 

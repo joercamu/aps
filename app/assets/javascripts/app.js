@@ -385,7 +385,52 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 			console.log(error);
 		});
 	};
-	$scope.validate_quantiry_missing = function(repeat) {
+	$scope.subprocessesToMove = [];
+	$scope.subprocessesErrors = [];
+	$scope.targetMachine;
+	$scope.collectSubprocessesToMove = function() {
+		$scope.subprocessesToMove = [];
+		$('#item-helper-clipboard').find('dd').each(function(){
+			subprocess = {};
+			item = $('#'+$(this).attr('id').replace('c',''));
+			subprocess.id = item.attr('id').replace('item_','');
+			subprocess.name = item.find('table tr td:nth-child(2)').text();
+			$scope.subprocessesToMove.push(subprocess);
+		});
+		
+	};
+	$scope.moveSubprocesses = function(form){
+		moveSubprocesses = $resource('/subprocesses/:id/move_machine/:machine_id.json',{id:"@id",machine_id:"@machine_id"},{update: {method:'PUT'}});
+		if(form.tMachine.$touched){
+			$('#item-helper-clipboard').remove();
+			countSubprocessesToMove = $scope.subprocessesToMove.length;
+			countSubprocessesMoved = 0;
+			console.log(countSubprocessesToMove);
+			$scope.subprocessesToMove.forEach(function(element){
+				moveSubprocesses.update({id:element.id,machine_id:form.tMachine.$modelValue},function(resp){
+					console.log(resp);
+					$scope.subprocessesErrors = resp.errors.status;
+					if(!resp.errors.status){//si no hay errores
+						$('#formMoveSubprocess').find('button')
+						.text("Moviendo...")
+						.addClass("disabled");
+						console.log('Subproceso cambiado de maquina correctamente');
+						$('#item_'+resp.id).remove();
+						countSubprocessesMoved = countSubprocessesMoved + 1;
+						if(countSubprocessesToMove == countSubprocessesMoved){
+							$('#modalChangeMachine').foundation('reveal', 'close');//cerrar modal	
+							$('#formMoveSubprocess').find('button')
+							.text("Cambiar de maquina")
+							.removeClass("disabled");
+						}
+					}
+				});
+			});
+			
+		}
+	};
+
+	$scope.validateQuantityMissing = function(repeat) {
 		if(repeat > 1){
 			return "(SALDO "+(repeat-1)+")";
 		}
@@ -401,38 +446,53 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 						spin.remove();//hide loading....
 					});
 	};
-	$scope.saveChanges = function(){//function of "sorting" 2 clicks
+	$scope.saveChanges = function(saveType){//function of "sorting" 2 clicks
 	
 		// var arrs = $('#sortable12').sortable('toArray');
 		// console.log(arrs.length);
-		spin.create();
+		if (saveType == "all"){//si se ordenar guardar todos los elementos
+			items_to_save = '.sortable:not(#clipboard)';
+		}else{
+			items_to_save = '.sortable[modified=true]:not(#clipboard)';
+		}
 		countSubprocesses = 0;
 		countSubprocessesUpdated = 0;
-		$('#ModalProgressUpdatingSubprocesses').foundation('reveal', 'open');
-		$('.sortable:not(#clipboard)').each(function(){//cada dia
-			day = $(this).sortable('toArray');
-			countSubprocesses += day.length;
-			if (day.length > 0){
+		
+		console.log($(items_to_save).length);
+		if($(items_to_save).length > 0){
+			$('#ModalProgressUpdatingSubprocesses').foundation('reveal', 'open');
+			$(items_to_save).each(function(){//cada dia
+				day = $(this).sortable('toArray');
 				dayElement = this;
-				day.forEach(function(element, index, array){
-					subprocess = {};
-					subprocess.day_id = parseInt($(dayElement).attr('id-day'));
-					subprocess.sequence = index+1;
-					subprocess.id = parseInt(element.replace('item_',''));
-					Subprocesses.update({id:subprocess.id},subprocess,function(response){
-						countSubprocessesUpdated += 1;
-						console.log(response);
-						$('#progressUpdateSubprocesses span').css('width',countSubprocessesUpdated/countSubprocesses*100+"%");
-						if(countSubprocesses===countSubprocessesUpdated){
-							$('#ModalProgressUpdatingSubprocesses').foundation('reveal', 'close');
-						}
-					},function(error){
-						alert(error.statusText);
+				countSubprocesses += day.length;
+				$(dayElement).attr('modified',false);
+
+				if (day.length > 0){//si el dia tiene pedidos(subprocesos)
+					day.forEach(function(element, index, array){//cada item del dia(subproceso)
+						subprocess = {};
+						subprocess.day_id = parseInt($(dayElement).attr('id-day'));
+						subprocess.sequence = index+1;
+						subprocess.id = parseInt(element.replace('item_',''));
+
+						Subprocesses.update({id:subprocess.id},subprocess,function(response){
+							countSubprocessesUpdated += 1;
+							console.log(response);
+							$('#progressUpdateSubprocesses span').css('width',countSubprocessesUpdated/countSubprocesses*100+"%");
+							if(countSubprocesses===countSubprocessesUpdated){
+								$('#ModalProgressUpdatingSubprocesses').foundation('reveal', 'close');//cerrar modal
+								$('#progressUpdateSubprocesses span').css('width',"0%");//progreso de copia en 0
+							}
+						},function(error){
+							alert(error.statusText);
+						});
 					});
-				});
-			}
-		});
-		spin.remove();
+				}
+			});
+		}else{
+			console.log("cierre");
+			$('#ModalProgressUpdatingSubprocesses').foundation('reveal', 'close');//cerrar modal
+		}
+
 	};
 	$scope.endSubprocess = function(id_subprocess){
 		console.log(id_subprocess);

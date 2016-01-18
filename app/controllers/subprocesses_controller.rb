@@ -1,5 +1,5 @@
 class SubprocessesController < ApplicationController
-  before_action :set_subprocess, only: [:show, :edit, :update, :destroy]
+  before_action :set_subprocess, only: [:show, :edit, :update, :destroy, :move_machine]
   skip_before_action :verify_authenticity_token
   load_and_authorize_resource
 
@@ -66,6 +66,21 @@ class SubprocessesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to subprocesses_url, notice: 'Subprocess was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # PATCH/PUT /subprocesses/1/move_machine/2.json
+  def move_machine
+    @machine = Machine.find(params[:machine_id])
+
+    today = DateTime.now.strftime('%F')
+    last_day_machine = @machine.days.order(:day).last
+
+    if  last_day_machine.day.strftime('%F') > today 
+      @subprocess.update(standard_id:@machine.standards.first.id,day_id:last_day_machine.id)
+    else
+      @machine.errors.add(:status,"no hay dias disponibles")
+      @machine.errors.add(:status,"Habilitar un nuevo dia mayor a #{today}")
     end
   end
 

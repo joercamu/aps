@@ -69,6 +69,8 @@ Rails.application.routes.draw do
   put 'modifications/:id/refuse'=> 'modifications#m_refuse', as: :refuse_modification
 
   get 'subprocesses_machine/:machine_id' => 'subprocesses#by_machine'
+  # method for move subprocesses to machine
+  put 'subprocesses/:id/move_machine/:machine_id' => 'subprocesses#move_machine'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

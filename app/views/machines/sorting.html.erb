@@ -1,16 +1,64 @@
-<p class="subtitle"><%=@machine.name%>
-<%@machine.procedures.first.machines.each do |machine|%>
-	<%= link_to machine.name, sort_subprocess_path(machine), target:"_self",class:"label"%>
-<%end%>
-</p>
+
 <div id="foo"></div>
-<div ng-app="apsApp">
-	<div class="row" ng-controller="machinesController">
+<div ng-app="apsApp" ng-controller="machinesController">
+	
+	<div class="row">
+		<div class="small-12 small-centered columns">
+			<div class="row subtitle">
+				<div class="small-11 columns">
+					<%=@machine.name%>
+					<%procedure_machines = @machine.procedures.first.machines%>	
+					<%procedure_machines.each do |machine|%>
+						<%= link_to machine.name, sort_subprocess_path(machine), target:"_self",class:"label"%>
+					<%end%>
+				</div>
+				<div class="small-1 columns">
+					<a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="icon-ellipsis-v"></a><br>
+					<ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+					  <li><a href="#" data-reveal-id="modalChangeMachine" ng-click="collectSubprocessesToMove()">Mover de maquina</a></li>
+					  <li> <a href="#" id="btnUpdateInfoDays">Actualizar info</a> </li>
+					</ul>
+					<!-- Modal //cambio de maquina -->
+					<div id="modalChangeMachine" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+						  <h2 id="modalTitle">Cambiar pedidos de maquina.</h2>
+						  <form id="formMoveSubprocess"name="form" class="css-form" ng-show="subprocessesToMove.length > 0" novalidate>
+						  	<div class="name-field" ng-repeat="error in subprocessesErrors">
+						  		<small class="error">{{error}}</small>
+						  	</div>
+						  	<div class="name-field">
+						  		<label>Subprocesos a mover.</label>
+							  	<div ng-repeat="subproces in subprocessesToMove">
+							  		<span class="label" style="font-size:1rem;float:left">{{subproces.name}}</span>
+							  	</div>	
+						  	</div><br>
+						  	<div class="name-field">
+						  		<label>Seleccione la maquina a la cual desea enviar los subprocesos.</label>
+							  	<select ng-model="targetMachine" name="tMachine" required="">
+									<%procedure_machines.each do |machine|%>
+										<%= "<option value='#{machine.id}'> #{machine.name} </option>".html_safe if machine.standards.any? && machine.name != @machine.name%>
+									<%end%>
+								</select>
+								<div ng-show="form.$submitted || form.tMachine.$touched">
+						      		<small ng-show="form.tMachine.$error.required" class="error">Selecciona una maquina.</small>
+						    	</div>
+						  	</div><br>
+							<button ng-click="moveSubprocesses(form)" type="submit" class="button success expand">Cambiar de maquina</button>	
+						  </form>
+						  <p ng-show="subprocessesToMove.length == 0">No hay subprocesos seleccionados...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
 		<div class="small-2 columns">
 			<div class="content-clipboard">
 				<div id="result"></div>
-			    <ul class="sortable" id="clipboard">
-			    	<button ng-click="saveChanges()" class="button success tiny" style="width:100%">Guardar cambios</button>
+			    <ul class="sortable" id="clipboard" style="width:170px">
+			    	<ul class="button-group">
+					  <li><button ng-click="saveChanges('all')" class="button success tiny"> <i class="icon-floppy-o">Todos</i></button></li>
+					  <li><button ng-click="saveChanges()" class="button tiny"> <i class="icon-floppy-o"></i> </button></li>
+					</ul>
 			    	<label id="labelItemClipboard">vacio</label>
 			    </ul>
 			    <label id="dateTimeNow" style="color:gray"><label>

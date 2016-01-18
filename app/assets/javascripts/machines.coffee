@@ -1,22 +1,3 @@
-###
-validar:
-  1- cuando se suelte un elemento validar si hay espacio OK
-  2- realizar n calculos en elementos afectados 
-  3- ingresar y sacar elementos del portapaples OK
-  4- pegar el portapapeles en algun sitio OK
-  5- 
-
-  sortable OK
-  1-restar "deduct" tiempo disponible (cuando entra un pedido)
-  2-sumar "increase" tiempo disponible (cuando sale un pedido)
-
-  items cruzados
-  1-un item puede estar en 2 dias
-  2-se debe restar del tiempo disponible del dia 2 el sobrante de tiempo del item
-  3-el item debe ser el ultimo en el dia 1
-  4-si el dia libera tiempo debe restarlo del dia 2
-  5-un dia totalmente programado equivale a 0 minutos disponibles
-###
 clipboard = {
   items : []
   createItemHelper: ->
@@ -113,6 +94,23 @@ updateInfo:(element)->
   .css("width","#{Math.round((occupied/minutes)*100)}%")
   .find('.percent').text("#{Math.round((occupied/minutes)*100)}%")
 }
+modified_days = {
+items : []
+add:(day) ->
+  @items.push(day) unless @validate_exist(day)
+  @modify(day)
+  @show()
+validate_exist:(day)->
+  validate = false
+  @items.forEach (element)->
+    if $(element).attr('id') == $(day).attr('id')
+      validate = true
+  validate
+modify:(day)->
+  $(day).attr('modified',true)
+show:->
+  console.log(@items)
+}
 #------------------------------------------------------------------------------------------------------------
 $ ->
 	$( ".days > .sortable" ).sortable
@@ -139,6 +137,7 @@ $ ->
           alert("No hay espacio en este dia. :(")
           sort.deduct $(ui.item).parent(), @minutes
       update: ->
+        modified_days.add(this)
         data = $(this).sortable('serialize')
         console.log(data)
 
@@ -176,6 +175,8 @@ $ ->
 
     $('#btnViewClipboard').click ->
       clipboard.view()
+    $('#btnUpdateInfoDays').click ->
+      sort.calculateTime()  
 
     clipboard.createItemHelper()
     sort.calculateTime()

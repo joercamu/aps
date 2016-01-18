@@ -28,7 +28,7 @@
 			</tr>
 			<tr ng-repeat="subprocess in subprocesses">
 				<td>{{ subprocess.id }}</td>
-				<td>K{{ subprocess.order.order_number }} {{validate_quantiry_missing(subprocess.order.repeat)}}</td>
+				<td>K{{ subprocess.order.order_number }} {{validateQuantityMissing(subprocess.order.repeat)}}</td>
 				<td>{{ subprocess.order.order_type }}</td>
 				<td>{{ subprocess.order.outsourced_name }}</td>
 				<td>{{ subprocess.order.sheet_client }}-{{ subprocess.order.sheet_number }}</td>
