@@ -73,7 +73,7 @@ class LeftoversController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_list_form
       @states = [{"name":"DISPONIBLE"},{"name":"OBSOLETO"}]
-      @hometowns = [{"name":"PRODUCCION"},{"name":"SEGREGADO"}]
+      @hometowns = [{"name":"PRODUCCION"},{"name":"SEGREGADO"},{"name":"INVENTARIO"}]
       @dispositions = [{"name":"SOBRANTES"}]
     end
     def set_leftover

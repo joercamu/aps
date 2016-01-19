@@ -4,16 +4,21 @@
 	
 	<div class="row">
 		<div class="small-12 small-centered columns">
-			<div class="row subtitle">
+			<div class="row">
 				<div class="small-11 columns">
-					<%=@machine.name%>
-					<%procedure_machines = @machine.procedures.first.machines%>	
-					<%procedure_machines.each do |machine|%>
-						<%= link_to machine.name, sort_subprocess_path(machine), target:"_self",class:"label"%>
-					<%end%>
+					<div class="subtitle">
+						<%=@machine.name%>
+						<%procedure_machines = @machine.procedures.first.machines%>	
+						<%procedure_machines.each do |machine|%>
+							<%= link_to machine.name, sort_subprocess_path(machine), target:"_self",class:"label"%>
+						<%end%>	
+					</div>
 				</div>
 				<div class="small-1 columns">
-					<a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="icon-ellipsis-v"></a><br>
+					<div style="width: 50px;margin: 1rem auto;text-align: center;font-size: 2rem;">
+						<a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="icon-ellipsis-v"></a>	
+					</div>
+					
 					<ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
 					  <li><a href="#" data-reveal-id="modalChangeMachine" ng-click="collectSubprocessesToMove()">Mover de maquina</a></li>
 					  <li> <a href="#" id="btnUpdateInfoDays">Actualizar info</a> </li>
