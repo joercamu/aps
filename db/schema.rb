@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151229134225) do
+ActiveRecord::Schema.define(version: 20160118202826) do
 
   create_table "app_settings", force: :cascade do |t|
     t.integer  "blocked_days", limit: 4, default: 3
@@ -70,10 +70,11 @@ ActiveRecord::Schema.define(version: 20151229134225) do
     t.string   "sheet_composite",    limit: 255
     t.string   "place_origin",       limit: 255
     t.string   "state",              limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "sheet_code",         limit: 255
     t.integer  "user_id",            limit: 4
+    t.text     "observation",        limit: 65535
   end
 
   add_index "leftovers", ["user_id"], name: "index_leftovers_on_user_id", using: :btree

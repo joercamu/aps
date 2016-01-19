@@ -1,5 +1,6 @@
 class LeftoversController < ApplicationController
   before_action :set_leftover, only: [:show, :edit, :update, :destroy]
+  before_action :set_list_form, only: [:new,:edit]
   load_and_authorize_resource
   
   # GET /leftovers
@@ -70,12 +71,17 @@ class LeftoversController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_list_form
+      @states = [{"name":"DISPONIBLE"},{"name":"OBSOLETO"}]
+      @hometowns = [{"name":"PRODUCCION"},{"name":"SEGREGADO"}]
+      @dispositions = [{"name":"SOBRANTES"}]
+    end
     def set_leftover
       @leftover = Leftover.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def leftover_params
-      params.require(:leftover).permit(:quantity, :um, :weight, :location, :order_origin, :sheet_id,:sheet_code, :sheet_version, :entry_date, :disposition, :sheet_composite, :place_origin, :state)
+      params.require(:leftover).permit(:quantity, :um, :weight, :location, :order_origin, :sheet_id,:sheet_code, :sheet_version, :entry_date, :disposition, :sheet_composite, :place_origin, :state,:observation)
     end
 end

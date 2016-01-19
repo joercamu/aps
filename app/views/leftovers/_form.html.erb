@@ -56,20 +56,25 @@
         <%= f.date_select :entry_date %>
       </div>
       <div class="field">
-        <%= f.label :disposition,"Disposicion" %><br>
-        <%= f.text_field :disposition %>
+        <%= f.label :disposition ,"Disposicion"%><br>
+        <%= select("leftover","disposition", @dispositions.collect {|p| [p[:name]]},{include_blank:''}) %>
+      </div>
+      <div class="field">
+        <%= f.label :place_origin ,"Lugar de origen"%><br>
+        <%= select("leftover","place_origin", @hometowns.collect {|p| [p[:name]]},{include_blank:''}) %>
       </div>
 
       <div class="field">
-        <%= f.label :place_origin,"Lugar de origen" %><br>
-        <%= f.text_field :place_origin %>
-      </div>
-      <div class="field">
         <%= f.label :state ,"Estado"%><br>
-        <%= f.text_field :state %>
+        <%= select("leftover","state", @states.collect {|p| [p[:name]]},{include_blank:''}) %>
       </div>
+      <div>
+        <%= f.label :observation,"Observaciones"%>
+        <%= f.text_area :observation%>
+      </div>
+      <br>
       <div class="actions">
-        <%= f.submit "Guardar sobrante",class:"button success"%>
+        <%= f.submit "Guardar sobrante",class:"button success expand"%>
       </div>
     <% end %>
   </div>

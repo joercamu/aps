@@ -39,7 +39,7 @@
     <%= f.text_field :weight %>
   </div>
   <div class="field">
-    <%= f.label :location %><br>
+    <%= f.label :location, "Ubicacion" %><br>
     <%= f.text_field :location %>
   </div>
 
@@ -48,19 +48,24 @@
     <%= f.date_select :entry_date %>
   </div>
   <div class="field">
-    <%= f.label :disposition %><br>
-    <%= f.text_field :disposition %>
+    <%= f.label :disposition ,"Disposicion"%><br>
+    <%= select("leftover","disposition", @dispositions.collect {|p| [p[:name]]},{include_blank:''}) %>
+  </div>
+  <div class="field">
+    <%= f.label :place_origin ,"Lugar de origen"%><br>
+    <%= select("leftover","place_origin", @hometowns.collect {|p| [p[:name]]},{include_blank:''}) %>
   </div>
 
   <div class="field">
-    <%= f.label :place_origin %><br>
-    <%= f.text_field :place_origin %>
+    <%= f.label :state ,"Estado"%><br>
+    <%= select("leftover","state", @states.collect {|p| [p[:name]]},{include_blank:''}) %>
   </div>
   <div class="field">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
+    <%= f.label :observation,"Observaciones"%>
+    <%= f.text_area :observation%>
   </div>
+  <br>
   <div class="actions">
-    <%= f.submit "Actualizar",class:"button alert" %>
+    <%= f.submit "Actualizar",class:"button alert expand" %>
   </div>
 <% end %>
