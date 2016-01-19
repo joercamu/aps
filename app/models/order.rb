@@ -52,7 +52,14 @@ class Order < ActiveRecord::Base
           meter
         end
       when "ROL"
-        meter = (quantity*sheet_meters_roll)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste)
+        # si la cantidad es menor a 5 rollos se aumenta el 10%
+        if quantity <= 5 && self.sheet_print
+          additional_waste = 0.1
+        else
+          additional_waste = 0
+        end
+        meter = (quantity*sheet_meters_roll)*(1+(self.outsourced_tolerance_up.to_f/100)+self.route.waste+additional_waste)
+        # si tiene cabidas, divide sobre ellas
         if self.sheet_spaces
           meter / self.sheet_spaces
         else
