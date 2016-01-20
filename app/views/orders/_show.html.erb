@@ -157,10 +157,15 @@
       <strong>Cabidas:</strong><br>
       <%= @order.sheet_spaces %>
     </td>
-    <td colspan="6">
+    <td colspan="5">
       <strong>Ruta de proceso:</strong><br>
       <%= @order.sheet_route.gsub(',','<br>').html_safe%>
     </td>
+    <td>
+      <strong>Traslape:</strong><br>
+      <%= @order.sheet_width_lap%>
+    </td>
+    
     <td colspan="2">
       <strong>Fecha Creacion</strong><br>
       <%=@order.created_at.strftime("%F %I:%M%p")%>

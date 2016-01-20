@@ -16,12 +16,12 @@
 				  	<%end%>
 				  	<%if @order.may_refuse?%>
 					  <li>
-					  	<%= link_to "Rechazar", change_state_order_path(@order,'refuse'), class:"button"%>
+					  	<%= link_to "Rechazar", change_state_order_path(@order,'refuse'), class:"button", data:{confirm:'¿Esta seguro que desea rechazar el pedido?'}%>
 					  </li>
 				  	<%end%>
 				  	<%if @order.may_suspend?%>
 					  <li>
-					  	<%= link_to "Suspender", change_state_order_path(@order,'suspend'), class:"button"%>
+					  	<%= link_to "Suspender", change_state_order_path(@order,'suspend'), class:"button", data:{confirm:'¿Esta seguro que desea suspender el pedido?'}%>
 					  </li>
 				  	<%end%>
 				  	<%if @order.may_end?%>
