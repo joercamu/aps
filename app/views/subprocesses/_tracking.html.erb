@@ -25,7 +25,7 @@
               </span>                
               <span class="day-title"><%= subprocess.procedure.name %></span><br />
               <span><%= subprocess.standard.machine.name%></span>
-              <span class="day-info"><%= subprocess.quantity_finished if subprocess.state == "terminado"%></span>
+              <span class="day-info"><%= "#{subprocess.quantity_finished} #{subprocess.procedure.measure}" if subprocess.state == "terminado"%></span>
               <div class="day-icon">
                 <span class="icon-sun"></span>
               </div>

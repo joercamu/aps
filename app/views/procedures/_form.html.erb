@@ -19,6 +19,10 @@
     <%= f.label :press %><br>
     <%= f.check_box :press %>
   </div>
+  <div class="field">
+    <%= f.label :measure %><br>
+    <%= select("procedure","measure",Measurement.all.collect {|p|[p.name]})%>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
