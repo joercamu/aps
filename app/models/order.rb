@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
 
   before_create :set_repeat
   # before_save :set_date_offer
-  validates :order_number, uniqueness: true, if: :exists_order?
+  validates :order_number, uniqueness: true, if: :exists_order?, :on => :create
     # Campo que se tiene que editar aqui! 
     # t.string   "state",                     limit: 255
     # t.float    "weight",                    limit: 24

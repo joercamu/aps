@@ -59,7 +59,7 @@
         <td><%= order.order_unit_value %></td>
         <td><%= order.order_date_request %></td>
         <td><%= order.date_offer %></td>
-        <td><%= order.state %></td>
+        <td><%= order.state.sub('_',' ') %></td>
         <td><%= order.sheet_route %></td>
         <td><%= order.created_at.strftime("%F %I:%M%p") %></td>
       </tr>
