@@ -1,6 +1,6 @@
 var app = angular.module("apsApp", ["ngResource"])
 app.factory("apiKhronos",function(){
-	return "192.168.1.247";
+	return "192.168.1.79";
 });
 app.factory("spin",function(){
 	return myspin = {
