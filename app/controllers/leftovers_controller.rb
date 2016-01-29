@@ -74,7 +74,7 @@ class LeftoversController < ApplicationController
     def set_list_form
       @states = [{"name":"DISPONIBLE"},{"name":"OBSOLETO"}]
       @hometowns = [{"name":"PRODUCCION"},{"name":"SEGREGADO"},{"name":"INVENTARIO"}]
-      @dispositions = [{"name":"SOBRANTES"}]
+      @dispositions = [{"name":"SOBRANTES"},{"name":"MOLINO"}]
     end
     def set_leftover
       @leftover = Leftover.find(params[:id])

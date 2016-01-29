@@ -1,6 +1,16 @@
-<div ng-app="apsApp">
-	<p class="subtitle">Pedidos en programacion</p>
-	<%=link_to "Descargar excel", orders_path(format:"xls",state:params[:state]),class:"label success"%>
+<div>
+	<div class="row">
+		<div class="small-12 medium-6 medium-centered columns content-main" style="margin-bottom:0 !important">
+			<%= render 'filter'%>
+		</div>
+		
+	</div>
+	
+	<p>
+		<%=link_to "Descargar excel", orders_search_path(format:"xls",state:params[:state],filter_key:params[:filter_key],filter_value:params[:filter_value]),method: :post,class:"label success"%>
+	</p>
+	
+	<br>
 	<div ng-controller="OrdersController">
 		<%= render 'list'%>
 	</div>

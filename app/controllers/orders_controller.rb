@@ -7,16 +7,39 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    if params[:state]
-      @orders = Order.where(state:params[:state])
-      @state = params[:state]
+  end
+  # GET /orders_search
+  def search
+  end
+  # POST /orders_search
+  def search_filter
+    case params[:filter_key]
+    when 'order_number'
+      @orders = Order.where(order_number:params[:filter_value])  
+    when 'sheet_number'
+      sheet_code = params[:filter_value].split("-")
+      # "#{order.sheet_client}-#{order.sheet_number}"
+      @orders = Order.where(sheet_client:sheet_code.first.to_i)
+      @orders = @orders.where(sheet_number:sheet_code.last.to_i)
+    when 'outsourced_name'
+      @orders = Order.where('outsourced_name like ?', "%"+params[:filter_value]+"%") 
+    when 'order_oc'
+      @orders = Order.where(order_oc:params[:filter_value])  
     else
       @orders = Order.all
+
+    end
+    # filter state
+    if params[:state] != ''
+      @orders = @orders.where(state:params[:state])
     end
     respond_to do |format|
-      format.html{}
-      format.xls{}
-    end
+      # raise
+      format.html{render :index}
+      format.xls{render :index}
+    end 
+    
+    
   end
 
   # GET /orders/1
@@ -177,6 +200,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:scheduled_meters,:route_id, :outsourced_id, :outsourced_name, :outsourced_tolerance_down, :outsourced_tolerance_up, :order_date_request, :order_number, :order_quantity, :order_type, :order_um, :order_unit_value, :sheet_caliber, :sheet_client, :sheet_composite, :sheet_cut_type, :sheet_film, :sheet_guillotine, :sheet_height, :sheet_height_planned, :sheet_id, :sheet_meters_roll, :sheet_number, :sheet_print, :sheet_product_type, :sheet_route, :sheet_spaces, :sheet_version, :sheet_width,:sheet_width_planned,:sheet_roller,:sheet_width_lap,:presses)
+      params.require(:order).permit(:scheduled_meters,:route_id, :outsourced_id, :outsourced_name, :outsourced_tolerance_down, :outsourced_tolerance_up, :order_date_request, :order_number, :order_quantity, :order_type, :order_um, :order_unit_value, :sheet_caliber, :sheet_client, :sheet_composite, :sheet_cut_type, :sheet_film, :sheet_guillotine, :sheet_height, :sheet_height_planned, :sheet_id, :sheet_meters_roll, :sheet_number, :sheet_print, :sheet_product_type, :sheet_route, :sheet_spaces, :sheet_version, :sheet_width,:sheet_width_planned,:sheet_roller,:sheet_width_lap,:presses,:order_oc,:order_adviser,:order_assistant_mail)
     end
 end

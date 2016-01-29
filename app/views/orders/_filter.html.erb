@@ -1,0 +1,43 @@
+<div>
+    <form method="POST">
+        <div class="row">
+            <div class="small-2 columns">
+                <label>Buscar por: </label>
+            </div>
+            <div class="small-4 columns">
+                    <select name="filter_key" placeholder="sas">
+                        <option></option>
+                        <option value="order_number">PEDIDO</option>
+                        <option value="sheet_number">FICHA</option>
+                        <option value="outsourced_name">CLIENTE</option>
+                        <option value="order_oc">ORDEN DE COMPRA</option>
+                    </select>
+            </div>
+            <div class="small-6 columns">
+                <input name="filter_value" placeholder="Describa aqui el valor de la busqueda" autocomplete="off">
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 columns">
+                <label>Filtrar por estado:</label>
+                  <select name="state">
+                        <option></option>
+                        <option value="activo" <%="selected" if @state=="activo"%> >Activo</option>
+                        <option value="aprobado" <%="selected" if @state=="aprobado"%>>Aprobado</option>
+                        <option value="rechazado" <%="selected" if @state=="rechazado"%> >Rechazado</option>
+                        <option value="programado" <%="selected" if @state=="programado"%> >Programado</option>
+                        <option value="reprogramado" <%="selected" if @state=="reprogramado"%> >Reprogramado</option>
+                        <option value="en_proceso" <%="selected" if @state=="en_proceso"%> >En proceso</option>
+                        <option value="suspendido" <%="selected" if @state=="suspendido"%> >Suspendido</option>
+                        <option value="terminado" <%="selected" if @state=="terminado"%> >Terminado</option>
+                  </select>
+                <input class="button expand success margin-top" type="submit" value="Buscar">
+            </div>
+        </div>
+        
+        
+        
+    </form>
+</div>
+
+

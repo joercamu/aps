@@ -16,24 +16,29 @@ class Ability
         can [:update], [AppSetting]
         can :by_sheet, Leftover
         can :read, :all
-
+        
     elsif user.role == "vendedor"
         can :read, :all
         can [:create,:update], [Modification]
+        can [:search,:search_filter], Order
     elsif user.role == "analistapedidos"
         can :read, :all
-        can [:create,:get], [Order]
+        can [:create,:get,:search,:search_filter], [Order]
     elsif user.role == "supervisor"
         can :read, :all
         can :todo, Machine
         can [:update,:by_machine], Subprocess
+        can [:search,:search_filter], Order
     elsif user.role == "sobrantes"
         can :read, :all
         can :create, Leftover
+        can [:search,:search_filter], Order
     elsif user.role == "adminsobrantes"
         can :read, :all
         can :manage, Leftover
+        can [:search,:search_filter], Order
     else
+        can [:search,:search_filter], Order
         can :todo, Machine
         can :read, :all
         can :by_machine, Subprocess

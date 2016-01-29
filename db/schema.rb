@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120213807) do
+ActiveRecord::Schema.define(version: 20160129140814) do
 
   create_table "app_settings", force: :cascade do |t|
     t.integer  "blocked_days", limit: 4, default: 3
@@ -159,6 +159,9 @@ ActiveRecord::Schema.define(version: 20160120213807) do
     t.float    "sheet_width_lap",           limit: 24
     t.string   "presses",                   limit: 255
     t.integer  "user_id",                   limit: 4
+    t.string   "order_oc",                  limit: 255
+    t.string   "order_adviser",             limit: 255
+    t.string   "order_assistant_mail",      limit: 255
   end
 
   add_index "orders", ["route_id"], name: "index_orders_on_route_id", using: :btree

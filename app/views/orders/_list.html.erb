@@ -1,23 +1,9 @@
 <!-- Esta vista parcial es una version sin tanta contamicacion visual -->
-<form action=""method="get" accept-charset="utf-8">
-  <label>Filtrar por estado:</label>
-  <select name="state" required>
-        <option></option>
-        <option value="activo" <%="selected" if @state=="activo"%> >Activo</option>
-        <option value="aprobado" <%="selected" if @state=="aprobado"%>>Aprobado</option>
-        <option value="rechazado" <%="selected" if @state=="rechazado"%> >Rechazado</option>
-        <option value="programado" <%="selected" if @state=="programado"%> >Programado</option>
-        <option value="reprogramado" <%="selected" if @state=="reprogramado"%> >Reprogramado</option>
-        <option value="en_proceso" <%="selected" if @state=="en_proceso"%> >En proceso</option>
-        <option value="suspendido" <%="selected" if @state=="suspendido"%> >Suspendido</option>
-        <option value="terminado" <%="selected" if @state=="terminado"%> >Terminado</option>
-  </select>
-  <button class="button postfix">Filtrar</button>
-</form>
 <table id="example" class="scroll" width="100%">
   <thead>
     <tr>
       <th>PEDIDO</th>
+      <th>ORDEN DE COMPRA</th>
       <th>REPETICION</th>
       <th>FICHA</th>
       <th>CLIENTE</th>
@@ -34,6 +20,7 @@
   <tfoot>
     <tr>
       <th>PEDIDO</th>
+      <th>ORDEN DE COMPRA</th>
       <th>REPETICION</th>
       <th>FICHA</th>
       <th>CLIENTE</th>
@@ -51,6 +38,7 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= link_to "K#{order.order_number}", order,target:"_self" %></td>
+        <td><%= order.order_oc%></td>
         <td><%= order.repeat %></td>
         <td><%= "#{order.sheet_client}-#{order.sheet_number}" %></td>
         <td><%= order.outsourced_name %></td>

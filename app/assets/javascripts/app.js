@@ -501,10 +501,15 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 		};
 		if (confirm("Esta seguro de terminar el subproceso "+id_subprocess+" ?")) {
 			Subprocesses.update({id:id_subprocess},subprocess,function(data){
-				alert("Terminado correctamente!");
-				$scope.getSubprocesses();
+				if (data.state == "terminado") {
+					alert("Terminado correctamente!");
+					console.log(data);
+					$scope.getSubprocesses();	
+				}else{
+					alert("Ocurrio un problema, informale a sistemas");
+				}
 			},function(error){
-				alert(error);
+				alert("Error: "+error);
 			});
 		};
 

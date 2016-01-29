@@ -157,7 +157,11 @@
       <strong>Cabidas:</strong><br>
       <%= @order.sheet_spaces %>
     </td>
-    <td colspan="5">
+    <td>
+      <strong>Asesor comercial:</strong><br>
+      <%= @order.order_adviser %>
+    </td>
+    <td colspan="4">
       <strong>Ruta de proceso:</strong><br>
       <%= @order.sheet_route.gsub(',','<br>').html_safe%>
     </td>
