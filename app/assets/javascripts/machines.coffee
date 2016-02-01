@@ -122,7 +122,7 @@ $ ->
       revert: true
       cursor: "move"
       cancel: "a,button,input"
-      containment: ".days"
+      # containment: ".days"
       cursorAt: { bottom: 5 }
       opacity: 0.8
       start: (event, ui) ->
