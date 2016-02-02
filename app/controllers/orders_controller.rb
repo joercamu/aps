@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :schedule,:new_subprocess,:calculate_meters,:change_state,:approve_order,:remove_subprocesses,:m_reactivate]
   before_action :set_subprocesses, only:[:show,:schedule]
+  after_action :show, only:[:by_number]
   skip_before_action :verify_authenticity_token
   load_and_authorize_resource
 
@@ -188,6 +189,10 @@ class OrdersController < ApplicationController
   def m_reactivate
     @order.activate! if @order.may_activate?
     redirect_to @order
+  end
+  def by_number
+    @order = Order.find_by(order_number:params[:order_number])
+    render 'show'
   end
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,12 +1,11 @@
-
 <div id="foo"></div>
 <div ng-app="apsApp" ng-controller="machinesController">
-	
 	<div class="row">
 		<div class="small-12 small-centered columns">
 			<div class="row">
 				<div class="small-11 columns">
 					<div class="subtitle">
+						<!-- links others machines -->
 						<%=@machine.name%>
 						<%procedure_machines = @machine.procedures.first.machines%>	
 						<%procedure_machines.each do |machine|%>
@@ -15,6 +14,7 @@
 					</div>
 				</div>
 				<div class="small-1 columns">
+					<!-- options +change machine  -->
 					<div style="width: 50px;margin: 1rem auto;text-align: center;font-size: 2rem;">
 						<a href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="icon-ellipsis-v"></a>	
 					</div>
@@ -71,7 +71,9 @@
 		</div>
 		<div class="small-10 columns">
 			<div class="head-subprocess">
-				<div class="handle"><span class="ui-icon  ui-icon-blank"></span></div>
+				<div class="handle">
+					<span class="ui-icon  ui-icon-blank"></span>
+				</div>
 				<table class="table-record-subprocess">
 					<tr>
 						<th>#</th>
@@ -150,10 +152,10 @@
 					  	<%end%>
 					</ul>
 				<%end%>
-			</div>
+			</div><!-- end .days -->
 		</div>
 	</div>
-</div>
+</div><!--end ng-app -->
 <div id="ModalProgressUpdatingSubprocesses" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 	<h2 id="modalTitle">Actualizando...</h2>
 	<div id="progressUpdateSubprocesses" class="progress">

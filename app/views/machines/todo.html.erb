@@ -2,11 +2,29 @@
 	<div ng-controller="machinesController">
 		<p class="subtitle">
 			<strong style="color:#008CBA"><%=@machine.name%></strong>
-			<%@machine.procedures.first.machines.each do |machine|%>
-				<%= link_to machine.name, todo_subprocess_path(machine), target:"_self",class:"label"%>
-			<%end%>
 		</p>
+			<div class="row">
+				<div class="small-12 medium-8 columns">
+					<%@machine.procedures.first.machines.each do |machine|%>
+						<%= link_to machine.name, todo_subprocess_path(machine), target:"_self",class:"label label-link-machine"%>
+					<%end%>
+				</div>
+				<div class="small-12 medium-4 columns">
+					<div class="row form-search">
+						<div class="small-2 columns">
+							<label><i class="icon-search"></i> </label>
+						</div>
+						<div class="small-10 columns">
+							<input id="inputSearchFish" ng-model="searchFish" ng-change="getMachineSearch(this)" placeholder="Buscar">
+						</div>
+						
+					</div>
+					
+					
+				</div>
+			</div>
 		<p id="dateTimeNow"></p>
+		<input id="procedure_id" value="<%=@machine.procedures.first.id%>" type="hidden">		
 		<input id="id_machine" value="<%=@machine.id%>" type="hidden">
 		<table>
 			<tr>
@@ -26,9 +44,9 @@
 				<th>PARCIAL</th>
 				<th>TERMINAR</th>
 			</tr>
-			<tr ng-repeat="subprocess in subprocesses">
+			<tr ng-repeat="subprocess in subprocesses | filter:searchFish">
 				<td>{{ subprocess.id }}</td>
-				<td>K{{ subprocess.order.order_number }} {{validateQuantityMissing(subprocess.order.repeat)}}</td>
+				<td>{{ "K"+subprocess.order.order_number }} {{validateQuantityMissing(subprocess.order.repeat)}}</td>
 				<td>{{ subprocess.order.order_type }} <i ng-if="subprocess.order.sheet_print" class="icon-print"></i></td>
 				<td>{{ subprocess.order.outsourced_name }}</td>
 				<td>{{ subprocess.order.sheet_client }}-{{ subprocess.order.sheet_number }}</td>
@@ -68,6 +86,7 @@
 		$('#contentMain').addClass('full-width');
 		moment.locale('es');
 		$('#dateTimeNow').text(moment().format('LL'));
+		$('#inputSearchFish').focus();
 		
 	});
 </script>

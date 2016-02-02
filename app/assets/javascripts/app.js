@@ -369,7 +369,7 @@ app.controller("leftoversController",['$scope','$resource','apiKhronos','spin',f
 	};
 			
 }]);
-app.controller("machinesController",['$scope','$resource','spin',function($scope,$resource,spin){
+app.controller("machinesController",['$scope','$resource','spin','$http',function($scope,$resource,spin,$http){
 	Subprocesses = $resource("/subprocesses/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	// Days = $resource("/days/:id.json",{id:"@id"},{update: {method: 'PUT'} });
 	$scope.getSubprocesses = function () {
@@ -513,6 +513,33 @@ app.controller("machinesController",['$scope','$resource','spin',function($scope
 			});
 		};
 
+	};
+	$scope.getMachineSearch = function(order_number){
+		order_number = order_number.searchFish;//get text entry of user
+		procedure_id = parseInt($('#procedure_id').val());
+		if (order_number.length == 5 && parseInt(order_number)) {
+			$http({
+				method:'GET',
+				url:'/orders_by_number/'+order_number+'.json'
+			}).then(function(response){
+				if (response.statusText === "OK") {//validete reponse
+					response.data.subprocesses.forEach(function(item){//each all procedures of order
+						if(item.procedure_id == procedure_id){//if its current procedure
+							$('.label-link-machine').each(function(index, value ){
+								if($(value).text() != item.machine){
+									$(value).css('display','none');
+								}
+							});
+						}
+					});
+				}
+			});
+		}else{
+			$('.label-link-machine').each(function(index, value ){
+					$(value).css('display','inline-block');
+			});
+		}
+		
 	};
 	$scope.getSubprocesses();
 }]);

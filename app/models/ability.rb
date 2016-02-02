@@ -28,7 +28,7 @@ class Ability
         can :read, :all
         can :todo, Machine
         can [:update,:by_machine], Subprocess
-        can [:search,:search_filter], Order
+        can [:search,:search_filter,:by_number], Order
     elsif user.role == "sobrantes"
         can :read, :all
         can :create, Leftover
@@ -38,7 +38,7 @@ class Ability
         can :manage, Leftover
         can [:search,:search_filter], Order
     else
-        can [:search,:search_filter], Order
+        can [:search,:search_filter,:by_number], Order
         can :todo, Machine
         can :read, :all
         can :by_machine, Subprocess

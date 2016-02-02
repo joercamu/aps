@@ -55,6 +55,8 @@ Rails.application.routes.draw do
   get 'orders_search' => 'orders#search'
   # router for filter search order
   post 'orders_search' => 'orders#search_filter'
+  #
+  get 'orders_by_number/:order_number' => 'orders#by_number'
 
 
   #route where it's do order "drag on drop"
@@ -75,6 +77,7 @@ Rails.application.routes.draw do
   get 'subprocesses_machine/:machine_id' => 'subprocesses#by_machine'
   # method for move subprocesses to machine
   put 'subprocesses/:id/move_machine/:machine_id' => 'subprocesses#move_machine'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
