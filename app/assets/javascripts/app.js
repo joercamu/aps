@@ -527,7 +527,7 @@ app.controller("machinesController",['$scope','$resource','spin','$http',functio
 						if(item.procedure_id == procedure_id){//if its current procedure
 							$('.label-link-machine').each(function(index, value ){
 								if($(value).text() != item.machine){
-									$(value).css('display','none');
+									$(value).fadeOut();//hide elements diff to current search
 								}
 							});
 						}
@@ -535,8 +535,8 @@ app.controller("machinesController",['$scope','$resource','spin','$http',functio
 				}
 			});
 		}else{
-			$('.label-link-machine').each(function(index, value ){
-					$(value).css('display','inline-block');
+			$('.label-link-machine').each(function(index, value ){//show all elements
+				$(value).fadeIn();
 			});
 		}
 		

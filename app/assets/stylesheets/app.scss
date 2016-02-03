@@ -65,5 +65,8 @@ body{
 		border:none !important;
 		height: 50px;
 		margin: 0 !important;
+		&:focus{
+			background-color: transparent !important;
+		}
 	}
 }
