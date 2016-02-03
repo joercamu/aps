@@ -36,7 +36,7 @@ class LeftoversController < ApplicationController
 
     respond_to do |format|
       if @leftover.save
-        format.html { redirect_to @leftover, notice: 'Leftover was successfully created.' }
+        format.html { redirect_to @leftover, notice: 'Sobrante se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @leftover }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class LeftoversController < ApplicationController
   def update
     respond_to do |format|
       if @leftover.update(leftover_params)
-        format.html { redirect_to @leftover, notice: 'Leftover was successfully updated.' }
+        format.html { redirect_to @leftover, notice: 'Sobrante actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @leftover }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class LeftoversController < ApplicationController
   def destroy
     @leftover.destroy
     respond_to do |format|
-      format.html { redirect_to leftovers_url, notice: 'Leftover was successfully destroyed.' }
+      format.html { redirect_to leftovers_url, notice: 'Sobrante eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -82,6 +82,6 @@ class LeftoversController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def leftover_params
-      params.require(:leftover).permit(:quantity, :um, :weight, :location, :order_origin, :sheet_id,:sheet_code, :sheet_version, :entry_date, :disposition, :sheet_composite, :place_origin, :state,:observation)
+      params.require(:leftover).permit(:quantity, :um, :weight, :location, :order_origin, :sheet_id,:sheet_code, :sheet_version, :entry_date, :disposition, :sheet_composite, :place_origin, :state,:observation,:departure_date)
     end
 end
