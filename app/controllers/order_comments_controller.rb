@@ -1,6 +1,7 @@
 class OrderCommentsController < ApplicationController
 	before_action :set_comment, only: [:show,:edit,:update,:destroy]
 	before_action :set_order, only: [:create,:show]
+	skip_before_action :verify_authenticity_token
 	def new
 		# @comment = OrderComment.new
 	end

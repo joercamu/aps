@@ -24,11 +24,7 @@
 					  	<%= link_to "Suspender", change_state_order_path(@order,'suspend'), class:"button", data:{confirm:'¿Esta seguro que desea suspender el pedido?'}%>
 					  </li>
 				  	<%end%>
-				  	<%if @order.may_end?%>
-					  <li>
-					  	<%= link_to "Terminar", change_state_order_path(@order,'end'), class:"button"%>
-					  </li>
-				  	<%end%>
+				  	
 				  	<%if @order.may_activate?%>
 					  <li>
 					  	<%= link_to "Activar", change_state_order_path(@order,'activate'), class:"button"%>
@@ -41,8 +37,13 @@
 		<%if @order.state == "rechazado" || @order.state == "suspendido"%>
 		<button ng-click="updateOrderOrigin()" class="button alert">Actualizar pedido</button>
 		<%end%>
-		<%=render 'subprocesses/tracking'%>
-		<%=render 'has_leftovers/list'%>
+		<%=render 'subprocesses/tracking' if @order.date_offer%>
+		<div class="row">
+			<div class="small-12 medium-4 medium-centered columns">
+				<p>Lo sentimos... este pedido no tiene fecha ofrecida.</p>
+			</div>
+		</div>
+		<%=render 'has_leftovers/list' %>
 
 		<%if can? :manage, Subprocess%>
 			<%=render 'subprocesses/list'%>

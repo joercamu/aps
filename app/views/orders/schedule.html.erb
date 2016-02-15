@@ -115,13 +115,18 @@ h.	Según los tiempos obtenidos, ubicar en la mejor posición en los días dispo
 						<label>Cantidad a programar ({{order.order_um}})</label>
 						<input ng-model="quantity_at_calculate" type="number">
 					</div>
-					<button type="button" class="button" ng-click="calculateScheduleMeters() ; calculated=true">Calcular</button>
-					<input id="input_scheduled_meters" type="hidden" value="<%=@meters%>">
-					<label>Metros programados</label>
-					<label><input ng-model="edit_scheduled_meters" type="checkbox">Protegido</label>
-					<input ng-model="order.scheduled_meters" ng-class="{disabled: edit_scheduled_meters}">
-					<p>{{order.scheduled_meters}} Metros programados</p> 
-					<button ng-show="calculated" ng-click="saveScheduleMeters()" class="button alert">Guardar</button>
+					<!-- validateIsComplete -->
+					<button type="button" class="button success" ng-click="endOrder()" ng-show="validateIsComplete()">Terminar pedido</button>
+					<div ng-hide="validateIsComplete()">
+						<button type="button" class="button" ng-click="calculateScheduleMeters() ; calculated=true">Calcular</button>
+						<input id="input_scheduled_meters" type="hidden" value="<%=@meters%>">
+						<label>Metros programados</label>
+						<label><input ng-model="edit_scheduled_meters" type="checkbox">Protegido</label>
+						<input ng-model="order.scheduled_meters" ng-class="{disabled: edit_scheduled_meters}">
+						<p>{{order.scheduled_meters}} Metros programados</p> 
+						<button ng-show="calculated" ng-click="saveScheduleMeters()" class="button alert">Guardar</button>	
+					</div>
+					
 				</div>
 			</li>
 			<li class="accordion-navigation" ng-class="{'item-success':state_route}">

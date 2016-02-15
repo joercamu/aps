@@ -124,6 +124,7 @@ class Order < ActiveRecord::Base
       transitions :from => :suspendido, :to => :en_proceso
     end
     event :end do
+      transitions :from => :aprobado, :to => :terminado
       transitions :from => :en_proceso, :to => :terminado
     end
     event :refuse do

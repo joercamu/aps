@@ -106,6 +106,9 @@ class OrdersController < ApplicationController
   end
   #GET /orders/:id/schedule
   def schedule
+    if @order.state != "aprobado"
+      redirect_to @order, notice: "El pedido no puede ser programado."
+    end
     # @meters = @order.calculate_meters
     @modifications = @order.modifications
   end

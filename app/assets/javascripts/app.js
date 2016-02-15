@@ -108,6 +108,11 @@ app.controller('OrdersController',['$scope','$resource','$http','spin','apiKhron
 		});
 
 	});
+	$scope.validateIsComplete = function (){
+		if ($scope.quantity_at_calculate == 0){
+			return true;
+		}
+	};
 
 	$scope.validateReady = function(){
 		if ($scope.state_programmed && $scope.state_route && $scope.state_leftovers && $scope.state_subprocesses){
@@ -325,6 +330,21 @@ app.controller('OrdersController',['$scope','$resource','$http','spin','apiKhron
 				$scope.state_subprocesses = true;
 			});
 		};
+	};
+	$scope.endOrder = function(){
+		//add comment
+		// POST /orders/:order_id/order_comments #:order_id, :user_id, :body
+		$http({
+			method:'POST',
+			url:'/orders/'+$scope.order.id+'/order_comments',
+			data:{
+				user_id:1,
+				body:"Pedido terminado, cantidad a programar es igual a cero."
+			}
+		});
+		// end order
+		// orders/:id/change_state/:state
+		location.href = '/orders/'+$scope.order.id+'/change_state/end';
 	};
 	$scope.approveOrder = function(){
 		ApproveOrder = $resource('/approve_order/:id.json',{id:"@id"});
