@@ -38,11 +38,13 @@
 		<button ng-click="updateOrderOrigin()" class="button alert">Actualizar pedido</button>
 		<%end%>
 		<%=render 'subprocesses/tracking' if @order.date_offer%>
-		<div class="row">
-			<div class="small-12 medium-4 medium-centered columns">
-				<p>Lo sentimos... este pedido no tiene fecha ofrecida.</p>
+		<%unless @order.date_offer%>
+			<div class="row">
+				<div class="small-12 medium-4 medium-centered columns">
+					<p>Lo sentimos... este pedido no tiene fecha ofrecida.</p>
+				</div>
 			</div>
-		</div>
+		<%end%>
 		<%=render 'has_leftovers/list' %>
 
 		<%if can? :manage, Subprocess%>

@@ -19,6 +19,14 @@
         <a ng-click="get()" href="#" class="button">Consultar</a>
       </div>
       <div class="field">
+        <label for="leftover_sheet_id">Cliente ID</label><br>
+        <input type="text" name="leftover[outsourced_id]" id="leftover_outsourced_id" ng-model="leftover.outsourced_id" readonly/>
+      </div>
+      <div class="field">
+        <label for="leftover_sheet_id">Nombre cliente</label><br>
+        <input type="text" name="leftover[outsourced_name]" id="leftover_outsourced_name" ng-model="leftover.outsourced_name" readonly/>
+      </div>
+      <div class="field">
         <label for="leftover_sheet_id">Ficha ID</label><br>
         <input type="text" name="leftover[sheet_id]" id="leftover_sheet_id" ng-model="leftover.sheet_id" readonly/>
       </div>

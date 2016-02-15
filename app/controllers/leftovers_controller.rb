@@ -82,6 +82,6 @@ class LeftoversController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def leftover_params
-      params.require(:leftover).permit(:quantity, :um, :weight, :location, :order_origin, :sheet_id,:sheet_code, :sheet_version, :entry_date, :disposition, :sheet_composite, :place_origin, :state,:observation,:departure_date)
+      params.require(:leftover).permit(:quantity, :um, :weight, :location, :order_origin, :sheet_id,:sheet_code, :sheet_version, :entry_date, :disposition, :sheet_composite, :place_origin, :state,:observation,:departure_date,:outsourced_id,:outsourced_name)
     end
 end
