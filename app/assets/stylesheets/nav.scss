@@ -1,0 +1,17 @@
+.top-bar-section .dropdown li{
+	margin-right:20px;
+	position:relative;
+
+	span.notification{
+		height: 20px;
+		width: 20px;
+		border-radius: 50%;
+		font-size: 13px;
+		text-align: center;
+		color:white;
+		background-color: #F44336;
+		position:absolute;
+		right: 5px;
+		top:10px;
+	}
+} 

@@ -1,0 +1,20 @@
+<h4>Comentarios...</h4>
+<div class="container-comments">
+<%@modification.modification_comments.each do |comment|%>
+	<div class="row comment">
+		<div class="small-1 columns avatar">
+			<img src="<%=comment.user.avatar_url%>">
+		</div>
+		<div class="small-11 columns cloud">
+			<div class="header">
+				<span class="name"><%= comment.user.email %></span>
+				<span class="role"><%= comment.user.role %></span>
+				<span class="time-ago"><%= comment.created_at.strftime("%F %I:%M%p") %></span>
+			</div>
+			<div class="body">
+				<p><%= comment.body %></p>			
+			</div>
+		</div>
+	</div>
+<%end%>
+</div>

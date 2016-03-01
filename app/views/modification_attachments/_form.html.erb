@@ -1,0 +1,17 @@
+<h3>Adjuntar archivo</h3>
+<%= form_for([@modification,@modification_attachment]) do |f|%>
+<%# form_tag({:controller => "modification_attachments", :action => "create"}, :method => "post", :multipart => true) do %>
+	<div class="row">
+		<div class="small-10 columns">
+			 <div id="upload_file">
+			 	<img src="http://i60.tinypic.com/2119eg1.png" alt="upload">
+		        <input id="file_horario" placeholder="Ningun archivo seleccionado." disabled="disabled">
+		        <input type="hidden" name="MAX_FILE_SIZE" value="104857" /> 
+		        <%=f.file_field :file, required:true%>
+		    </div>
+		</div>
+		<div class="small-2 columns">
+			<button id="bnt_enviar" type="submit" class="btn-modification red icon-upload"></button>
+		</div>
+	</div>
+<%end%>

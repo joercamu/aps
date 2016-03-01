@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :app_settings
-  resources :modifications
+  resources :app_settings, only: [:edit,:update]
+  resources :modifications do
+    resources :modification_comments, only: [:index,:new,:create]
+    resources :modification_attachments, only: [:new,:create,:destroy]
+  end
   devise_for :users
   resources :leftovers
   resources :days
@@ -73,10 +76,17 @@ Rails.application.routes.draw do
 
   put 'modifications/:id/approve'=> 'modifications#m_approve', as: :approve_modification
   put 'modifications/:id/refuse'=> 'modifications#m_refuse', as: :refuse_modification
+  # this method is used to mark a modification as unread
+  put 'modifications/:id/mark_unread'=> 'modifications#mark_as_unread', as: :mark_as_unread
+  # this method is used to mark a modifications as executed
+  put 'modifications/:id/mark_as_executed'=> 'modifications#mark_as_executed', as: :mark_as_executed
+
+  post 'modifications/:id/upload_file' => 'modification_attachments#create'
 
   get 'subprocesses_machine/:machine_id' => 'subprocesses#by_machine'
   # method for move subprocesses to machine
   put 'subprocesses/:id/move_machine/:machine_id' => 'subprocesses#move_machine'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

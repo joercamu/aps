@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215193231) do
+ActiveRecord::Schema.define(version: 20160225213648) do
 
   create_table "app_settings", force: :cascade do |t|
     t.integer  "blocked_days", limit: 4, default: 3
@@ -96,6 +96,32 @@ ActiveRecord::Schema.define(version: 20160215193231) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "modification_attachments", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "name_original",   limit: 255
+    t.string   "nameid",          limit: 255
+    t.string   "ext",             limit: 255
+    t.integer  "user_id",         limit: 4
+    t.integer  "modification_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "content_type",    limit: 255
+  end
+
+  add_index "modification_attachments", ["modification_id"], name: "index_modification_attachments_on_modification_id", using: :btree
+  add_index "modification_attachments", ["user_id"], name: "index_modification_attachments_on_user_id", using: :btree
+
+  create_table "modification_comments", force: :cascade do |t|
+    t.integer  "modification_id", limit: 4
+    t.integer  "user_id",         limit: 4
+    t.text     "body",            limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "modification_comments", ["modification_id"], name: "index_modification_comments_on_modification_id", using: :btree
+  add_index "modification_comments", ["user_id"], name: "index_modification_comments_on_user_id", using: :btree
+
   create_table "modifications", force: :cascade do |t|
     t.integer  "order_id",          limit: 4
     t.string   "priority",          limit: 255
@@ -105,6 +131,9 @@ ActiveRecord::Schema.define(version: 20160215193231) do
     t.string   "state",             limit: 255,   default: "activo"
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
+    t.boolean  "viewed",                          default: false
+    t.datetime "approval_date"
+    t.boolean  "executed"
   end
 
   add_index "modifications", ["order_id"], name: "index_modifications_on_order_id", using: :btree
@@ -246,6 +275,10 @@ ActiveRecord::Schema.define(version: 20160215193231) do
   add_foreign_key "has_procedures", "machines"
   add_foreign_key "has_procedures", "procedures"
   add_foreign_key "leftovers", "users"
+  add_foreign_key "modification_attachments", "modifications"
+  add_foreign_key "modification_attachments", "users"
+  add_foreign_key "modification_comments", "modifications"
+  add_foreign_key "modification_comments", "users"
   add_foreign_key "modifications", "orders"
   add_foreign_key "modifications", "users"
   add_foreign_key "order_comments", "orders"

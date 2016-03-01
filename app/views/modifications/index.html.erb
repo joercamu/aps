@@ -1,2 +1,3 @@
 <h1 class="subtitle">Mis modificaciones</h1>
+<p><%= "Tienes #{@modifications.unread} modificaciones sin leer." if current_user.role == "programador"%></p>
 <%= render 'list'%>

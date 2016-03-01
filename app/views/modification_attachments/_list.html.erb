@@ -1,0 +1,13 @@
+<div class="list list-attachments">
+	<%@modification_attachments.each do |attachment|%>
+		<div class="item">
+			<%= link_to attachment.name_original, "/uploads/#{attachment.nameid}", class:"icon-paperclip", target:"_blank"%>
+			<%= link_to '', modification_modification_attachment_path(@modification,attachment), method: :delete, data: { confirm: 'Estas seguro?' } , class:"icon-times destroy"%>
+		</div>
+	<% end %>
+</div><br>
+<ul class="clearing-thumbs" data-clearing>
+	<% @modification_attachments.images.each do |image|%>
+		<li><a href="<%="/uploads/#{image.nameid}"%>" class="th"><img src="<%="/uploads/#{image.nameid}"%>" style="width:100px;height:80px"></a></li>
+	<% end%>
+</ul>

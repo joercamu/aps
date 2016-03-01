@@ -1,34 +1,87 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Order:</strong>
-  <%= @modification.order %>
-</p>
-
-<p>
-  <strong>Priority:</strong>
-  <%= @modification.priority %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @modification.type %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @modification.body %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @modification.user %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @modification.state %>
-</p>
-
-<%= link_to 'Edit', edit_modification_path(@modification) %> |
-<%= link_to 'Back', modifications_path %>
+<h3>Informacion de modificación</h3>
+<table class="scroll" style="width:100%">
+  <thead>
+    <tr>
+      <th>PEDIDO</th>
+      <th>PRIORIDAD</th>
+      <th>TIPO</th>
+      <th>USUARIO</th>
+      <th>ESTADO</th>
+      <th>FECHA DE APROBACION O RECHAZO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>K<%= @modification.order.order_number %></td>
+      <td><%= @modification.priority.upcase %></td>
+      <td><%= @modification.modification_type.upcase %></td>
+      <td><%= @modification.user.email %></td>
+      <td><%= @modification.state.upcase %></td>
+      <td><%= @modification.approval_date.strftime("%F %I:%M%p") if @modification.approval_date %></td>
+    </tr>
+  </tbody>
+    <thead>
+    <tr>
+      <th>REALIZADA?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= format_expression(@modification.executed) %></td>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th colspan="6">DESCRIPCIÓN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="6"><%= @modification.body %></td>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th colspan="6">ACCIONES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="6">
+        <!-- actions -->
+        <!-- back list -->
+        <%= link_to '', modifications_path,class:"icon icon-arrow-left" %>
+        <% if can? :update, @modification %>
+          <!-- edit -->
+          <%= link_to '', edit_modification_path(@modification), class:"icon icon-pencil" if @modification.state == "activo"%>
+          <!-- destroy -->
+          <%= link_to '', @modification, method: :delete, data: { confirm: 'Esta seguro de eliminar la modificacion?' } , class:"icon icon-trash-o" if @modification.state == "activo"%>
+        <% end %>
+        <% if can? :mark_as_unread, @modification %>
+        <!-- mark unread -->
+          <%= link_to '', mark_as_unread_path(@modification), class:"icon icon-book", method:'PUT' %>
+        <% end %>
+        <% if @modification.may_approve?%>
+        <!-- approve -->
+          <%= link_to '', approve_modification_path(@modification), method:"PUT", data: { confirm: 'Esta seguro de aprobar?'}, class:"icon icon-check success" %>
+        <% end%>
+        <% if @modification.may_refuse?%>
+        <!-- refuse -->
+          <%= link_to '', refuse_modification_path(@modification), method:"PUT", data: { confirm: 'Esta seguro de recharzar?'}, class:"icon icon-times alert" %>
+        <% end%>
+        <!-- mark_as_executed -->
+        <% if can? :mark_as_executed, @modification %>
+          <%= link_to '', mark_as_executed_path(@modification), class:"icon icon-eject", method:'PUT', data:{ confirm: 'Esta seguro de marcar la modificacion como realizada?'} if @modification.state == "aprobado"%>
+        <% end%>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- list file attachments -->
+<%= render 'modification_attachments/list'%>
+<!-- form new attachment -->
+<%= render 'modification_attachments/form' if can? :create, @modification_attachment%>
+<!-- form new comments -->
+<%= render 'modification_comments/form' if user_signed_in? %>
+<!-- list comments -->
+<%= render 'modification_comments/list'%>

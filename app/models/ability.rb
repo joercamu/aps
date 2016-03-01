@@ -12,18 +12,20 @@ class Ability
         can [:manage], [Standard,Day,Order,Subprocess]
         can [:sorting,:todo], Machine
         can :schedule, Day
-        can [:m_approve,:m_refuse], [Modification]   
+        can [:m_approve,:m_refuse,:mark_as_unread], [Modification]   
         can [:update], [AppSetting]
+        can [:manage], ModificationAttachment
         can :by_sheet, Leftover
         can :read, :all
         
     elsif user.role == "vendedor"
         can :read, :all
-        can [:create,:update], [Modification]
         can [:search,:search_filter], Order
+        can [:manage], [ModificationAttachment,Modification]
     elsif user.role == "analistapedidos"
         can :read, :all
         can [:create,:get,:search,:search_filter], [Order]
+        can [:read,:mark_as_executed], [Modification]
     elsif user.role == "supervisor"
         can :read, :all
         can :todo, Machine

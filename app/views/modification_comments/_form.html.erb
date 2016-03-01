@@ -1,0 +1,26 @@
+<%= form_for([@modification,@modification_comment]) do |f| %>
+  <% if @modification_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@modification_comment.errors.count, "error") %> prohibited this modification_comment from being saved:</h2>
+
+      <ul>
+      <% @modification_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h3>Nuevo comentario</h3>
+  <div class="row">
+    <div class="small-12 medium-10 columns">
+        <div class="field">
+          <%= f.text_area :body, placeholder:"Deje aqui su comentario acerca de la modificacion.",required:"true" %>
+        </div>
+    </div>
+    <div class="small-12 medium-2 columns">
+      <div class="actions">
+        <button type="submit" class="btn-modification green icon-paper-plane"></button>
+      </div>
+    </div>
+  </div>
+<% end %>

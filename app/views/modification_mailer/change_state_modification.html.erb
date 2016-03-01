@@ -1,0 +1,7 @@
+<h1>Cambio de estado en modificacion</h1>
+<p>
+	La modificacion #<%=@modification.id%> del pedido <%=@modification.order.order_number%> ha cambiado de estado a <strong><%= @modification.state %></strong>
+</p>
+<p>
+	<%= link_to 'Ver modification', @modification%>
+</p>

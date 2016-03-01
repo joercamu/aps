@@ -12,7 +12,8 @@
       <!-- Left Nav Section -->
       <ul class="left">
         <li>
-          <%= link_to " PEDIDOS", orders_search_path,class:"icon-search" %></li>
+          <%= link_to " PEDIDOS", orders_search_path,class:"icon-search" %>
+        </li>
         <li class="has-dropdown">
           <a href="#" class="icon-th"> MODULOS</a>
           <ul class="dropdown">
@@ -48,7 +49,11 @@
             <li> <%= link_to "SOBRANTES", leftovers_path %> </li>
             <li> <%= link_to "PROCESOS", procedures_path %> </li>
             <li> <%= link_to "RUTAS", routes_path %> </li>
-            <li> <%= link_to "MODIFICACIONES", modifications_path %> </li>
+            <li> <%= link_to "MODIFICACIONES", modifications_path %> 
+              <!-- imprime la cantidad de modificaciones sin leer -->
+              <%unread_modifications = Modification.all.unread%>
+              <%="<span class='notification'>#{unread_modifications}</span>".html_safe if unread_modifications > 0 && user_signed_in? && current_user.role == "programador"%>
+            </li>
           </ul>
         </li>
       </ul>

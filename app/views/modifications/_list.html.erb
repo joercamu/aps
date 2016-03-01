@@ -2,6 +2,7 @@
 <table id="table_modifications" class="scroll">
   <thead>
     <tr>
+      <th></th>
       <th>ID</th>
       <th>Pedido</th>
       <th>Prioridad</th>
@@ -9,38 +10,31 @@
       <th>Solicitud</th>
       <th>Usuario</th>
       <th>Estado</th>
-      <th>Fecha</th>
-      <th>Editar</th>
-      <th>Eliminar</th>
-      <th>Acciones</th>
+      <th>Fecha de creacion</th>
+      <th>REALIZADA</th>
     </tr>
   </thead>
 
   <tbody>
     <% @modifications.each do |modification| %>
       <tr>
-        <td><%= modification.id %></td>
-        <td>K<%= modification.order.order_number %></td>
-        <td><%= modification.priority %></td>
-        <td><%= modification.modification_type %></td>
-        <td><%= modification.body %></td>
-        <td><%= modification.user.name_email %></td>
-        <td><%= modification.state %></td>
-        <td><%= modification.created_at.strftime("%F %I:%M%p") %></td>
-        <td><%= link_to '', edit_modification_path(modification), class:"icon-pencil" %></td>
         <td>
-          <%= link_to '', modification, method: :delete, data: { confirm: 'Are you sure?' } , class:"icon-trash-o"%>
+          <%if modification.viewed %>
+            <%class_for_link = "icon icon-email"%>
+          <%else%>
+            <%class_for_link = "icon icon-email-unread"%>
+          <%end%>
+          <%=link_to '',modification, class:"#{class_for_link}"%>
         </td>
-          <td>
-            <ul>
-              <% if modification.may_approve?%>
-                <li><%= link_to "Aprobar", approve_modification_path(modification), method:"PUT" %></li>
-              <% end%>
-              <% if modification.may_refuse?%>
-                <li><%= link_to "Rechazar", refuse_modification_path(modification), method:"PUT" %></li>
-              <% end%>
-            </ul>
-          </td>
+        <td><%= link_to modification.id, modification %></td>
+        <td>K<%= modification.order.order_number %></td>
+        <td><%= modification.priority.upcase %></td>
+        <td><%= modification.modification_type %></td>
+        <td><%= modification.body.truncate(20) %> <%=link_to 'Ver más', modification%></td>
+        <td><%= modification.user.name_email %></td>
+        <td><%= modification.state.upcase %></td>
+        <td><%= modification.created_at.strftime("%F %I:%M%p") %></td>
+        <td><%= format_expression( modification.executed ) %></td>
       </tr>
     <% end %>
   </tbody>
