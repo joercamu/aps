@@ -1,5 +1,8 @@
 <p class="subtitle">Sobrantes</p>
 <%= link_to 'Nuevo sobrante', new_leftover_path, target:"_self",class:"button" %>
+<br>
+<%= link_to "ver todos",leftovers_path(all:true) unless params[:all]%>
+<%= link_to "ver sobrantes en bodega",leftovers_path if params[:all]%>
 <table class="scroll">
   <thead>
     <tr>

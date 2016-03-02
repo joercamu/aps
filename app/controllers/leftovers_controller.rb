@@ -6,7 +6,11 @@ class LeftoversController < ApplicationController
   # GET /leftovers
   # GET /leftovers.json
   def index
-    @leftovers = Leftover.all
+    if params[:all]
+      @leftovers = Leftover.all
+    else
+      @leftovers = Leftover.in_warehouse
+    end
   end
 
   def by_sheet

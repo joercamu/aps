@@ -6,7 +6,8 @@ class Leftover < ActiveRecord::Base
 	validates :order_origin,:sheet_id,:quantity,:state, presence: true
 	before_create :set_quantity_available
 
-	scope :availables, -> {where("quantity_available > ?", 0)}
+	scope :availables, -> {where("quantity_available > ?", 0).where(disposition:"SOBRANTES")}
+	scope :in_warehouse, -> {where(disposition:"SOBRANTES")}
 	
 	def set_quantity_available
 		self.quantity_available = self.quantity
