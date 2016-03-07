@@ -69,6 +69,6 @@ class AppSettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_setting_params
-      params.require(:app_setting).permit(:blocked_days, :days_back)
+      params.require(:app_setting).permit(:blocked_days, :days_back,:recipients)
     end
 end

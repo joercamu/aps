@@ -9,7 +9,7 @@ class ModificationMailer < ApplicationMailer
   def create_modification_confirmation(user,modification)
     @user = user
     @modification = modification
-    mail to: "programacion@suprapak.com", subject: "APS:Nueva modificacion registrada."
+    mail to: AppSetting.find(1).recipients.split(','), subject: "APS:Nueva modificacion registrada."
     # mail to: user.email, subject: "APS:Nueva modificacion registrada."
   end
   # approve o refuse modification confirmation
